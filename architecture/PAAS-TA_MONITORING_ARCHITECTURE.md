@@ -2,105 +2,39 @@
 
 
 # PaaS-TA Monitoring Architecture
-1. [문서 개요](#1)  
- 1.1. [목적](#1.1)  
- 1.2. [참고 자료](#1.2)  
-2. [PaaS-TA Monitoring Architecture](#2)  
- 2.1. [PaaS Monitoring Architecture](#2.1)  
- 2.2. [PaaS 자원정보 수집 Architecture](#2.2)  
- 2.3. [CaaS Monitoring Architecture](#2.3)  
- 2.4. [CaaS 자원정보 수집 Architecture](#2.4)  
- 2.5. [SaaS Monitoring Architecture](#2.5)  
- 2.6. [SaaS 자원정보 수집 Architecture](#2.6)  
- 2.7. [IaaS Monitoring Architecture](#2.7)  
 
 
-# <div id='1'/>1. 문서 개요 
+### │ Purpose
+본 문서에서는 PaaS-TA 플랫폼에서 동작하는 모니터링 구조(Architecture)에 대한 설명을 다룬다.
 
 
-## <div id='1.1'/>1.1. 목적
-본 문서(PaaS-TA Monitoring Architecture)는 PaaS-TA Monitoring의 Architecture를 제공한다.
+### │ References
+본 문서는 Cloud Foundry의 BOSH Document와 Cloud Foundry Document 등을 참고하여 작성되었다.
+<table>
+  <tr>
+    <td>BOSH Document</td>
+    <td><a href="https://bosh.io">bosh.io</a></td>
+  </tr>
+  <tr>
+    <td>Cloud Foundry Document</td>
+    <td><a href="https://docs.cloudfoundry.org">docs.cloudfoundry.org</a></td>
+  </tr>
+  <tr>
+    <td>BOSH Deployment</td>
+    <td><a href="https://github.com/cloudfoundry/bosh-deployment">github.com/cloudfoundry/bosh-deployment</a></td>
+  </tr>
+  <tr>
+    <td>CF Deployment</td>
+    <td><a href="https://github.com/cloudfoundry/cf-deployment">github.com/cloudfoundry/cf-deployment</a></td>
+  </tr>  
+</table>
 
 
-## <div id='1.2'/>1.2. 참고 자료
-본 문서는 Cloud Foundry의 BOSH Document와 Cloud Foundry Document를 참고로 작성하였다.
-* BOSH Document: [http://bosh.io](http://bosh.io)
-* Cloud Foundry Document: [https://docs.cloudfoundry.org/](https://docs.cloudfoundry.org/)
-* BOSH DEPLOYMENT: [https://github.com/cloudfoundry/bosh-deployment](https://github.com/cloudfoundry/bosh-deployment)
-* CF DEPLOYMENT: [https://github.com/cloudfoundry/cf-deployment](https://github.com/cloudfoundry/cf-deployment)
-
-
-# <div id='2'/>2. PaaS-TA Monitoring Architecture
-
-
-## <div id='2.1'/>2.1. PaaS Monitoring Architecture
-PaaS Monitoring 운영환경에서는 크게 Backend 환경에서 실행되는 Batch 프로세스 영역과 Frontend 환경에서 실행되는 Monitoring 시스템 영역으로 나누어진다.  
-Batch 프로세스는 PaaS-TA Portal에서 등록한 임계치 정보와 AutoScale 대상 정보를 기준으로 주기적으로 시스템 Metrics 정보를 조회 및 분석하여, 임계치를 초과한 서비스 발견시 관리자에게 Alarm을 전송하며, 임계치를 초과한 컨테이너 리스트 중에서 AutoScale 대상의 컨테이너 존재시 AutoScale Server 서비스에 관련 정보를 전송하여 자동으로 AutoScaling 기능이 수행되도록 처리한다.  
-PaaS-TA Monitoring 시스템은 TSDB(InfluxDB)로부터 시스템 환경 정보 데이터를 조회하고, Lucene(Elasticsearch)을 통해 로그 정보를 조회한다.  
-조회된 정보로 PaaS-TA Monitoring 시스템의 현재 자원 사용 현황을 조회하고, PaaS-TA Monitoring Dashboard를 통해 로그 정보를 조회할 수 있도록 한다.  
-PaaS-TA Monitoring Dashboard는 관리자 화면으로 알람이 발생된 이벤트 현황 정보를 조회하고, 컨테이너 배치 현황과 장애 발생 서비스에 대한 통계 정보를 조회할 수 있으며, 이벤트 관련 처리정보를 이력관리할 수 있는 화면을 제공한다.
-
-![PaaSTa_Monit_architecure_Image]
-
-
-## <div id='2.2'/>2.2. PaaS 자원정보 수집 Architecture
-PaaS는 내부적으로 메트릭스 정보를 수집 및 전달하는 Metric Agent와 로그 정보를 수집 및 전달하는 Syslog 모듈을 제공한다.  
-Metric Agent는 시스템 관련 메트릭스를 수집하여 InfluxDB에 정보를 저장한다.  
-Syslog는 PaaS-TA를 Deploy 하기 위한 manfiest 파일의 설정으로도 로그 정보를 ELK 서비스에 전달할 수 있으며, 로그 정보를 전달하기 위해서는 RELP 프로토콜(Reliable Event Logging Protocol)을 사용한다.
-
-![PaaSTa_Monit_collect_architecure_Image]
-
-
-## <div id='2.3'/>2.3. CaaS Monitoring Architecture
-CaaS Monitoring 운영환경에는 크게 Backend 환경에서 실행되는 Batch 프로세스 영역과 Frontend 환경에서 실행되는 Monitoring 시스템 영역으로 나누어진다.  
-Batch 프로세스는 CaaS에서 등록한 임계치 정보를 기준으로 주기적으로 시스템 metrics 정보를 조회 및 분석하여, 임계치를 초과한 서비스 발견시 관리자에게 Alarm을 전송한다.  
-PaaS-TA Monitoring 시스템은 K8s(Prometheus Agent)로부터 시스템 메트릭 데이터를 조회하고, 조회된 정보로 CaaS Monitoring 시스템의 현재 자원 사용 현황을 조회한다.  
-PaaS-TA Monitoring Dashboard는 관리자 화면으로 알람이 발생된 이벤트 현황 정보를 조회하고, kubernetes Pod 현황 및 서비스에 대한 통계 정보를 조회할 수 있으며, 이벤트 관련 처리정보를 이력관리할 수 있는 화면을 제공한다.  
-
-![Caas_Monit_architecure_Image]
-
-
-## <div id='2.4'/>2.4. CaaS 자원정보 수집 Architecture
-CaaS는 내부적으로 메트릭스 정보를 수집 하는 Prometheus Metric Agent(Node Exporter, cAdvisor) 제공한다.  
-Prometheus 기본 제공되는 로컬 디지스 Time-Series Database 정보를 저장한다. 해당 정보를 조회하기 위해서는 Prometheus 제공하는 API를 통하여 조회할 수 있다.
-
-![Caas_Monit_collect_architecure_Image]
-
-
-## <div id='2.5'/>2.5. SaaS Monitoring Architecture
-Saas Monitoring 운영환경에는 크게 Backend 환경에서 실행되는 Batch 프로세스 영역과 Frontend 환경에서 실행되는 Monitoring 시스템 영역으로 나누어진다.  
-Batch 프로세스는 PaaS-TA Portal SaaS 서비스에서 등록한 임계치 정보를 기준으로 주기적으로 시스템 metrics 정보를 조회 및 분석하여, 임계치를 초과한 서비스 발견시 관리자에게 Alarm을 전송한다.  
-Monitoring 시스템 은 Pinpoint APM Server 로부터 시스템 메트 데이터를 조회하고, 조회된 정보는 SaaS Monitoring 시스템의 현재 자원 사용 현황을 조회한다.  
-Monitoring Portal은 관리자 화면으로 알람이 발생된 이벤트 현황 정보를 조회하고, Application 현황 및 서비스에 대한 통계 정보를 조회할 수 있으며, 이벤트 관련 처리정보를 이력관리할 수 있는 화면을 제공한다.
-
-![Saas_Monit_architecure_Image]
-
-
-## <div id='2.6'/>2.6. SaaS 자원정보 수집 Architecture
-PaaS-TA SaaS는 내부적으로 메트릭스 정보를 수집 하는 Pinpoint Metric Agent 제공한다.  
-Metric Agent는 Application JVM 관련 메트릭스를 수집하여 Hbase DB에 정보를 저장한다.  
-해당 정보는 Pinpoint APM 서버의 API를 통하여 조회할 수 있다.
-
-![Saas_Monit_collect_architecure_Image]
-
-
-## <div id='2.7'/>2.7. IaaS  Monitoring Architecture
-IaaS 서비스 모니터링 운영환경은 IaaS는 Openstack과 Monasca를 기반으로 구성되어 있다.  
-IaaS는 Openstack Node에 monasca Agent가 설치되어 Metric Data를 Monasca에 전송하여 InfluxDB에 저장한다.  
-PaaS는 PaaS-TA에 모니터링 Agent가 설치되어 InfluxDB에 전송 저장한다.  
-Log Agent도 IaaS/PaaS에 설치되어 Log Data를 각각의 Log Repository에 전송한다.
-
-![IaaSTa_Monit_architecure_Image]
+### │ Monitoring Architecture Document by Platform
+1. [PaaS](#)
+2. [SaaS](#)
+3. [CaaS](#)
+4. [IaaS](#)
 
 
 ### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > Monitoring Architecture
-
-
-<!-- Image Links -->
-[IaaSTa_Monit_architecure_Image]:./images/iaas-archi.png
-[PaaSTa_Monit_architecure_Image]:./images/monit_architecture.png
-[Caas_Monit_architecure_Image]:./images/caas_monitoring_architecture.png
-[Saas_Monit_architecure_Image]:./images/saas_monitoring_architecture.png
-[PaaSTa_Monit_collect_architecure_Image]:./images/collect_architecture.png
-[CaaS_Monit_collect_architecure_Image]:./images/caas_collect_architecture.png
-[SaaS_Monit_collect_architecure_Image]:./images/saas_collect_architecture.png
