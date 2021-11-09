@@ -17,7 +17,7 @@
     <td><a href="https://bosh.io">bosh.io</a></td>
   </tr>
   <tr>
-    <td>Cloud Foundry Document</td>
+    <td>CF Document</td>
     <td><a href="https://docs.cloudfoundry.org">docs.cloudfoundry.org</a></td>
   </tr>
   <tr>
