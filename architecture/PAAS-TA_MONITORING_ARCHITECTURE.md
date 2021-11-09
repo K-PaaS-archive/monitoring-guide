@@ -9,7 +9,7 @@
 
 
 ### │ References
-본 문서는 Cloud Foundry의 BOSH Document와 Cloud Foundry Document 등을 참고하여 작성되었다.
+본 문서는 클라우드 파운드리 재단(Cloud Foundry)의 BOSH Document, Cloud Foundry Document 등을 참고하여 작성되었다.
 <table>
   <tr>
     <td>BOSH Document</td>
