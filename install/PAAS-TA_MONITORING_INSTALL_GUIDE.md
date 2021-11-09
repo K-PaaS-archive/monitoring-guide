@@ -1,11 +1,13 @@
 ### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > Monitoring Install
 
+
 # PaaS-TA Monitoring Install Guide
+
 
 ### │ PaaS-TA Monitoring Install Process
 <table>
   <tr>
-    <td><b><i>[중요!]</i></b> PaaS-TA에서 모니터링 기능을 사용할 경우, <b>BOSH</b>와 <b>PaaS-TA</b> 설치 시에 <u>모니터링에 필요한 옵션을 사용한 설치 작업</u>이 필수 선행되어야 한다(#1, #2 설치 가이드 참고).</td>
+    <td><b><i>[중요!]</i></b> PaaS-TA 플랫폼에서 모니터링 기능을 사용할 경우, <b>BOSH</b>와 <b>PaaS-TA</b> 설치 시에 모니터링에 필요한 옵션을 사용한 설치 작업이 필수 선행되어야 한다(#1, #2 설치 가이드 참고).</td>
   </tr>
 </table>
 
@@ -19,5 +21,6 @@
  6.2. [Zabbix Proxy 설치](#)  
  6.3. [Zabbix Agent 설치](#)  
 7. [PaaS-TA Monitoring 설치](./PAAS-TA_MONITORING_PAAS-TA_MONITORING_INSTALL.md)
+
 
 ### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > Monitoring Install
