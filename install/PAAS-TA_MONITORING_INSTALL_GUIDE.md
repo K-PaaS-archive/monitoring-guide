@@ -2,8 +2,13 @@
 
 # PaaS-TA Monitoring Install Guide
 
-### [ PaaS-TA Monitoring Install Process ]
-> ***[중요!]*** PaaS-TA에서 모니터링 기능을 사용할 경우, **BOSH**와 **PaaS-TA** 설치 시에 모니터링에 필요한 옵션을 사용한 설치 작업이 필수 선행되어야 한다(#1, #2 설치 가이드 참고).
+### │ PaaS-TA Monitoring Install Process
+<table>
+  <tr>
+    <td><b><i>[중요!]</i></b> PaaS-TA에서 모니터링 기능을 사용할 경우, <b>BOSH</b>와 <b>PaaS-TA</b> 설치 시에 <u>모니터링에 필요한 옵션을 사용한 설치 작업</u>이 필수 선행되어야 한다(#1, #2 설치 가이드 참고).</td>
+  </tr>
+</table>
+
 1. [Monitoring 옵션을 포함한 BOSH 설치](./PAAS-TA_BOSH2_MONITORING_INSTALL_GUIDE.md)
 2. [Monitoring 옵션을 포함한 PaaS-TA 5.5.2 설치](./PAAS-TA_CORE_MONITORING_INSTALL_GUIDE.md)
 3. [PaaS-TA PaaS Monitoring Logsearch 설치(선택)](./PAAS-TA_MONITORING_LOGSEARCH_INSTALL.md)
