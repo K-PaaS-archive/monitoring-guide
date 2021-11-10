@@ -20,7 +20,7 @@
  6.1. [Zabbix Server](#)  
  6.2. [Zabbix Proxy](#)  
  6.3. [Zabbix Agent](#)  
-7. [PaaS-TA 플랫폼 **통합 모니터링** 솔루션 설치](PAAS-TA_MONITORING_PAAS-TA_MONITORING_INSTALL.md)
+7. [PaaS-TA 플랫폼 **통합 모니터링** 대시보드 설치](PAAS-TA_MONITORING_PAAS-TA_MONITORING_INSTALL.md)
 
 
 ### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > Monitoring Install
