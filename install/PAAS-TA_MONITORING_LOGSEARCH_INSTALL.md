@@ -1,3 +1,6 @@
+### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Logsearch
+
+
 ## Table of Contents
 
 1\. [개요](#1)  
@@ -202,4 +205,9 @@ $ bosh –e {director_name} vms
 ```
 ![PaaSTa_logsearch_vms_5.0]
 
+
+### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Logsearch
+
+
+<!-- Images Links -->
 [PaaSTa_logsearch_vms_5.0]:./images/logsearch_5.0.png
