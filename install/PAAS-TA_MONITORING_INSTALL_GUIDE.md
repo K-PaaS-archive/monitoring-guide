@@ -16,11 +16,11 @@
 3. [[PaaS] Log Monitoring - Logsearch 배포(선택)](./PAAS-TA_MONITORING_LOGSEARCH_INSTALL.md)
 4. [[SaaS] Application Monitoring -  Pinpoint Monitoring 배포(선택)](./PAAS-TA_MONITORING_PINPOINT_MONITORING_INSTALL.md)
 5. [[CaaS] Container Monitoring - Prometheus 설치(선택)](./PAAS-TA_MONITORING_CONTAINER_SERVICE_INSTALL.md)
-6. [[IaaS] Hypervisor Monitoring - Zabbix 설치(선택)](#)  
+6. [[IaaS] Infrastructure Monitoring - Zabbix 설치(선택)](#)  
  6.1. [Zabbix Server](#)  
  6.2. [Zabbix Proxy](#)  
  6.3. [Zabbix Agent](#)  
-7. [**PaaS-TA 플랫폼 통합** 모니터링 솔루션 배포](./PAAS-TA_MONITORING_PAAS-TA_MONITORING_INSTALL.md)
+7. [PaaS-TA 플랫폼 **통합 모니터링** 솔루션 배포](./PAAS-TA_MONITORING_PAAS-TA_MONITORING_INSTALL.md)
 
 
 ### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > Monitoring Install

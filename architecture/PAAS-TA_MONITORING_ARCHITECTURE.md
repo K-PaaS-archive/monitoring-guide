@@ -31,11 +31,11 @@
 </table>
 
 
-### │ Monitoring Architecture Document by Platform
-1. [PaaS](#)
-2. [SaaS](#)
-3. [CaaS](#)
-4. [IaaS](#)
+### │ Architecture Document by Service Platform
+1. [PaaS Monitoring Architecture](PAAS_MONITORING_ARCHITECTURE.md)
+2. [SaaS Monitoring Architecture](SAAS_MONITORING_ARCHITECTURE.md)
+3. [CaaS Monitoring Architecture](CAAS_MONITORING_ARCHITECTURE.md)
+4. [IaaS Monitoring Architecture](IAAS_MONITORING_ARCHITECTURE.md)
 
 
 ### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > Monitoring Architecture
