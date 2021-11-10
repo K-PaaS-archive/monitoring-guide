@@ -1,5 +1,12 @@
 # PaaS-TA Monitoring Guide
 
+
+### │ Shortcuts Doc
+1. [Architecture Guide](architecture/PAAS-TA_MONITORING_ARCHITECTURE.md)
+2. [Install Guide](install/PAAS-TA_MONITORING_INSTALL_GUIDE.md)
+
+
+### │ Version Info
 | Installation            | Current Version                                                                                                                                                  |
 | ----------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 | paasta-deployment (AP)  | [5.6.0](https://github.com/PaaS-TA/paasta-deployment/releases/tag/v5.6.0)                                                                                        |
