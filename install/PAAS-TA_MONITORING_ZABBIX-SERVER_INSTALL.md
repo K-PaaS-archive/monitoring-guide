@@ -33,13 +33,11 @@
 
 
 ### 2.1. Zabbix Packages 설치
-Zabbix 공식 홈페이지의 [다운로드 페이지](https://www.zabbix.com/download)를 통해 설치하고자 하는 Zabbix 버전, 운영체제 종류와 버전 등을 선택하여 운영 환경에 알맞는 스크립트를 제공 받을 수 있다.
+Zabbix 공식 홈페이지의 [다운로드 페이지](https://www.zabbix.com/download)를 통해 설치하고자 하는 Zabbix 버전, 운영체제 종류와 버전 등을 선택하여 사용자의 운영 환경에 알맞는 설치 스크립트를 제공 받을 수 있다.
 
 ![](images/zabbix_server_install_guide_01.png)
 
-본 가이드에서는 CentOS 7 운영체제에서 Zabbix 5.0LTS 버전, 데이터베이스는 MySQL, 웹 서버로는 Apache 구성으로 운영될 수 있도록 하였다.
-
-
+본 가이드에서는 CentOS 7 운영체제에서 Zabbix 5.0 LTS 버전, 데이터베이스는 MySQL, 웹 서버로는 Apache 구성으로 운영될 수 있도록 하였다.
 
 
 ### <div id='2.2'/>2.2 Helm 설치  (v3)
