@@ -10,11 +10,11 @@
 
 
 ### 1.1. 목적
-본 문서는 준비된 IaaS 환경의 시스템 자원 정보를 수집하여 실시간 컴퓨팅 자원의 사용량 또는 유휴 자원량을 측정하여 PaaS-TA 플랫폼에서 사용 가능한 모니터링 대시보드와 연계하는 방법에 대한 설명을 다루고 있다.
+본 문서는 사용자의 IaaS 환경 시스템 자원 정보를 수집하여 실시간 컴퓨팅 자원의 사용량 또는 유휴 자원량을 측정해 PaaS-TA 플랫폼에서 사용 가능한 모니터링 대시보드와 연계하는 방법에 대한 설명을 다루고 있다.
   
-  
+
 ### 1.2. 범위와 한계
-또한 본 가이드는 다음과 같은 설치 환경을 바탕으로 작성되었으므로 가이드에서 언급되지 않은 기타 범위에 대하여는 일부 제약이나 설치에 한계가 있을 수 있다.
+또한 본 가이드는 다음과 같은 설치 환경을 바탕으로 작성되었으므로 가이드에서 언급되지 않은 기타 범위에 대하여는 일부 제약이나 설치 또는 적용에 한계가 있을 수 있다.
 
 <table>
   <tr>
@@ -29,7 +29,7 @@
 </table>
 
 
-## <div id="2">2. Zabbix Packages 설치
+## <div id="2">2. Zabbix Server의 설치
 
 
 ### 2.1. 운영 환경 선택
@@ -43,23 +43,23 @@ Zabbix 공식 홈페이지를 방문하면 [다운로드 페이지](https://www.
 
 ### 2.2. Zabbix Packages 설치
 Zabbix 저장소를 설치한다.
-```shell script
+```
 # rpm -Uvh https://repo.zabbix.com/zabbix/5.0/rhel/7/x86_64/zabbix-release-5.0-1.el7.noarch.rpm
 # yum clean all
 ```
 
 Zabbix Server와 Zabbix Agent를설치한다.
-```shell script
+```
 # yum install zabbix-server-mysql zabbix-agent
 ```
 
 Zabbix 프론트엔드 설치를 위해 Red Hat 소프트웨어 컬렉션을 설치한다.
-```shell script
+```
 # yum install centos-release-scl
 ```
 
 Zabbix 프론트엔드 저장소를 활성화를 위해 `/etc/yum.repos.d/zabbix.repo` 파일을 다음과 같이 편집한다. 
-```shell script
+```
 [zabbix-frontend]
 ...
 enabled=1
@@ -67,12 +67,12 @@ enabled=1
 ```
 
 Zabbix 프론트엔드 패키지를 설치한다.
-```shell script
+```
 # yum install zabbix-web-mysql-scl zabbix-apache-conf-scl
 ```
 
 서버의 데이터베이스가 작동(활성화)중인지 확인하고 다음과 같이 데이터베이스 및 계정을 생성한 후 데이터베이스 프롬프트에서 빠져나온다.
-```shell script
+```
 # mysql -uroot -p
 Enter password: 
 ...
@@ -84,26 +84,26 @@ mysql> quit;
 ```
 
 생성한 `zabbix` 데이터베이스에 다음과 같이 Zabbix 운영에 필요한 스키마와 데이터를 삽입한다. 이 때 앞에서 생성한 계정의 비밀번호를 요구하므로 알맞은 비밀번호를 입력해준다(가이드에서는`paasta`로 설정하였다).
-```shell script
+```
 # zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p zabbix
 Enter Password:
 ```
 
 Zabbix Server의 데이터베이스 비밀번호를 `/etc/zabbix/zabbix_server.conf` 파일 내 `DBPassword` 항목을 찾아 다음과 같이 추가한다. 
-```shell script
+```
 DBPassword=paasta
 ```
 
 Zabbix 프론트엔드를 위한 PHP 설정 파일을 수정한다. `/etc/opt/rh/rh-php72/php-fpm.d/zabbix.conf` 파일 내 타임존 설정을 사용자 환경에 맞는 시각으로 변경한다. `;` 기호는 PHP 구성 파일에서 라인 주석을 의미하므로 제거한다.
-```shell script
+``` script
 php_value[date.timezone] = Asia/Seoul
 ```
 
 Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시작한다.
-```shell script
+```
 # systemctl restart zabbix-server zabbix-agent httpd rh-php72-php-fpm
 # systemctl enable zabbix-server zabbix-agent httpd rh-php72-php-fpm
 ```
 
 
-### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Prometheus
+### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Zabbix Server
