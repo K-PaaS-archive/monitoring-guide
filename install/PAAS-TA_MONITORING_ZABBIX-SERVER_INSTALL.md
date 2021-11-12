@@ -23,7 +23,7 @@
   </tr>
   <tr>
     <td><b>IaaS Vendor SW</b></td>
-    <td> OpenStack 5.4.0
+    <td> OpenStack 5.4.0 (Stein)
     </td>
   </tr>
 </table>
@@ -32,25 +32,66 @@
 ## <div id="2">2. Zabbix Server의 설치
 
 
-### 2.1. Zabbix Packages 설치
-Zabbix 공식 홈페이지의 [다운로드 페이지](https://www.zabbix.com/download)를 통해 설치하고자 하는 Zabbix 버전, 운영체제 종류와 버전 등을 선택하여 사용자의 운영 환경에 알맞는 설치 스크립트를 제공 받을 수 있다.
+### 2.1. 운영 환경 선택
+Zabbix 공식 홈페이지를 방문하면 [다운로드 페이지](https://www.zabbix.com/download)를 통해 설치하고자 하는 Zabbix 버전, 운영체제 종류와 버전 등을 선택하여 사용자의 운영 환경에 알맞는 설치 스크립트를 제공 받을 수 있다.  
+**Zabbix Packages**는 Zabbix Server와 Zabbix Agent 설치 구성을 의미한다. Zabbix Server가 설치될 Physical Node 자체의 시스템 모니터링이 필요하므로 패키지 설치를 통해서 Zabbix Server와 Zabbix Agent를 함께 설치한다.
 
 ![](images/zabbix_server_install_guide_01.png)
 
-본 가이드에서는 CentOS 7 운영체제에서 Zabbix 5.0 LTS 버전, 데이터베이스는 MySQL, 웹 서버로는 Apache 구성으로 운영될 수 있도록 하였다.
+본 가이드에서는 CentOS 7 운영체제에서 Zabbix 5.0 LTS 버전, 데이터베이스 SW로는 MySQL, 웹 서버 SW로는 Apache 구성으로 선택해 설치하였다.
 
 
-### <div id='2.2'/>2.2 Helm 설치  (v3)
-> Helm 다운로드 및 실행 
+### 2.2. Zabbix Server 설치
+**│ Install Zabbix Repository**
+```shell script
+# rpm -Uvh https://repo.zabbix.com/zabbix/5.0/rhel/7/x86_64/zabbix-release-5.0-1.el7.noarch.rpm
+# yum clean all
 ```
-#  Helm 다운로드
-$  curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
 
-#  Helm 파일 권한 수정
-$  chmod 700 get_helm.sh
+**│ Install Zabbix server and agent**
+```shell script
+# yum install zabbix-server-mysql zabbix-agent
+```
 
-#  Helm 실행
-$  ./get_helm.sh
+**│ Install Zabbix frontend**  
+　Red Hat 소프트웨어 컬렉션을 활성화한다.
+```shell script
+# yum install centos-release-scl
+```
+　`/etc/yum.repos.d/zabbix.repo` 파일을 편집하고 zabbix-frontend 저장소를 활성화한다.
+```shell script
+[zabbix-frontend]
+...
+enabled=1
+...
+```
+　Zabbix frontend 패키지를 설치한다.
+```shell script
+# yum install zabbix-web-mysql-scl zabbix-apache-conf-scl
+```
+
+**│ Create initial database**  
+　서버의 데이터베이스가 작동(활성화)중인지 확인하고 다음과 같이 데이터베이스 및 계정을 생성하고 데이터베이스 프롬프트에서 빠져나온다.
+```shell script
+# mysql -uroot -p
+Enter password: 
+...
+mysql> create database zabbix character set utf8 collate utf8_bin;
+mysql> create user zabbix@localhost identified by 'password';
+mysql> grant all privileges on zabbix.* to zabbix@localhost;
+mysql> quit;
+...
+```
+　생성한 `zabbix` 데이터베이스에 다음과 같이 Zabbix 운영에 필요한 스키마와 데이터를 삽입한다. 이 때 앞에서 생성한 계정의 비밀번호를 요구하므로 알맞은 비밀번호를 입력해준다(가이드에서는`password`로 설정하였다).
+```shell script
+# mysql -uroot -p
+Enter password: 
+...
+mysql> create database zabbix character set utf8 collate utf8_bin;
+mysql> create user zabbix@localhost identified by 'password';
+mysql> grant all privileges on zabbix.* to zabbix@localhost;
+mysql> quit;
+...
 ```
 
 > Helm 설치 및 버전 확인
