@@ -150,6 +150,8 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 ### 3.1. Create host group(필수 호스트 그룹 생성)
 **Configuration > Host groups** 메뉴로 이동해 우측 상단의 'Create host group' 버튼을 통해 모니터링 호스트 그룹을 생성할 수 있다.
 
+![](images/zabbix_server_install_guide_14.png)
+
 PaaS-TA 플랫폼의 IaaS 모니터링 환경에서 필수 설정되어야 할 호스트 그룹은 다음과 같다.
 
 * **PaaS-TA Group**
@@ -157,10 +159,9 @@ PaaS-TA 플랫폼의 IaaS 모니터링 환경에서 필수 설정되어야 할 �
 
 <table>
   <tr>
-    <td >⚠️ 그룹을 생성할 때 반드시 본 문서에 서술된 그대로 대·소문자 및 띄어쓰기를 구별하여 가이드와 동일하게 그룹명을 생성하는 것에 주의한다. </td>
+    <td >⚠️ PaaS-TA 플랫폼에서의 IaaS 모니터링은 해당 그룹명과 동일한 설정에서만 정상 동작하도록 설계되었으므로 그룹을 생성할 때는 반드시 본 문서에 서술된 그대로 대·소문자 및 띄어쓰기를 구별하여 가이드와 동일하게 그룹명을 작성하는 것에 주의한다. </td>
   </tr>
 </table>
-
 
 
 ### 3.2. Autoregistration actions(호스트 자동 등록)
