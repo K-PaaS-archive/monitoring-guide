@@ -18,9 +18,8 @@
 
 <table>
   <tr>
-    <td><b>Virtual Machine OS</b></td>
-    <td>[AP] bosh-openstack-kvm-ubuntu-xenial-go_agent/621.125<br>
-        [CP] Ubuntu 18.04.6 LTS (Bionic)</td>
+    <td><b>Physical Node OS</b></td>
+    <td> CentOS Linux 7.8.2003</td>
   </tr>
   <tr>
     <td><b>IaaS Vendor SW</b></td>
