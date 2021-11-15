@@ -10,7 +10,7 @@
 
 
 ### 1.1. 목적
-본 문서는 사용자의 IaaS 환경 시스템 자원 정보를 수집하여 실시간 컴퓨팅 자원의 사용량 또는 유휴 자원량을 측정해 PaaS-TA 플랫폼에서 사용 가능한 모니터링 대시보드와 연계하는 방법에 대한 설명을 다루고 있다.
+본 문서는 사용자의 IaaS 환경 시스템 자원 정보를 수집하여 실시간 컴퓨팅 자원의 사용량 또는 유휴 자원량을 측정해 PaaS-TA 플랫폼에서 사용 가능한 모니터링 대시보드와 연계하기 위한 Zabbix Server 설치 및 환경 설정 방법에 대한 설명을 다루고 있다.
   
 
 ### 1.2. 범위와 한계
@@ -18,8 +18,9 @@
 
 <table>
   <tr>
-    <td><b>Physical Node OS</b></td>
-    <td> CentOS Linux 7.8.2003</td>
+    <td><b>Virtual Machine OS</b></td>
+    <td>[AP] bosh-openstack-kvm-ubuntu-xenial-go_agent/621.125<br>
+        [CP] Ubuntu 18.04.6 LTS (Bionic)</td>
   </tr>
   <tr>
     <td><b>IaaS Vendor SW</b></td>
@@ -29,10 +30,14 @@
 </table>
 
 
-## <div id="2">2. Zabbix Server의 설치
+## <div id="2">2. Zabbix Agent의 설치
 
 
-### 2.1. 운영 환경 선택
+### 2.1. 모니터링 플랫폼에 따른 Zabbix Agent 설치
+**│ Application Platform (AP)**  
+
+AP 환경에서는 Zabbix Agent를 별도로 설치할 필요가 없다. PaaS-TA 설치시 
+
 Zabbix 공식 홈페이지를 방문하면 [다운로드 페이지](https://www.zabbix.com/download)를 통해 설치하고자 하는 Zabbix 버전, 운영체제 종류와 버전 등을 선택하여 사용자의 운영 환경에 알맞는 설치 스크립트를 제공 받을 수 있다.  
 **Zabbix Packages**는 Zabbix Server와 Zabbix Agent 설치 구성을 의미한다. Zabbix Server가 설치될 Physical Node 자체의 시스템 모니터링 역시 필요하므로 패키지 설치를 통해서 Zabbix Server와 Zabbix Agent를 함께 설치한다.
 
@@ -131,7 +136,7 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 
 ![](images/zabbix_server_install_guide_07.png)
 
-**│ Login** - ID: Admin, PW: zabbix 계정으로 로그인한다.
+**│ Login** - Username: Admin, Password: zabbix 계정 정보를 사용하여 로그인한다.
 
 ![](images/zabbix_server_install_guide_08.png)
 
