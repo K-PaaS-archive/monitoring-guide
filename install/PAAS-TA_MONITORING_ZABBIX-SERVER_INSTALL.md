@@ -4,7 +4,7 @@
 # Zabbix Server Install Guide
 1. [개요](#1)
 2. [Zabbix Server의 설치](#2)
-3. [필수 환경설정 사항](#3)
+3. [필수 환경설정](#3)
  
 ## <div id="1">1. 개요
 
@@ -107,7 +107,7 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 
 이제 인터넷 브라우저를 통해 Zabbix 프론트엔드 설치 페이지로 접속할 수 있다. `http://{your_server_ip_or_name}/zabbix`로 접속해 각 단계별 안내에 따라 Zabbix 프론트엔드 설치를 완료한다.
 
-**│ Welcome** - Next step 버튼으로 설치를 시작한다.
+**│ Welcome** - 'Next step' 버튼으로 설치를 시작한다.
 
 ![](images/zabbix_server_install_guide_02.png)
 
@@ -144,13 +144,13 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 ![](images/zabbix_server_install_guide_10.png)
 
 
-## <div id="3">3. 필수 환경설정 사항
+## <div id="3">3. 필수 환경설정
 
 
-### 3.1. Autoregistration actions(호스트 자동 등록 설정)
+### 3.1. Autoregistration actions(호스트 자동 등록)
 
 
-### 3.2. Create host group(호스트 그룹 생성 설정)
+### 3.2. Create host group(필수 호스트 그룹 생성)
 
 
 ### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Zabbix Server
