@@ -135,11 +135,11 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 
 ![](images/zabbix_server_install_guide_08.png)
 
-**│ Global view** - 로그인에 성공하면 Global view 페이지를 볼 수 있다.
+**│ Monitoring > Dashboard (Global view)** - 로그인에 성공하면 Global view 페이지를 볼 수 있다.
 
 ![](images/zabbix_server_install_guide_09.png)
 
-**│ Hosts** - Hosts 페이지로 이동해 로컬 환경에 설치된 Agent가 연결되었는지 확인한다('ZBX' 아이콘이 초록색으로 점등되면 연결된 것이다). Zabbix server가 설치된 로컬 환경의 Zabbix agent는 자동으로 연결된다.
+**│ Monitoring > Hosts** - Hosts 페이지로 이동해 로컬 환경에 설치된 Agent가 연결되었는지 확인한다('ZBX' 아이콘이 초록색으로 점등되면 연결된 것이다). Zabbix server가 설치된 로컬 환경의 Zabbix agent는 자동으로 연결된다.
 
 ![](images/zabbix_server_install_guide_10.png)
 
@@ -148,7 +148,27 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 
 
 ### 3.1. Autoregistration actions(호스트 자동 등록)
+**Configuration > Actions** 메뉴로 이동해 좌측 상단의 드롭다운 메뉴 중 **'Autoregistration actions'** 설정 페이지로 이동한다.
 
+![](images/zabbix_server_install_guide_11.png)
+
+우측 상단에 'Create action' 버튼을 눌러 호스트를 자동 등록하기 위한 새로운 액션(룰)을 만든다. 적당한 액션 이름(Name)을 임의 지정하고 'Condition'란의 'Add'를 눌러 조건을 추가한다. 추가될 새로운 조건은 'Type'을 'Host metadata'로 지정하고 'Operator'로 'contains'를 선택한다. 그리고 'Value'란에는 반드시 'paasta'가 지정될 수 있도록 한다.
+
+![](images/zabbix_server_install_guide_12.png)
+
+이 조건 설정을 통해 Zabbix Server는 네트워크 안에서 감지되는 많은 호스트들 중에서 'Host metadata'로 'paasta'라는 문자열을 포함(contains)하고 있는 호스트들에 대해서만 구별하여 별도의 설정을 할 수 있다.
+
+이제 'Operations' 탭으로 이동해 다음 설정을 추가한다.
+
+<table>
+  <tr><td>Details</td></tr>
+  <tr><td><b>Add host</b></td></tr>
+  <tr><td><b>Add to host groups:</b> PaaS-TA Group</td></tr>
+  <tr><td><b>Link to template:</b> Template OS Linux by Zabbix agent</td></tr>
+  <tr><td><b>Enable host</b></td></tr>
+</table>
+
+![](images/zabbix_server_install_guide_13.png)
 
 ### 3.2. Create host group(필수 호스트 그룹 생성)
 
