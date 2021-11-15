@@ -156,11 +156,11 @@ PaaS-TA 플랫폼의 IaaS 모니터링 환경에서 필수 설정되어야 할 �
 
 > **[필수 호스트 그룹]**   
 . <b>PaaS-TA Group</b>  
-. <b>Openstack hyperviosrs</b>
+. <b>Openstack hypervisors</b>
 
 <table>
   <tr>
-    <td >⚠️ PaaS-TA 플랫폼에서의 IaaS 모니터링은 해당 그룹명과 동일한 설정에서만 정상 동작하도록 설계되었으므로 그룹을 생성할 때는 반드시 본 문서에 서술된 그대로 대·소문자 및 띄어쓰기를 구별하여 가이드와 동일하게 그룹명을 작성하는 것에 주의한다. </td>
+    <td >⚠️ PaaS-TA 플랫폼에서의 IaaS 모니터링은 해당 그룹명과 동일한 설정에서 정상 작동하도록 설계되었으므로 그룹을 생성할 때는 반드시 본 문서에 서술된 그대로 대·소문자 및 띄어쓰기를 구별하여 가이드와 동일하게 그룹명을 작성하는 것에 주의한다. </td>
   </tr>
 </table>
 
@@ -171,7 +171,6 @@ PaaS-TA 플랫폼의 IaaS 모니터링 환경에서 필수 설정되어야 할 �
 ![](images/zabbix_server_install_guide_11.png)
 
 우측 상단에 'Create action' 버튼을 눌러 호스트를 자동 등록하기 위한 새로운 액션(룰)을 만든다. 적당한 액션 이름(Name)을 임의 지정하고 'Condition'란의 'Add'를 눌러 조건을 추가할 수 있다. 추가될 새로운 조건은 다음과 같이 지정하여 준다.
-
 
 > **[ New Condition ]**  
 . Type: Host metadata  
