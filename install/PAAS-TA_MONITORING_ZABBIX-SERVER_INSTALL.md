@@ -50,12 +50,12 @@ Zabbix 저장소를 설치한다.
 
 Zabbix Server와 Zabbix Agent를설치한다.
 ```
-# yum install zabbix-server-mysql zabbix-agent
+# yum -y install zabbix-server-mysql zabbix-agent
 ```
 
 Zabbix 프론트엔드 설치를 위해 Red Hat 소프트웨어 컬렉션을 설치한다.
 ```
-# yum install centos-release-scl
+# yum -y install centos-release-scl
 ```
 
 Zabbix 프론트엔드 저장소를 활성화를 위해 `/etc/yum.repos.d/zabbix.repo` 파일을 다음과 같이 편집한다. 
@@ -68,7 +68,7 @@ enabled=1
 
 Zabbix 프론트엔드 패키지를 설치한다.
 ```
-# yum install zabbix-web-mysql-scl zabbix-apache-conf-scl
+# yum -y install zabbix-web-mysql-scl zabbix-apache-conf-scl
 ```
 
 서버의 데이터베이스가 작동(활성화)중인지 확인하고 다음과 같이 데이터베이스 및 계정을 생성한 후 데이터베이스 프롬프트에서 빠져나온다.
@@ -95,7 +95,7 @@ DBPassword=paasta
 ```
 
 Zabbix 프론트엔드를 위한 PHP 설정 파일을 수정한다. `/etc/opt/rh/rh-php72/php-fpm.d/zabbix.conf` 파일 내 타임존 설정을 사용자 환경에 맞는 시각으로 변경한다. `;` 기호는 PHP 구성 파일에서 라인 주석을 의미하므로 제거한다.
-``` script
+```
 php_value[date.timezone] = Asia/Seoul
 ```
 
@@ -104,6 +104,44 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 # systemctl restart zabbix-server zabbix-agent httpd rh-php72-php-fpm
 # systemctl enable zabbix-server zabbix-agent httpd rh-php72-php-fpm
 ```
+
+이제 인터넷 브라우저를 통해 Zabbix 프론트엔드 설치 페이지로 접속할 수 있다. `http://{your_server_ip_or_name}/zabbix`로 접속해 각 단계별 안내에 따라 Zabbix 프론트엔드 설치를 완료한다.
+
+**│ Welcome**: Next step 버튼으로 설치를 시작한다.
+
+![](images/zabbix_server_install_guide_02.png)
+
+**│ Check of pre-requisites**: 모든 항목에서 'OK' 상태가 되어야 한다.
+
+![](images/zabbix_server_install_guide_03.png)
+
+**│ Configure DB connection**: 본 가이드에서는 DB를 로컬 환경에서 사용하는 것으로 가정하였다. 사용자의 DB 사용 환경에 알맞게 설정한다. 
+
+![](images/zabbix_server_install_guide_04.png)
+
+**│ Zabbix-server details**: 호스트명 정보 등을 입력한다. 포트 번호 정도만 정확하게 입력해 주고 나머지 값은 사용자 임의로 사용 가능하다.
+
+![](images/zabbix_server_install_guide_05.png)
+
+**│ Pre-installation summary**: 요약 정보를 확인한다.
+
+![](images/zabbix_server_install_guide_06.png)
+
+**│ Install**: 설치가 완료되었다.
+
+![](images/zabbix_server_install_guide_07.png)
+
+**│ Login**: ID-Admin, PW-zabbix 계정으로 로그인 가능하다.
+
+![](images/zabbix_server_install_guide_08.png)
+
+**│ Global view**: 로그인에 성공하면 Global view 페이지를 볼 수 있다.
+
+![](images/zabbix_server_install_guide_09.png)
+
+**│ Hosts**: Hosts 페이지로 이동해 로컬 환경에 설치된 Agent가 연결되었는지 확인한다('ZBX' 아이콘이 초록색으로 점등되면 연결된 것이다). Zabbix server가 설치된 로컬 환경의 Zabbix agent는 자동으로 연결된다.
+
+![](images/zabbix_server_install_guide_10.png)
 
 
 ### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Zabbix Server
