@@ -154,8 +154,9 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 
 PaaS-TA 플랫폼의 IaaS 모니터링 환경에서 필수 설정되어야 할 호스트 그룹은 다음과 같다.
 
-* **PaaS-TA Group**
-* **Openstack hyperviosrs**
+> **[필수 호스트 그룹]**   
+. <b>PaaS-TA Group</b>  
+. <b>Openstack hyperviosrs</b>
 
 <table>
   <tr>
@@ -171,26 +172,27 @@ PaaS-TA 플랫폼의 IaaS 모니터링 환경에서 필수 설정되어야 할 �
 
 우측 상단에 'Create action' 버튼을 눌러 호스트를 자동 등록하기 위한 새로운 액션(룰)을 만든다. 적당한 액션 이름(Name)을 임의 지정하고 'Condition'란의 'Add'를 눌러 조건을 추가할 수 있다. 추가될 새로운 조건은 다음과 같이 지정하여 준다.
 
-**[ New Condition ]**  
+
+> **[ New Condition ]**  
 . Type: Host metadata  
 . Operator: contains  
 . Value: paasta
 
 ![](images/zabbix_server_install_guide_12.png)
 
-이 조건 설정을 통해 Zabbix Server는 네트워크 안에서 감지되는 많은 호스트들 중에서 'Host metadata'로 'paasta'라는 문자열을 포함(contains)하고 있는 호스트들에 대해서만 구별하여 별도의 설정을 할 수 있다.
+이 조건 설정을 통해 Zabbix Server는 네트워크 안에서 감지되는 수많은 호스트들 중에서 'Host metadata' 타입으로 'paasta'라는 문자열을 포함(contains)하고 있는 호스트들에 대해서만 구별하여 별도의 설정을 할 수 있다.
 
 이제 'Operations' 탭으로 이동해 다음 설정을 추가한다.
 
-**[ Operations ]**  
+> **[ Operations ]**  
 . <b>Add host</b>  
 . <b>Add to host groups:</b> PaaS-TA Group  
 . <b>Link to templates:</b> Template OS Linux by Zabbix agent  
-. <b>Enable host<b>
+. <b>Enable host</b>
 
 ![](images/zabbix_server_install_guide_13.png)
 
-'Add' 버튼을 눌러 액션을 추가한다. 이 액션 설정을 통해 Zabbix Server는 네트워크 안에서 감지되는 많은 호스트들 중에서 'Host metadata'로 'paasta'라는 문자열을 포함(contains)하고 있는 호스트들에 대해서 'PaaS-TA Group'으로 그룹핑하여 모니터링한다.
+'Add' 버튼을 눌러 최종적으로 액션 설정을 추가한다. 이 액션 설정을 통해 Zabbix Server는 네트워크 안에서 감지되는 수많은 호스트들 중에서 'Host metadata' 타입으로 'paasta'라는 문자열을 포함(contains)하고 있는 호스트들에 대해서 'PaaS-TA Group'으로 그룹핑하여 모니터링한다.
 
 
 ### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Zabbix Server
