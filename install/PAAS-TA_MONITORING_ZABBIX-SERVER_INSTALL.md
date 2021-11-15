@@ -147,17 +147,33 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 ## <div id="3">3. 필수 환경설정
 
 
-### 3.1. Autoregistration actions(호스트 자동 등록)
+### 3.1. Create host group(필수 호스트 그룹 생성)
+**Configuration > Host groups** 메뉴로 이동해 우측 상단의 'Create host group' 버튼을 통해 모니터링 호스트 그룹을 생성할 수 있다.
+
+PaaS-TA 플랫폼의 IaaS 모니터링 환경에서 필수 설정되어야 할 호스트 그룹은 다음과 같다.
+
+* **PaaS-TA Group**
+* **Openstack hyperviosrs**
+
+<table>
+  <tr>
+    <td >⚠️ 그룹을 생성할 때 반드시 본 문서에 서술된 그대로 대·소문자 및 띄어쓰기를 구별하여 가이드와 동일하게 그룹명을 생성하는 것에 주의한다. </td>
+  </tr>
+</table>
+
+
+
+### 3.2. Autoregistration actions(호스트 자동 등록)
 **Configuration > Actions** 메뉴로 이동해 좌측 상단의 드롭다운 메뉴 중 **'Autoregistration actions'** 설정 페이지로 이동한다.
 
 ![](images/zabbix_server_install_guide_11.png)
 
 우측 상단에 'Create action' 버튼을 눌러 호스트를 자동 등록하기 위한 새로운 액션(룰)을 만든다. 적당한 액션 이름(Name)을 임의 지정하고 'Condition'란의 'Add'를 눌러 조건을 추가할 수 있다. 추가될 새로운 조건은 다음과 같이 지정하여 준다.
 
-　**[ New Condition ]**  
-　Type: Host metadata  
-　Operator: contains  
-　Value: paasta
+**[ New Condition ]**  
+. Type: Host metadata  
+. Operator: contains  
+. Value: paasta
 
 ![](images/zabbix_server_install_guide_12.png)
 
@@ -165,15 +181,15 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 
 이제 'Operations' 탭으로 이동해 다음 설정을 추가한다.
 
-　**[ Details ]**  
-　<b>Add host</b>  
-　<b>Add to host groups:</b> PaaS-TA Group  
-　<b>Link to templates:</b> Template OS Linux by Zabbix agent  
-　<b>Enable host<b>
+**[ Operations ]**  
+. <b>Add host</b>  
+. <b>Add to host groups:</b> PaaS-TA Group  
+. <b>Link to templates:</b> Template OS Linux by Zabbix agent  
+. <b>Enable host<b>
 
 ![](images/zabbix_server_install_guide_13.png)
 
-### 3.2. Create host group(필수 호스트 그룹 생성)
+'Add' 버튼을 눌러 액션을 추가한다. 이 액션 설정을 통해 Zabbix Server는 네트워크 안에서 감지되는 많은 호스트들 중에서 'Host metadata'로 'paasta'라는 문자열을 포함(contains)하고 있는 호스트들에 대해서 'PaaS-TA Group'으로 그룹핑하여 모니터링한다.
 
 
 ### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Zabbix Server
