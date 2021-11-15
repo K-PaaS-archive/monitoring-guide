@@ -2,9 +2,9 @@
 
 
 # Zabbix Server Install Guide
-1. [개요](#1)  
-2. [Zabbix Server의 설치](#2)  
-
+1. [개요](#1)
+2. [Zabbix Server의 설치](#2)
+3. [필수 환경설정 사항](#3)
  
 ## <div id="1">1. 개요
 
@@ -142,6 +142,15 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 **│ Hosts**: Hosts 페이지로 이동해 로컬 환경에 설치된 Agent가 연결되었는지 확인한다('ZBX' 아이콘이 초록색으로 점등되면 연결된 것이다). Zabbix server가 설치된 로컬 환경의 Zabbix agent는 자동으로 연결된다.
 
 ![](images/zabbix_server_install_guide_10.png)
+
+
+## <div id="3">3. 필수 환경설정 사항
+
+
+### 3.1. Autoregistration actions(호스트 자동 등록 설정)
+
+
+### 3.2. Create host group(호스트 그룹 생성 설정)
 
 
 ### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Zabbix Server
