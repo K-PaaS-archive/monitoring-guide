@@ -33,7 +33,12 @@
 ## <div id="2">2. Zabbix Server의 설치
 
 
-### 2.1. 운영 환경 선택
+### 2.1. 모니터링 플랫폼에 따른 Zabbix Agent 설치
+**│ Application Platform (AP)**  
+
+AP 환경에서는 Zabbix Agent를 별도로 설치할 필요가 없다. PaaS-TA 설치시 
+
+
 Zabbix 공식 홈페이지를 방문하면 [다운로드 페이지](https://www.zabbix.com/download)를 통해 설치하고자 하는 Zabbix 버전, 운영체제 종류와 버전 등을 선택하여 사용자의 운영 환경에 알맞는 설치 스크립트를 제공 받을 수 있다.  
 **Zabbix Packages**는 Zabbix Server와 Zabbix Agent 설치 구성을 의미한다. Zabbix Server가 설치될 Physical Node 자체의 시스템 모니터링 역시 필요하므로 패키지 설치를 통해서 Zabbix Server와 Zabbix Agent를 함께 설치한다.
 
