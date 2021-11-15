@@ -154,10 +154,10 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 
 우측 상단에 'Create action' 버튼을 눌러 호스트를 자동 등록하기 위한 새로운 액션(룰)을 만든다. 적당한 액션 이름(Name)을 임의 지정하고 'Condition'란의 'Add'를 눌러 조건을 추가할 수 있다. 추가될 새로운 조건은 다음과 같이 지정하여 준다.
 
-**│ New Condition**
-* Type: Host metadata
-* Operator: contains
-* Value: paasta
+　**[ New Condition ]**  
+　Type: Host metadata  
+　Operator: contains  
+　Value: paasta
 
 ![](images/zabbix_server_install_guide_12.png)
 
@@ -165,13 +165,11 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 
 이제 'Operations' 탭으로 이동해 다음 설정을 추가한다.
 
-<table>
-  <tr><td>Details</td></tr>
-  <tr><td><b>Add host</b></td></tr>
-  <tr><td><b>Add to host groups:</b> PaaS-TA Group</td></tr>
-  <tr><td><b>Link to template:</b> Template OS Linux by Zabbix agent</td></tr>
-  <tr><td><b>Enable host</b></td></tr>
-</table>
+　**[ Details ]**  
+　<b>Add host</b>  
+　<b>Add to host groups:</b> PaaS-TA Group  
+　<b>Link to templates:</b> Template OS Linux by Zabbix agent  
+　<b>Enable host<b>
 
 ![](images/zabbix_server_install_guide_13.png)
 
