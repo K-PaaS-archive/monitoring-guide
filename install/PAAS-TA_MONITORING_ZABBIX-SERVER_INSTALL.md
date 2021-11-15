@@ -135,7 +135,7 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 
 ![](images/zabbix_server_install_guide_08.png)
 
-**│ Monitoring > Dashboard (Global view)** - 로그인에 성공하면 Global view 페이지를 볼 수 있다.
+**│ Monitoring > Dashboard(Global view)** - 로그인에 성공하면 Global view 페이지를 볼 수 있다.
 
 ![](images/zabbix_server_install_guide_09.png)
 
