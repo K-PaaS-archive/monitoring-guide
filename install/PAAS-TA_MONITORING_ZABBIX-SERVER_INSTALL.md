@@ -115,7 +115,7 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 
 ![](images/zabbix_server_install_guide_03.png)
 
-**│ Configure DB connection**: 본 가이드에서는 DB를 로컬 환경에서 사용하는 것으로 가정하였다. 사용자의 DB 사용 환경에 알맞게 설정한다. 
+**│ Configure DB connection**: 본 가이드에서는 DB를 로컬 환경에서 사용하는 것으로 가정하였다. 해당 설정은 각 사용자의 설치 환경에 알맞게 설정한다.
 
 ![](images/zabbix_server_install_guide_04.png)
 
@@ -123,7 +123,7 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 
 ![](images/zabbix_server_install_guide_05.png)
 
-**│ Pre-installation summary**: 요약 정보를 확인한다.
+**│ Pre-installation summary**: 설치 요약 정보를 확인한다.
 
 ![](images/zabbix_server_install_guide_06.png)
 
@@ -131,7 +131,7 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 
 ![](images/zabbix_server_install_guide_07.png)
 
-**│ Login**: ID-Admin, PW-zabbix 계정으로 로그인 가능하다.
+**│ Login**: [ID] Admin, [PW] zabbix 계정으로 로그인한다.
 
 ![](images/zabbix_server_install_guide_08.png)
 
