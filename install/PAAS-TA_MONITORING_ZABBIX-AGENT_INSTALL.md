@@ -73,7 +73,7 @@ Hostname=zabbix-agent1
 Hostmetadata=paasta
 ...
 ```
-> **[ 주요 설정 파라미터 ]**
+> **[ 주요 설정 파라미터 ]**  
 > . `Server`: Zabbix Server의 IP 주소를 입력한다.  
 > . `ServerActive`: Zabbix Server의 IP 주소와 서비스 포트 번호를 콜론으로 연결하여 입력한다.  
 > . `Hostname`: 호스트명을 입력한다. 이곳에 설정된 내용이 Zabbix Server의 모니터링 호스트명이 된다.  
