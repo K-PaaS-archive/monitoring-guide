@@ -63,7 +63,7 @@ $ zcat /usr/share/doc/zabbix-proxy-mysql/schema.sql.gz | mysql -uzabbix_proxy -p
 Enter Password:
 ```
 
-서버의 데이터베이스가 작동(활성화)중인지 확인하고 다음과 같이 데이터베이스 및 계정을 생성한 후 데이터베이스 프롬프트에서 빠져나온다.
+Zabbix Proxy 설정을 위해 `/etc/zabbix/zabbix_proxy.conf` 파일의 다음 항목들을 각 사용자의 환경에 알맞게 편집한다.
 ```
 ...
 ProxyMode=0
