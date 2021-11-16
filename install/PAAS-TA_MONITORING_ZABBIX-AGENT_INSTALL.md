@@ -9,7 +9,7 @@
 ## <div id="1">1. 개요
 
 
-### 1.1. 목적
+### 1.1. 소개
 본 문서는 사용자의 IaaS 환경 시스템 자원 정보를 수집하여 실시간 컴퓨팅 자원의 사용량 또는 유휴 자원량을 측정해 PaaS-TA 플랫폼에서 사용 가능한 모니터링 대시보드와 연계하기 위한 Zabbix Agent 설치 및 환경 설정 방법에 대한 설명을 다루고 있다.
   
 
@@ -19,7 +19,7 @@
 <table>
   <tr>
     <td><b>Virtual Machine OS</b></td>
-    <td>[AP] bosh-openstack-kvm-ubuntu-xenial-go_agent/621.125<br>
+    <td>[AP] Ubuntu 16.04.7 LTS (Xenial)<br>
         [CP] Ubuntu 18.04.6 LTS (Bionic)</td>
   </tr>
   <tr>
@@ -33,21 +33,22 @@
 ## <div id="2">2. Zabbix Server의 설치
 
 
-### 2.1. 모니터링 플랫폼에 따른 Zabbix Agent 설치
+### 2.1. 서비스 플랫폼에 따른 Zabbix Agent 설치
 **│ Application Platform (AP)**  
 
-AP 환경에서는 Zabbix Agent를 별도로 설치할 필요가 없다. PaaS-TA 설치시 
+AP 환경에서 Zabbix Agent는 PaaS-TA 플랫폼 배포와 함께 PaaS-TA 환경을 구성하는 각 인스턴스에 내장 설치된다. 따라서 AP 환경에서는 Zabbix Agent를 별도로 설치할 필요가 없다.
 
+**│ Container Platform (CP)**  
 
-Zabbix 공식 홈페이지를 방문하면 [다운로드 페이지](https://www.zabbix.com/download)를 통해 설치하고자 하는 Zabbix 버전, 운영체제 종류와 버전 등을 선택하여 사용자의 운영 환경에 알맞는 설치 스크립트를 제공 받을 수 있다.  
-**Zabbix Packages**는 Zabbix Server와 Zabbix Agent 설치 구성을 의미한다. Zabbix Server가 설치될 Physical Node 자체의 시스템 모니터링 역시 필요하므로 패키지 설치를 통해서 Zabbix Server와 Zabbix Agent를 함께 설치한다.
+AP 환경에서 배포 자동화 스크립트를 이용해 플랫폼을 배포했던 방식과는 달리 CP 환경에서는 쿠버네티스를 사용해 클러스터링을 구현할 노드의 수를 설정하거나 혹은 IaaS 플랫폼에서 가상 머신을 생성하거나 하는 일련의 작업이 수동으로 이루어진다. 따라서 CP 환경을 구성하는 각 노드에 Zabbix Agent를 별도로 설치하는 작업이 필요하다.
 
-![](images/zabbix_server_install_guide_01.png)
+Zabbix 공식 홈페이지를 방문하면 [다운로드 페이지](https://www.zabbix.com/download)를 통해 설치하고자 하는 Zabbix 버전, 운영체제 종류와 버전 등을 선택하여 사용자의 운영 환경에 알맞는 설치 스크립트를 제공 받을 수 있다.
 
-본 가이드에서는 CentOS 7 운영체제에서 Zabbix 5.0 LTS 버전, 데이터베이스 SW로는 MySQL, 웹 서버 SW로는 Apache 구성으로 선택해 설치하였다.
+![](images/zabbix_agent_install_guide_01.png)
 
+**Zabbix Packages**는 Zabbix Server와 Zabbix Agent 설치 구성을 의미한다. 이 단계에서 Zabbix Server는 설치할 필요가 없으므로 Server 설치와 관련된 스크립트는 생략하고 Zabbix Agent 설치 스크립트만 따라 실행하도록 한다. 
 
-### 2.2. Zabbix Packages 설치
+### 2.2. Zabbix Agent 설치
 Zabbix 저장소를 설치한다.
 ```
 # rpm -Uvh https://repo.zabbix.com/zabbix/5.0/rhel/7/x86_64/zabbix-release-5.0-1.el7.noarch.rpm

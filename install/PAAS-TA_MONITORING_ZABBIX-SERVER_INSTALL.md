@@ -9,7 +9,7 @@
 ## <div id="1">1. 개요
 
 
-### 1.1. 목적
+### 1.1. 소개
 본 문서는 사용자의 IaaS 환경 시스템 자원 정보를 수집하여 실시간 컴퓨팅 자원의 사용량 또는 유휴 자원량을 측정해 PaaS-TA 플랫폼에서 사용 가능한 모니터링 대시보드와 연계하기 위한 Zabbix Server 설치 및 환경 설정 방법에 대한 설명을 다루고 있다.
   
 
@@ -33,10 +33,11 @@
 
 
 ### 2.1. 운영 환경 선택
-Zabbix 공식 홈페이지를 방문하면 [다운로드 페이지](https://www.zabbix.com/download)를 통해 설치하고자 하는 Zabbix 버전, 운영체제 종류와 버전 등을 선택하여 사용자의 운영 환경에 알맞는 설치 스크립트를 제공 받을 수 있다.  
-**Zabbix Packages**는 Zabbix Server와 Zabbix Agent 설치 구성을 의미한다. Zabbix Server가 설치될 Physical Node 자체의 시스템 모니터링 역시 필요하므로 패키지 설치를 통해서 Zabbix Server와 Zabbix Agent를 함께 설치한다.
+Zabbix 공식 홈페이지를 방문하면 [다운로드 페이지](https://www.zabbix.com/download)를 통해 설치하고자 하는 Zabbix 버전, 운영체제 종류와 버전 등을 선택하여 사용자의 운영 환경에 알맞는 설치 스크립트를 제공 받을 수 있다.
 
 ![](images/zabbix_server_install_guide_01.png)
+
+**Zabbix Packages**는 Zabbix Server와 Zabbix Agent 설치 구성을 의미한다. Zabbix Server가 설치될 Physical Node 자체의 시스템 모니터링 역시 필요하므로 패키지 설치를 통해서 Zabbix Server와 Zabbix Agent를 함께 설치한다.
 
 본 가이드에서는 CentOS 7 운영체제에서 Zabbix 5.0 LTS 버전, 데이터베이스 SW로는 MySQL, 웹 서버 SW로는 Apache 구성으로 선택해 설치하였다.
 
@@ -152,15 +153,15 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 
 ![](images/zabbix_server_install_guide_14.png)
 
-PaaS-TA 플랫폼의 IaaS 모니터링 환경에서 필수 설정되어야 할 호스트 그룹은 다음과 같다.
+PaaS-TA 플랫폼 IaaS 모니터링 환경에서 필수 설정되어야 할 호스트 그룹은 다음과 같다.
 
 > **[필수 호스트 그룹]**   
-. <b>PaaS-TA Group</b>  
-. <b>Openstack hypervisors</b>
+. PaaS-TA Group  
+. Openstack hypervisors
 
 <table>
   <tr>
-    <td >⚠️ PaaS-TA 플랫폼에서의 IaaS 모니터링은 해당 그룹명과 동일한 설정에서 정상 작동하도록 설계되었으므로 그룹을 생성할 때는 반드시 본 문서에 서술된 그대로 대·소문자 및 띄어쓰기를 구별하여 가이드와 동일하게 그룹명을 작성하는 것에 주의한다. </td>
+    <td >⚠️ PaaS-TA 플랫폼에서의 IaaS 모니터링은 필수 호스트 그룹 리스트와 동일한 설정에서 정상 작동하도록 설계되었으므로 그룹을 생성할 때는 반드시 본 문서에 서술된 그대로 <b>대·소문자 및 띄어쓰기를 구별하여 가이드와 동일하게 그룹명을 작성하는 것에 주의한다.</b></td>
   </tr>
 </table>
 
@@ -170,7 +171,7 @@ PaaS-TA 플랫폼의 IaaS 모니터링 환경에서 필수 설정되어야 할 �
 
 ![](images/zabbix_server_install_guide_11.png)
 
-우측 상단에 'Create action' 버튼을 눌러 호스트를 자동 등록하기 위한 새로운 액션(룰)을 만든다. 적당한 액션 이름(Name)을 임의 지정하고 'Condition'란의 'Add'를 눌러 조건을 추가할 수 있다. 추가될 새로운 조건은 다음과 같이 지정하여 준다.
+우측 상단에 'Create action' 버튼을 눌러 호스트를 자동 등록하기 위한 새로운 액션(규칙)을 만든다. 적당한 액션 이름(Name)을 임의 지정한 다음 'Condition'란의 'Add'를 눌러 조건을 추가할 수 있다. 추가될 새로운 조건은 다음과 같이 지정하여 준다.
 
 > **[ New Condition ]**  
 . Type: Host metadata  
