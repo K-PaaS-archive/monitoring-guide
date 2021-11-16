@@ -92,7 +92,7 @@ ConfigFrequency=100
 
 > **[ 주요 설정 파라미터 ]**  
 . `ProxyMode`: `0`은 액티브 모드, `1`은 패시브 모드.  
-. `Server`: Zabbix Server의 IP 주소를 입력.
+. `Server`: Zabbix Server의 IP 주소를 입력.  
 . `ServerPort`: Zabbix Server와 통신하기 위해 목적지로 사용되는 포트 번호.  
 . `Hostname`: 호스트명을 입력. 이곳에 설정된 값이 Zabbix Server 프록시 설정에서 프록시명으로 적용.    
 . `ListenPort`: Zabbix Server 및 Agent와 통신하기 위한 포트 번호.    
