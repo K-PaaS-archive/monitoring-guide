@@ -62,6 +62,7 @@ Zabbix 프론트엔드 설치를 위해 Red Hat 소프트웨어 컬렉션을 설
 
 Zabbix 프론트엔드 저장소를 활성화를 위해 `/etc/yum.repos.d/zabbix.repo` 파일을 다음과 같이 편집한다. 
 ```
+...
 [zabbix-frontend]
 ...
 enabled=1
@@ -93,12 +94,16 @@ Enter Password:
 
 Zabbix Server의 데이터베이스 비밀번호를 `/etc/zabbix/zabbix_server.conf` 파일 내 `DBPassword` 항목을 찾아 다음과 같이 추가한다. 
 ```
+...
 DBPassword=paasta
+...
 ```
 
 Zabbix 프론트엔드를 위한 PHP 설정 파일을 수정한다. `/etc/opt/rh/rh-php72/php-fpm.d/zabbix.conf` 파일 내 타임존 설정을 사용자 환경에 맞는 시각으로 변경한다. `;` 기호는 PHP 구성 파일에서 라인 주석을 의미하므로 제거한다.
 ```
+...
 php_value[date.timezone] = Asia/Seoul
+...
 ```
 
 Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시작한다.
@@ -107,7 +112,7 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 # systemctl enable zabbix-server zabbix-agent httpd rh-php72-php-fpm
 ```
 
-이제 인터넷 브라우저를 통해 Zabbix 프론트엔드 설치 페이지로 접속할 수 있다. `http://{your_server_ip_or_name}/zabbix`로 접속해 각 단계별 안내에 따라 Zabbix 프론트엔드 설치를 완료한다.
+이제 인터넷 브라우저를 통해 Zabbix 프론트엔드 설치 페이지로 접속할 수 있다. **'http://{your_server_ip_or_name}/zabbix'**로 접속해 각 단계별 안내에 따라 Zabbix 프론트엔드 설치를 완료한다.
 
 **│ Welcome** - 'Next step' 버튼으로 설치를 시작한다.
 
