@@ -36,7 +36,7 @@
 ### 2.1. 서비스 플랫폼에 따른 Zabbix Agent 설치
 **│ Application Platform (AP)**  
 
-AP 환경에서 Zabbix Agent는 PaaS-TA 플랫폼 배포와 함께 PaaS-TA 환경을 구성하는 각 인스턴스에 내장 설치된다. 따라서 AP 환경에서는 Zabbix Agent를 별도로 설치할 필요가 없다.
+AP 환경에서 Zabbix Agent는 PaaS-TA 플랫폼 배포와 함께 PaaS-TA 환경을 구성하는 각 인스턴스에 내장 설치된다. 따라서 AP 환경에서는 Zabbix Agent를 별도로 설치할 필요가 없다. 다만 PaaS-TA 설치 시에 사용되는 공통 변수 참조 파일(`common-vars.yml`)등에서 Zabbix Server 혹은 Zabbix Proxy IP 정보만 알맞게 설정해주면 된다.
 
 **│ Container Platform (CP)**  
 
@@ -77,11 +77,12 @@ HostMetadata=paasta
 . `Server`: Zabbix Server의 IP 주소를 입력한다.  
 . `ServerActive`: Zabbix Server의 IP 주소와 서비스 포트 번호를 콜론으로 연결하여 입력한다.  
 . `Hostname`: 호스트명을 입력한다. 이곳에 설정된 값이 Zabbix Server의 모니터링 호스트명으로 적용된다.  
-. `HostMetadata`: 자동 모니터링 호스트 등록과 그룹핑을 위해 인스턴스 범위를 구분하기 위한 일종의 태그 같은 역할을 한다.
+. `HostMetadata`: 자동 모니터링 호스트 등록과 그룹핑을 위해 인스턴스 범위를 구분하기 위한 일종의 태그와 같은 역할을 한다.
 
-Zabbix Agent를 재시작한다.
+Zabbix Agent를 재시작하여 Agent 설치와 설정을 완료한다.
 ```
 $ sudo systemctl restart zabbix-agent
 ```
+
 
 ### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Zabbix Agent
