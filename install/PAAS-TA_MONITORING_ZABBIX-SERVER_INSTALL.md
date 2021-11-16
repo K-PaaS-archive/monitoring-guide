@@ -112,7 +112,7 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 # systemctl enable zabbix-server zabbix-agent httpd rh-php72-php-fpm
 ```
 
-이제 인터넷 브라우저를 통해 Zabbix 프론트엔드 설치 페이지로 접속할 수 있다. **'http://{your_server_ip_or_name}/zabbix'**로 접속해 각 단계별 안내에 따라 Zabbix 프론트엔드 설치를 완료한다.
+이제 인터넷 브라우저를 통해 Zabbix 프론트엔드 설치 페이지로 접속할 수 있다. <b>'http://{your_server_ip_or_name}/zabbix'</b>로 접속해 각 단계별 안내에 따라 Zabbix 프론트엔드 설치를 완료한다.
 
 **│ Welcome** - 'Next step' 버튼으로 설치를 시작한다.
 

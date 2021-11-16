@@ -32,7 +32,7 @@
 ## <div id="2">2. Zabbix Proxy의 설치
 
 
-### 2.1. Zabbix Packages 설치
+### 2.1. Zabbix Proxy 설치
 Zabbix 저장소를 설치한다.
 ```
 $ wget https://repo.zabbix.com/zabbix/5.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_5.0-1+bionic_all.deb
