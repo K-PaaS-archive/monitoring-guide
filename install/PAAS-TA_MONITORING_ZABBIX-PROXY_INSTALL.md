@@ -94,13 +94,13 @@ ConfigFrequency=100
 . `ProxyMode`: `0`은 액티브 모드, `1`은 패시브 모드.  
 . `Server`: Zabbix Server의 IP 주소를 입력.
 . `ServerPort`: Zabbix Server와 통신하기 위해 목적지로 사용되는 포트 번호.  
-. `Hostname`: 호스트명을 입력. 이곳에 설정된 값이 Zabbix Server 프록시 설정에서 프록시명으로 적용.  
-. `ListenPort`: Zabbix Server 및 Agent와 통신하기 위한 포트 번호.  
-. `DBHost`: DB IP 주소를 입력.
-. `DBName`: DB 이름을 입력.
-. `DBUser`: DB 유저 정보를 입력.
-. `DBPassword`: DB 액세스 유저의 비밀번호를 입력.
-. `DBPort`: DB 서비스 포트 번호를 입력. 
+. `Hostname`: 호스트명을 입력. 이곳에 설정된 값이 Zabbix Server 프록시 설정에서 프록시명으로 적용.    
+. `ListenPort`: Zabbix Server 및 Agent와 통신하기 위한 포트 번호.    
+. `DBHost`: DB IP 주소를 입력.  
+. `DBName`: DB 이름을 입력.  
+. `DBUser`: DB 유저 정보를 입력.  
+. `DBPassword`: DB 액세스 유저의 비밀번호를 입력.  
+. `DBPort`: DB 서비스 포트 번호를 입력.  
 . `ConfiguFrequency`: Zabbix Proxy가 Zabbix Server로부터 설정 데이터를 검색하는 빈도.
 
 생성한 `zabbix` 데이터베이스에 다음과 같이 Zabbix 운영에 필요한 스키마와 데이터를 삽입한다. 이 때 앞에서 생성한 계정의 비밀번호를 요구하므로 알맞은 비밀번호를 입력해준다(가이드에서는`paasta`로 설정하였다).
