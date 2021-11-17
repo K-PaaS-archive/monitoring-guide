@@ -11,7 +11,7 @@
 
 
 ### 1.1. 소개
-본 문서는 사용자의 IaaS 환경 시스템 자원 정보를 수집하여 실시간 컴퓨팅 자원의 사용량 또는 유휴 자원량을 측정해 PaaS-TA 플랫폼에서 사용 가능한 모니터링 대시보드와 연계하기 위한 Zabbix Server 설치 및 환경 설정 방법에 대한 설명을 다루고 있다.
+본 문서는 사용자의 IaaS 환경에 대한 시스템 자원 정보를 수집하여 실시간 컴퓨팅 자원의 사용량 또는 유휴 자원량을 측정해 PaaS-TA 플랫폼에서 사용 가능한 모니터링 대시보드와 연계하기 위한 Zabbix Server 설치 및 환경 설정 방법에 대한 설명을 다루고 있다.
   
 
 ### 1.2. 범위와 한계
@@ -40,7 +40,7 @@ Zabbix 공식 홈페이지를 방문하면 [다운로드](https://www.zabbix.com
 
 **Zabbix Packages**는 Zabbix Server와 Zabbix Agent 설치 구성을 의미한다. Zabbix Server가 설치될 Physical Node 자체의 시스템 모니터링 역시 필요하므로 패키지 설치를 통해서 Zabbix Server와 Zabbix Agent를 함께 설치한다.
 
-본 가이드에서는 CentOS 7 운영체제에서 Zabbix 5.0 LTS 버전, 데이터베이스 SW로는 MySQL, 웹 서버 SW로는 Apache 구성으로 선택해 설치하였다.
+본 가이드에서는 CentOS 7 운영체제에서 Zabbix 5.0 LTS 버전의 Server 및 Agent, 데이터베이스 SW로는 MySQL, 웹 서버 SW로는 Apache 구성으로 선택해 설치하였다.
 
 
 ### 2.2. Zabbix Packages 설치
@@ -97,7 +97,6 @@ Zabbix Server의 데이터베이스 비밀번호를 `/etc/zabbix/zabbix_server.c
 ...
 DBPassword=paasta
 ...
-...
 HostMetadata=openstack
 ...
 ```
@@ -117,39 +116,39 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 
 이제 인터넷 브라우저를 통해 Zabbix 프론트엔드 설치 페이지로 접속할 수 있다. <b>'http://<i>{your_server_ip_or_name}</i>/zabbix'</b>로 접속해 각 단계별 안내에 따라 Zabbix 프론트엔드 설치를 완료한다.
 
-**│ Welcome** - 'Next step' 버튼으로 설치를 시작한다.
+**① Welcome** - 'Next step' 버튼으로 설치를 시작한다.
 
 ![](images/zabbix_server_install_guide_02.png)
 
-**│ Check of pre-requisites** - 모든 항목에서 'OK' 상태가 되어야 한다.
+**② Check of pre-requisites** - 모든 항목에서 'OK' 상태가 되어야 한다.
 
 ![](images/zabbix_server_install_guide_03.png)
 
-**│ Configure DB connection** - 본 가이드에서는 DB를 로컬 환경에서 사용하는 것으로 가정하였다. 해당 설정은 각 사용자의 설치 환경에 알맞게 설정한다.
+**③ Configure DB connection** - 본 가이드에서는 DB를 로컬 환경에서 사용하는 것으로 가정하였다. 해당 설정은 각 사용자의 설치 환경에 알맞게 설정한다.
 
 ![](images/zabbix_server_install_guide_04.png)
 
-**│ Zabbix-server details** - 호스트명 정보 등을 입력한다. 포트 번호 정도만 정확하게 입력해 주고 나머지 값은 사용자가 임의로 설정하여 사용 가능하다.
+**④ Zabbix-server details** - 호스트명 정보 등을 입력한다. 포트 번호 정도만 정확하게 입력해 주고 나머지 값은 사용자가 임의로 설정하여 사용 가능하다.
 
 ![](images/zabbix_server_install_guide_05.png)
 
-**│ Pre-installation summary** - 설치 요약 정보를 확인한다.
+**⑤ Pre-installation summary** - 설치 요약 정보를 확인한다.
 
 ![](images/zabbix_server_install_guide_06.png)
 
-**│ Install** - 설치가 완료되었다.
+**⑥ Install** - 설치가 완료되었다.
 
 ![](images/zabbix_server_install_guide_07.png)
 
-**│ Login** -  관리자 게정 정보를 사용하여 로그인한다(Username: Admin, Password: zabbix).
+**⑦ Login** -  관리자 게정 정보를 사용하여 로그인한다(Username: Admin, Password: zabbix).
 
 ![](images/zabbix_server_install_guide_08.png)
 
-**│ Monitoring > Dashboard(Global view)** - 로그인에 성공하면 Global view 페이지를 볼 수 있다.
+**⑧ Monitoring > Dashboard(Global view)** - 로그인에 성공하면 Global view 페이지를 볼 수 있다.
 
 ![](images/zabbix_server_install_guide_09.png)
 
-**│ Monitoring > Hosts** - Hosts 페이지로 이동해 로컬 환경에 설치된 Agent가 연결되었는지 확인한다('ZBX' 아이콘이 초록색으로 점등되면 연결된 것이다). Zabbix server가 설치된 로컬 환경의 Zabbix agent는 자동으로 연결된다.
+**⑨ Monitoring > Hosts** - Hosts 페이지로 이동해 로컬 환경에 설치된 Agent가 연결되었는지 확인한다('ZBX' 아이콘이 초록색으로 점등되면 연결된 것이다). Zabbix server가 설치된 로컬 환경의 Zabbix agent는 자동으로 연결된다.
 
 ![](images/zabbix_server_install_guide_10.png)
 
@@ -158,7 +157,9 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 
 
 ### 3.1. Create host group(필수 호스트 그룹 생성)
-PaaS-TA 플랫폼에서 IaaS 모니터링을 위해 필수 설정되어야 할 호스트 그룹 설정에 대해 알아본다. **Configuration > Host groups** 메뉴로 이동하면 우측 상단의 'Create host group' 버튼을 통해 모니터링 호스트 그룹을 생성할 수 있다.
+PaaS-TA 플랫폼에서 IaaS 모니터링을 위해 필수 설정되어야 할 호스트 그룹 생성 방법에 대해 알아본다. 
+
+**Configuration > Host groups** 메뉴로 이동하면 우측 상단의 'Create host group' 버튼을 통해 모니터링 호스트 그룹을 생성할 수 있다.
 
 ![](images/zabbix_server_install_guide_14.png)
 
@@ -176,7 +177,9 @@ PaaS-TA 플랫폼에서 IaaS 모니터링을 위해 필수 설정되어야 할 �
 
 
 ### 3.2. Autoregistration actions(호스트 자동 등록)
-PaaS-TA 플랫폼에서 IaaS 모니터링을 위해 설정되어야 할 필수 'Autoregistration actions' 옵션 설정법에 대해 알아본다. 앞서 생성한 필수 호스트 그룹에 따라 설정 옵션이 다르므로 다음 가이드를 참고하여 설정한다.
+PaaS-TA 플랫폼에서 IaaS 모니터링을 위해 필수 설정되어야 할 **'Autoregistration actions'** 옵션 설정 방법에 대해 알아본다.
+
+앞서 생성한 필수 호스트 그룹에 따라 옵션이 다소 다르므로 다음 가이드에 안내된 내용을 참고한다.
 
 **│ PaaS-TA Group**  
 
@@ -224,9 +227,9 @@ PaaS-TA 플랫폼에서 IaaS 모니터링을 위해 설정되어야 할 필수 '
 
 
 ### 3.3. Create proxy(프록시 설정)
-Zabbix Proxy가 설치된 노드(인스턴스) 정보를 Zabbix Server 프론트엔드를 통해 등록하는 방법에 대해 알아본다. **Administration > Proxies** 메뉴로 이동해 우측 상단의 'Create proxy' 버튼을 통해 프록시 설정이 가능하다.
-
-Zabbix Proxy가 설치된 인스턴스에서 설정된 환경설정 값을 바탕으로 각 사용자 설정에 알맞게 Proxy 정보를 입력한 후 설정을 완료한다.
+Zabbix Proxy가 설치된 노드(인스턴스) 정보를 Zabbix Server 프론트엔드를 통해 등록하는 방법에 대해 알아본다.
+ 
+**Administration > Proxies** 메뉴로 이동해 우측 상단의 'Create proxy' 버튼을 통해 프록시 설정이 가능하다. Zabbix Proxy가 설치된 인스턴스에서 설정된 환경설정 값을 바탕으로 각 사용자 설정에 알맞게 Proxy 정보를 입력한 후 설정을 완료한다.
 
 > **[ Proxy ]**  
 . Proxy name: zabbix proxy 01  
