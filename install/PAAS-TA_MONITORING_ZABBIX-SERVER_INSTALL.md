@@ -236,7 +236,7 @@ Zabbix Proxy가 설치된 노드(인스턴스) 정보를 Zabbix Server 프론트
 
 ![](images/zabbix_server_install_guide_15.png)
 
-OpenStack 환경에서는 Proxy 인스턴스에 Floting IP를 할당함으로 가상 네트워크로 격리된 PaaS-TA 네트워크 간의 중계 역할을 하도록 설계되었으므로 'Proxy address'란에는 Proxy 인스턴스에 할당된 Floting IP를 설정한다.
+OpenStack 환경에서는 Proxy 인스턴스에 Floting IP를 할당함으로 가상 네트워크로 격리된 PaaS-TA 네트워크 간의 중계 역할을 하도록 설계되었으므로 'Proxy address'란에는 Proxy 인스턴스에 할당된 Floting IP를 설정하도록 한다.
 
 
 ### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Zabbix Server
