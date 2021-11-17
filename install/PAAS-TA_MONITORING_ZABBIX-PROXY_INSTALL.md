@@ -10,7 +10,7 @@
 
 
 ### 1.1. 소개
-본 문서는 사용자의 IaaS 환경에 대한 시스템 자원 정보를 수집하여 실시간 컴퓨팅 자원의 사용량 또는 유휴 자원량을 측정해 PaaS-TA 플랫폼에서 사용 가능한 모니터링 대시보드와 연계하기 위한 Zabbix Proxy 설치 및 환경 설정 방법에 대한 설명을 다루고 있다.
+본 문서는 사용자의 IaaS 환경에 대한 시스템 자원 정보를 수집하여 실시간 컴퓨팅 자원의 사용량 또는 유휴 자원량을 측정해 PaaS-TA 플랫폼에서 사용 가능한 모니터링 대시보드와 연계하기 위한 Zabbix Proxy 설치 및 환경설정 방법에 대한 설명을 다루고 있다.
   
 
 ### 1.2. 범위와 한계
@@ -134,7 +134,7 @@ ConfigFrequency=100
 
 생성한 `zabbix` 데이터베이스에 다음과 같이 Zabbix 운영에 필요한 스키마와 데이터를 삽입한다. 이 때 앞에서 생성한 계정의 비밀번호를 요구하므로 알맞은 비밀번호를 입력해준다(가이드에서는`paasta`로 설정하였다).
 ```
-$ zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p zabbix_proxy
+$ zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix_proxy -p zabbix_proxy
 Enter Password:
 ```
 
