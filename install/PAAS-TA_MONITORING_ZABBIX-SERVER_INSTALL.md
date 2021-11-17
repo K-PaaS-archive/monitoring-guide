@@ -30,11 +30,11 @@
 </table>
 
 
-## <div id="2">2. Zabbix Agent의 설치
+## <div id="2">2. Zabbix Server의 설치
 
 
 ### 2.1. 운영 환경 선택
-Zabbix 공식 홈페이지를 방문하면 [다운로드 페이지](https://www.zabbix.com/download)를 통해 설치하고자 하는 Zabbix 버전, 운영체제 종류와 버전 등을 선택하여 사용자의 운영 환경에 알맞는 설치 스크립트를 제공 받을 수 있다.
+Zabbix 공식 홈페이지를 방문하면 [다운로드](https://www.zabbix.com/download) 페이지를 통해 설치하고자 하는 Zabbix 버전, 운영체제 종류와 버전 등을 선택하여 사용자의 운영 환경에 알맞는 설치 스크립트를 제공 받을 수 있다.
 
 ![](images/zabbix_server_install_guide_01.png)
 
@@ -74,7 +74,7 @@ Zabbix 프론트엔드 패키지를 설치한다.
 # yum -y install zabbix-web-mysql-scl zabbix-apache-conf-scl
 ```
 
-서버의 데이터베이스가 작동(활성화) 상태인지 확인한 후 다음과 같이 데이터베이스 및 계정을 생성한 후 데이터베이스 프롬프트에서 빠져나온다.
+서버의 데이터베이스가 작동(활성화) 상태인지 확인한 후 다음과 같이 데이터베이스 및 계정을 생성한 후 데이터베이스 명령 프롬프트에서 빠져나온다.
 ```
 # mysql -uroot -p
 Enter password: 
@@ -99,7 +99,7 @@ DBPassword=paasta
 ...
 ```
 
-Zabbix 프론트엔드를 위한 PHP 설정 파일을 수정한다. `/etc/opt/rh/rh-php72/php-fpm.d/zabbix.conf` 파일 내 타임존 설정을 사용자 환경에 맞는 시각으로 변경한다. `;` 기호는 PHP 구성 파일에서 라인 주석을 의미하므로 제거한다.
+Zabbix 프론트엔드를 위한 PHP 설정 파일을 수정한다. `/etc/opt/rh/rh-php72/php-fpm.d/zabbix.conf` 파일 내 타임존 설정을 사용자 환경에 맞는 시각으로 변경한다. `;` 기호가 있다면 제거한다.
 ```
 ...
 php_value[date.timezone] = Asia/Seoul
@@ -112,7 +112,7 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 # systemctl enable zabbix-server zabbix-agent httpd rh-php72-php-fpm
 ```
 
-이제 인터넷 브라우저를 통해 Zabbix 프론트엔드 설치 페이지로 접속할 수 있다. <b>'http://{your_server_ip_or_name}/zabbix'</b>로 접속해 각 단계별 안내에 따라 Zabbix 프론트엔드 설치를 완료한다.
+이제 인터넷 브라우저를 통해 Zabbix 프론트엔드 설치 페이지로 접속할 수 있다. <b>'http://<i>{your_server_ip_or_name}</i>/zabbix'</b>로 접속해 각 단계별 안내에 따라 Zabbix 프론트엔드 설치를 완료한다.
 
 **│ Welcome** - 'Next step' 버튼으로 설치를 시작한다.
 
@@ -177,7 +177,7 @@ PaaS-TA 플랫폼 IaaS 모니터링 환경에서 필수 설정되어야 할 호�
 
 ![](images/zabbix_server_install_guide_11.png)
 
-우측 상단에 'Create action' 버튼을 눌러 호스트를 자동 등록하기 위한 새로운 액션(규칙)을 만든다. 적당한 액션 이름(Name)을 임의 지정한 다음 'Condition'란의 'Add'를 눌러 조건을 추가할 수 있다. 추가될 새로운 조건은 다음과 같이 지정하여 준다.
+우측 상단에 'Create action' 버튼을 눌러 호스트를 자동 등록하기 위한 새로운 액션(규칙)을 만든다. 적당한 액션 이름(Name)을 임의 지정한 다음 'Condition'란의 'Add'를 통해 조건을 추가할 수 있다. 추가될 새로운 조건은 다음과 같이 지정하여 준다.
 
 > **[ New condition ]**  
 . Type: Host metadata  

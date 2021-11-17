@@ -42,11 +42,13 @@ AP 환경에서 Zabbix Agent는 PaaS-TA 플랫폼 배포와 함께 PaaS-TA 환�
 
 AP 환경에서 배포 자동화 스크립트를 이용해 플랫폼을 배포했던 방식과는 달리 CP 환경에서는 쿠버네티스를 사용해 클러스터링을 구현할 노드의 수를 결정하거나 혹은 IaaS 플랫폼에서 가상 머신을 생성하거나 하는 일련의 작업이 수동으로 이루어지게 된다. 따라서 CP 환경을 구성하는 각 노드에 Zabbix Agent를 별도로 설치하는 작업이 필요하다.
 
-Zabbix 공식 홈페이지를 방문하면 [다운로드 페이지](https://www.zabbix.com/download)를 통해 설치하고자 하는 Zabbix 버전, 운영체제 종류와 버전 등을 선택하여 사용자의 운영 환경에 알맞는 설치 스크립트를 제공 받을 수 있다.
+Zabbix 공식 홈페이지를 방문하면 [다운로드](https://www.zabbix.com/download) 페이지를 통해 설치하고자 하는 Zabbix 버전, 운영체제 종류와 버전 등을 선택하여 사용자의 운영 환경에 알맞는 설치 스크립트를 제공 받을 수 있다.
 
 ![](images/zabbix_agent_install_guide_01.png)
 
-**Zabbix Packages**는 Zabbix Server와 Zabbix Agent 설치 구성을 의미한다. 이 단계에서 Zabbix Server는 설치할 필요가 없으므로 Server 설치와 관련된 스크립트는 생략하고 Zabbix Agent 설치 스크립트만 따라 실행하도록 한다. 
+**Zabbix Packages**는 Zabbix Server와 Zabbix Agent 설치 구성을 의미한다. 이 단계에서 Zabbix Server는 설치할 필요가 없으므로 Server 설치와 관련된 스크립트는 생략하고 Zabbix Agent 설치 스크립트만 따라 실행하도록 한다.
+
+본 가이드에서는 Ubuntu 18.04 운영체제에서 Zabbix 5.0 LTS 버전의 Agent를 설치하는 구성으로 선택해 설치하였다.
 
 
 ### 2.2. Zabbix Agent 설치
@@ -74,10 +76,10 @@ HostMetadata=paasta
 ...
 ```
 > **[ 주요 설정 파라미터 ]**  
-. `Server`: Zabbix Server의 IP 주소를 입력한다.  
-. `ServerActive`: Zabbix Server의 IP 주소와 서비스 포트 번호를 콜론으로 연결하여 입력한다.  
-. `Hostname`: 호스트명을 입력한다. 이곳에 설정된 값이 Zabbix Server의 모니터링 호스트명으로 적용된다.  
-. `HostMetadata`: 자동 모니터링 호스트 등록과 그룹핑을 위해 인스턴스 범위를 구분하기 위한 일종의 태그와 같은 역할을 한다.
+. `Server`: Zabbix Server의 IP 주소를 입력.  
+. `ServerActive`: Zabbix Server의 IP 주소와 서비스 포트 번호를 콜론으로 연결하여 입력.  
+. `Hostname`: 호스트명을 입력. 이곳에 설정된 값이 Zabbix Server의 모니터링 호스트명으로 적용.  
+. `HostMetadata`: 자동 모니터링 호스트 등록과 그룹핑을 위해 인스턴스 범위를 구분하기 위한 일종의 태그와 같은 역할.
 
 Zabbix Agent를 재시작하여 Agent 설치와 설정을 완료한다.
 ```
