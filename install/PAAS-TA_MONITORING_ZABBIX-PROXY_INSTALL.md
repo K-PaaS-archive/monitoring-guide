@@ -61,7 +61,7 @@ Zabbix 공식 홈페이지를 방문하면 [다운로드](https://www.zabbix.com
 본 가이드에서는 Ubuntu 18.04 운영체제에서 Zabbix 5.0 LTS 버전의 Proxy, 데이터베이스 SW로는 MySQL 구성으로 선택해 설치하였다.
 
 
-### 2.1. Zabbix Proxy 설치
+### 2.2. Zabbix Proxy 설치
 Zabbix 저장소를 설치한다.
 ```
 $ wget https://repo.zabbix.com/zabbix/5.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_5.0-1+bionic_all.deb
