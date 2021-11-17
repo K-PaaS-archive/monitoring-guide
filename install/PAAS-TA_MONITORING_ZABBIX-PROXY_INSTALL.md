@@ -17,16 +17,35 @@
 또한 본 가이드는 다음과 같은 설치 환경을 바탕으로 작성되었으므로 가이드에서 언급되지 않은 기타 범위에 대하여는 일부 제약이나 설치 또는 적용에 한계가 있을 수 있다.
 
 <table>
-   <tr>
-     <td><b>Virtual Machine OS</b></td>
-     <td>Ubuntu 18.04.6 LTS (Bionic)</td>
-   </tr>
-   <tr>
-     <td><b>IaaS Vendor SW</b></td>
-     <td>OpenStack 5.4.0 (Stein)
-     </td>
-   </tr>
- </table>
+  <tr>
+    <td><b>Virtual Machine OS</b></td>
+    <td>Ubuntu 18.04.6 LTS (Bionic)</td>
+  </tr>
+  <tr>
+    <td><b>IaaS Vendor SW</b></td>
+    <td>OpenStack 5.4.0 (Stein)
+    </td>
+  </tr>
+</table>
+ 
+ 
+### 1.3. Proxy 인스턴스 권장 사양
+Zabbix 모니터링 환경에서 Proxy 구성을 위한 인스턴스 권장 사양으로 다음을 참고한다.
+
+<table>
+  <tr>
+    <td><b>CPU</b></td>
+    <td>XX Core</td>
+  </tr>
+  <tr>
+    <td><b>RAM</b></td>
+    <td>XX GB</td>
+  </tr>
+  <tr>
+    <td><b>DISK</b></td>
+    <td>XX GB</td>
+  </tr>
+</table>
 
 
 ## <div id="2">2. Zabbix Proxy의 설치
@@ -93,7 +112,7 @@ ConfigFrequency=100
 > **[ 주요 설정 파라미터 ]**  
 . `ProxyMode`: `0`은 액티브 모드, `1`은 패시브 모드.  
 . `Server`: Zabbix Server의 IP 주소를 입력.  
-. `ServerPort`: Zabbix Server와 통신하기 위해 목적지로 사용되는 포트 번호.  
+. `ServerPort`: Zabbix Server와 통신하기 위한 목적지 포트 번호.  
 . `Hostname`: 호스트명을 입력. 이곳에 설정된 값이 Zabbix Server 프록시 설정에서 프록시명으로 적용.    
 . `ListenPort`: Zabbix Server 및 Agent와 통신하기 위한 포트 번호.    
 . `DBHost`: DB IP 주소를 입력.  
@@ -105,8 +124,14 @@ ConfigFrequency=100
 
 생성한 `zabbix` 데이터베이스에 다음과 같이 Zabbix 운영에 필요한 스키마와 데이터를 삽입한다. 이 때 앞에서 생성한 계정의 비밀번호를 요구하므로 알맞은 비밀번호를 입력해준다(가이드에서는`paasta`로 설정하였다).
 ```
-# zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p zabbix
+$ zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p zabbix
 Enter Password:
+```
+
+프로세스를 재시작하여 Zabbix Proxy 설치를 완료한다.
+```
+$ sudo systemctl restart zabbix-proxy
+$ sudo systemctl enable zabbix-proxy
 ```
 
 

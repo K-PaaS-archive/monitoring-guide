@@ -97,9 +97,12 @@ Zabbix Server의 데이터베이스 비밀번호를 `/etc/zabbix/zabbix_server.c
 ...
 DBPassword=paasta
 ...
+...
+HostMetadata=openstack
+...
 ```
 
-Zabbix 프론트엔드를 위한 PHP 설정 파일을 수정한다. `/etc/opt/rh/rh-php72/php-fpm.d/zabbix.conf` 파일 내 타임존 설정을 사용자 환경에 맞는 시각으로 변경한다. `;` 기호가 있다면 제거한다.
+Zabbix 프론트엔드를 위한 PHP 설정 파일을 수정한다. `/etc/opt/rh/rh-php72/php-fpm.d/zabbix.conf` 파일 내 타임존 설정을 사용자 환경에 맞는 시각으로 변경한다. 만약 해당 항목에 `;` 기호가 있다면 제거한다.
 ```
 ...
 php_value[date.timezone] = Asia/Seoul
@@ -138,7 +141,7 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 
 ![](images/zabbix_server_install_guide_07.png)
 
-**│ Login** - Username: Admin, Password: zabbix 계정 정보를 사용하여 로그인한다.
+**│ Login** -  관리자 게정 정보를 사용하여 로그인한다(Username: Admin, Password: zabbix).
 
 ![](images/zabbix_server_install_guide_08.png)
 
@@ -155,11 +158,11 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 
 
 ### 3.1. Create host group(필수 호스트 그룹 생성)
-**Configuration > Host groups** 메뉴로 이동해 우측 상단의 'Create host group' 버튼을 통해 모니터링 호스트 그룹을 생성할 수 있다.
+PaaS-TA 플랫폼에서 IaaS 모니터링을 위해 필수 설정되어야 할 호스트 그룹 설정에 대해 알아본다. **Configuration > Host groups** 메뉴로 이동하면 우측 상단의 'Create host group' 버튼을 통해 모니터링 호스트 그룹을 생성할 수 있다.
 
 ![](images/zabbix_server_install_guide_14.png)
 
-PaaS-TA 플랫폼 IaaS 모니터링 환경에서 필수 설정되어야 할 호스트 그룹은 다음과 같다.
+위와 같이 사용자 정의 호스트 그룹을 생성할 수 있으며, PaaS-TA 플랫폼의 IaaS 모니터링 환경에서 필수 설정되어야 할 호스트 그룹은 다음과 같다.
 
 > **[ 필수 호스트 그룹 ]**   
 . PaaS-TA Group  
@@ -173,13 +176,17 @@ PaaS-TA 플랫폼 IaaS 모니터링 환경에서 필수 설정되어야 할 호�
 
 
 ### 3.2. Autoregistration actions(호스트 자동 등록)
+PaaS-TA 플랫폼에서 IaaS 모니터링을 위해 설정되어야 할 필수 'Autoregistration actions' 옵션 설정법에 대해 알아본다. 앞서 생성한 필수 호스트 그룹에 따라 설정 옵션이 다르므로 다음 가이드를 참고하여 설정한다.
+
+**│ PaaS-TA Group**  
+
 **Configuration > Actions** 메뉴로 이동해 좌측 상단의 드롭다운 메뉴 중 **'Autoregistration actions'** 설정 페이지로 이동한다.
 
 ![](images/zabbix_server_install_guide_11.png)
 
 우측 상단에 'Create action' 버튼을 눌러 호스트를 자동 등록하기 위한 새로운 액션(규칙)을 만든다. 적당한 액션 이름(Name)을 임의 지정한 다음 'Condition'란의 'Add'를 통해 조건을 추가할 수 있다. 추가될 새로운 조건은 다음과 같이 지정하여 준다.
 
-> **[ New condition ]**  
+> **[ Action > Conditions > New condition ]**  
 . Type: Host metadata  
 . Operator: contains  
 . Value: paasta
@@ -199,6 +206,34 @@ PaaS-TA 플랫폼 IaaS 모니터링 환경에서 필수 설정되어야 할 호�
 ![](images/zabbix_server_install_guide_13.png)
 
 'Add' 버튼을 눌러 최종적으로 액션 설정을 추가한다. 이 액션 설정을 통해 Zabbix Server는 네트워크 안에서 감지되는 수많은 호스트들 중에서 'Host metadata' 타입으로 'paasta'라는 문자열을 포함(contains)하고 있는 호스트들에 대해서 'PaaS-TA Group'으로 그룹핑하여 모니터링 호스트로 자동 등록하게 된다.
+
+**│ Openstack hypervisors** 
+
+같은 방법으로 'Openstack hypervisors' 그룹에 대한 액션을 설정하되 설정 옵션은 다음을 참고한다.
+
+> **[ Action > Conditions > New condition ]**  
+. Type: Host metadata  
+. Operator: contains  
+. Value: openstack
+
+> **[ Operations ]**  
+. <b>Add host</b>  
+. <b>Add to host groups:</b> Openstack hypervisors  
+. <b>Link to templates:</b> Template OS Linux by Zabbix agent  
+. <b>Enable host</b>
+
+
+### 3.3. Create proxy(프록시 설정)
+Zabbix Proxy가 설치된 노드(인스턴스) 정보를 Zabbix Server 프론트엔드를 통해 등록하는 방법에 대해 알아본다. **Administration > Proxies** 메뉴로 이동해 우측 상단의 'Create proxy' 버튼을 통해 프록시 설정이 가능하다.
+
+Zabbix Proxy가 설치된 인스턴스에서 설정된 환경설정 값을 바탕으로 각 사용자 설정에 알맞게 Proxy 정보를 입력한 후 설정을 완료한다.
+
+> **[ Proxy ]**  
+. Proxy name: zabbix proxy 01  
+. Proxy mode: Active  
+. Proxy address: 11.11.11.11
+
+![](images/zabbix_server_install_guide_15.png)
 
 
 ### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Zabbix Server

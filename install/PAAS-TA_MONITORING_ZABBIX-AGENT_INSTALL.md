@@ -36,7 +36,7 @@
 ### 2.1. 서비스 플랫폼에 따른 Zabbix Agent 설치
 **│ Application Platform (AP)**  
 
-AP 환경에서 Zabbix Agent는 PaaS-TA 플랫폼 배포와 함께 PaaS-TA 환경을 구성하는 각 인스턴스에 내장 설치된다. 따라서 AP 환경에서는 Zabbix Agent를 별도로 설치할 필요가 없다. 다만 PaaS-TA 설치 시에 사용되는 공통 변수 참조 파일(`common-vars.yml`)등에서 Zabbix Server 혹은 Zabbix Proxy IP 정보만 알맞게 설정해주면 된다.
+AP 환경에서 Zabbix Agent는 PaaS-TA 플랫폼 배포와 함께 PaaS-TA 환경을 구성하는 각 인스턴스에 내장 설치된다. 따라서 AP 환경에서는 Zabbix Agent를 별도로 설치할 필요가 없으며 다만 PaaS-TA 설치 시에 사용되는 공통 변수 참조 파일(`common-vars.yml`)등에서 Zabbix Server 혹은 Zabbix Proxy IP 정보만 알맞게 설정해주면 된다.
 
 **│ Container Platform (CP)**  
 
@@ -48,7 +48,7 @@ Zabbix 공식 홈페이지를 방문하면 [다운로드](https://www.zabbix.com
 
 **Zabbix Packages**는 Zabbix Server와 Zabbix Agent 설치 구성을 의미한다. 이 단계에서 Zabbix Server는 설치할 필요가 없으므로 Server 설치와 관련된 스크립트는 생략하고 Zabbix Agent 설치 스크립트만 따라 실행하도록 한다.
 
-본 가이드에서는 Ubuntu 18.04 운영체제에서 Zabbix 5.0 LTS 버전의 Agent를 설치하는 구성으로 선택해 설치하였다.
+본 가이드에서는 Ubuntu 18.04 운영체제에서 Zabbix 5.0 LTS 버전의 Agent 구성으로 선택해 설치하였다.
 
 
 ### 2.2. Zabbix Agent 설치
@@ -70,7 +70,7 @@ Server=10.10.10.10
 ...
 ServerActive=10.10.10.10:1005
 ...
-Hostname=zabbix-agent1
+Hostname=dev-kube-master
 ...
 HostMetadata=paasta
 ...
@@ -85,6 +85,8 @@ Zabbix Agent를 재시작하여 Agent 설치와 설정을 완료한다.
 ```
 $ sudo systemctl restart zabbix-agent
 ```
+
+여기까지의 '2.2.' 항목의 Zabbix Agent 설치 가이드를 CP 환경 구성을 위한 모든 쿠버네티스 클러스터 노드(Master 노드 및 모든 Slave 노드)에서 동일하게 반복한다.
 
 
 ### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Zabbix Agent
