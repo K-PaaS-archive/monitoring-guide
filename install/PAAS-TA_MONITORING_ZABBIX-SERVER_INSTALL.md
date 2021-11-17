@@ -38,7 +38,7 @@ Zabbix 공식 홈페이지를 방문하면 [다운로드](https://www.zabbix.com
 
 ![](images/zabbix_server_install_guide_01.png)
 
-**Zabbix Packages**는 Zabbix Server와 Zabbix Agent 설치 구성을 의미한다. Zabbix Server가 설치될 Physical Node 자체의 시스템 모니터링 역시 필요하므로 패키지 설치를 통해서 Zabbix Server와 Zabbix Agent를 함께 설치한다.
+**Zabbix Packages** 탭에서 제공 받을 수 있는 설치 스크립트를 통해 Zabbix Server, Proxy, Agent 등 Zabbix 관련 패키지를 모두 설치할 수 있는 저장소 정보를 내려 받을 수 있다. 해당 저장소를 통해 Zabbix Server가 설치될 Physical Node 자체의 시스템 모니터링 역시 필요하므로 패키지 설치를 통해서 Zabbix Server와 Zabbix Agent를 함께 설치한다.
 
 본 가이드에서는 CentOS 7 운영체제에서 Zabbix 5.0 LTS 버전의 Server 및 Agent, 데이터베이스 SW로는 MySQL, 웹 서버 SW로는 Apache 구성으로 선택해 설치하였다.
 
@@ -86,7 +86,7 @@ mysql> quit;
 ...
 ```
 
-생성한 `zabbix` 데이터베이스에 다음과 같이 Zabbix 운영에 필요한 스키마와 데이터를 삽입한다. 이 때 앞에서 생성한 계정의 비밀번호를 요구하므로 알맞은 비밀번호를 입력해준다(가이드에서는`paasta`로 설정하였다).
+생성한 `zabbix` 데이터베이스에 다음과 같이 Zabbix 운영에 필요한 스키마와 데이터를 삽입한다. 이 때 앞서 생성한 계정의 비밀번호를 요구하므로 알맞은 비밀번호를 입력해준다(가이드에서는`paasta`로 설정하였다).
 ```
 # zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p zabbix
 Enter Password:
@@ -157,7 +157,7 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 
 
 ### 3.1. Create host group(필수 호스트 그룹 생성)
-PaaS-TA 플랫폼에서 IaaS 모니터링을 위해 필수 설정되어야 할 호스트 그룹 생성 방법에 대해 알아본다. 
+PaaS-TA 플랫폼에서 IaaS 모니터링을 위해 필수 설정되어야 할 호스트 그룹 생성 방법에 대해 알아본다.
 
 **Configuration > Host groups** 메뉴로 이동하면 우측 상단의 'Create host group' 버튼을 통해 모니터링 호스트 그룹을 생성할 수 있다.
 
@@ -177,9 +177,7 @@ PaaS-TA 플랫폼에서 IaaS 모니터링을 위해 필수 설정되어야 할 �
 
 
 ### 3.2. Autoregistration actions(호스트 자동 등록)
-PaaS-TA 플랫폼에서 IaaS 모니터링을 위해 필수 설정되어야 할 **'Autoregistration actions'** 옵션 설정 방법에 대해 알아본다.
-
-앞서 생성한 필수 호스트 그룹에 따라 옵션이 다소 다르므로 다음 가이드에 안내된 내용을 참고한다.
+PaaS-TA 플랫폼에서 IaaS 모니터링을 위해 필수 설정되어야 할 **'Autoregistration actions'** 옵션 설정 방법에 대해 알아본다. 앞서 생성한 필수 호스트 그룹에 따라 옵션이 다소 다르므로 다음 가이드에 안내된 내용을 참고한다.
 
 **│ PaaS-TA Group**  
 

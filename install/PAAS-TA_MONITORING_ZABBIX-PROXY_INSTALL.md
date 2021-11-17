@@ -10,7 +10,7 @@
 
 
 ### 1.1. 소개
-본 문서는 사용자의 IaaS 환경 시스템 자원 정보를 수집하여 실시간 컴퓨팅 자원의 사용량 또는 유휴 자원량을 측정해 PaaS-TA 플랫폼에서 사용 가능한 모니터링 대시보드와 연계하기 위한 Zabbix Proxy 설치 및 환경 설정 방법에 대한 설명을 다루고 있다.
+본 문서는 사용자의 IaaS 환경에 대한 시스템 자원 정보를 수집하여 실시간 컴퓨팅 자원의 사용량 또는 유휴 자원량을 측정해 PaaS-TA 플랫폼에서 사용 가능한 모니터링 대시보드와 연계하기 위한 Zabbix Proxy 설치 및 환경 설정 방법에 대한 설명을 다루고 있다.
   
 
 ### 1.2. 범위와 한계
@@ -30,25 +30,35 @@
  
  
 ### 1.3. Proxy 인스턴스 권장 사양
-Zabbix 모니터링 환경에서 Proxy 구성을 위한 인스턴스 권장 사양으로 다음을 참고한다.
+Zabbix 모니터링 환경에서 Proxy 구성을 위한 인스턴스 사양으로 다음을 권장하고 있다.
 
 <table>
   <tr>
     <td><b>CPU</b></td>
-    <td>XX Core</td>
+    <td>XX Core 이상</td>
   </tr>
   <tr>
     <td><b>RAM</b></td>
-    <td>XX GB</td>
+    <td>XX GB 이상</td>
   </tr>
   <tr>
     <td><b>DISK</b></td>
-    <td>XX GB</td>
+    <td>XX GB 이상</td>
   </tr>
 </table>
 
 
 ## <div id="2">2. Zabbix Proxy의 설치
+
+
+### 2.1. 운영 환경 선택
+Zabbix 공식 홈페이지를 방문하면 [다운로드](https://www.zabbix.com/download) 페이지를 통해 설치하고자 하는 Zabbix 버전, 운영체제 종류와 버전 등을 선택하여 사용자의 운영 환경에 알맞는 설치 스크립트를 제공 받을 수 있다.
+
+![](images/zabbix_agent_install_guide_01.png)
+
+**Zabbix Packages** 탭에서 제공 받을 수 있는 설치 스크립트를 통해 Zabbix Server, Proxy, Agent 등 Zabbix 관련 패키지를 모두 설치할 수 있는 저장소 정보를 내려 받을 수 있다. 이 단계에서는 Zabbix Proxy만 설치하면 되기 때문에 기타 Zabbix 패키지 설치와 관련된 스크립트는 생략하고 Zabbix Proxy 설치와 데이터베이스 설정 관련 스크립트만 따라 수행하도록 한다.
+
+본 가이드에서는 CentOS 7 운영체제에서 Zabbix 5.0 LTS 버전의 Server 및 Agent, 데이터베이스 SW로는 MySQL, 웹 서버 SW로는 Apache 구성으로 선택해 설치하였다.
 
 
 ### 2.1. Zabbix Proxy 설치
@@ -76,7 +86,7 @@ mysql> quit;
 ...
 ```
 
-생성한 `zabbix_proxy` 데이터베이스에 다음과 같이 Zabbix 운영에 필요한 스키마와 데이터를 삽입한다. 이 때 앞에서 생성한 계정의 비밀번호를 요구하므로 알맞은 비밀번호를 입력해준다(가이드에서는`paasta`로 설정하였다).
+생성한 `zabbix_proxy` 데이터베이스에 다음과 같이 Zabbix 운영에 필요한 스키마와 데이터를 삽입한다. 이 때 앞서 생성한 계정의 비밀번호를 요구하므로 알맞은 비밀번호를 입력해준다(가이드에서는`paasta`로 설정하였다).
 ```
 $ zcat /usr/share/doc/zabbix-proxy-mysql/schema.sql.gz | mysql -uzabbix_proxy -p zabbix_proxy
 Enter Password:
@@ -101,7 +111,7 @@ DBName=zabbix_proxy
 ...
 DBUser=zabbix_proxy
 ...
-DBPassword=password
+DBPassword=paasta
 ...
 DBPort=3306
 ...
@@ -120,11 +130,11 @@ ConfigFrequency=100
 . `DBUser`: DB 유저 정보를 입력.  
 . `DBPassword`: DB 액세스 유저의 비밀번호를 입력.  
 . `DBPort`: DB 서비스 포트 번호를 입력.  
-. `ConfiguFrequency`: Zabbix Proxy가 Zabbix Server로부터 설정 데이터를 검색하는 빈도.
+. `ConfigFrequency`: Zabbix Proxy가 Zabbix Server로부터 설정 데이터를 검색하는 빈도.
 
 생성한 `zabbix` 데이터베이스에 다음과 같이 Zabbix 운영에 필요한 스키마와 데이터를 삽입한다. 이 때 앞에서 생성한 계정의 비밀번호를 요구하므로 알맞은 비밀번호를 입력해준다(가이드에서는`paasta`로 설정하였다).
 ```
-$ zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p zabbix
+$ zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p zabbix_proxy
 Enter Password:
 ```
 

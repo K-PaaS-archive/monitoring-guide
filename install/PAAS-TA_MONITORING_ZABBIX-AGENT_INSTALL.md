@@ -10,7 +10,7 @@
 
 
 ### 1.1. 소개
-본 문서는 사용자의 IaaS 환경 시스템 자원 정보를 수집하여 실시간 컴퓨팅 자원의 사용량 또는 유휴 자원량을 측정해 PaaS-TA 플랫폼에서 사용 가능한 모니터링 대시보드와 연계하기 위한 Zabbix Agent 설치 및 환경 설정 방법에 대한 설명을 다루고 있다.
+본 문서는 사용자의 IaaS 환경에 대한 시스템 자원 정보를 수집하여 실시간 컴퓨팅 자원의 사용량 또는 유휴 자원량을 측정해 PaaS-TA 플랫폼에서 사용 가능한 모니터링 대시보드와 연계하기 위한 Zabbix Agent 설치 및 환경 설정 방법에 대한 설명을 다루고 있다.
   
 
 ### 1.2. 범위와 한계
@@ -46,7 +46,7 @@ Zabbix 공식 홈페이지를 방문하면 [다운로드](https://www.zabbix.com
 
 ![](images/zabbix_agent_install_guide_01.png)
 
-**Zabbix Packages**는 Zabbix Server와 Zabbix Agent 설치 구성을 의미한다. 이 단계에서 Zabbix Server는 설치할 필요가 없으므로 Server 설치와 관련된 스크립트는 생략하고 Zabbix Agent 설치 스크립트만 따라 실행하도록 한다.
+**Zabbix Packages** 탭에서 제공 받을 수 있는 설치 스크립트를 통해 Zabbix Server, Proxy, Agent 등 Zabbix 관련 패키지를 모두 설치할 수 있는 저장소 정보를 내려 받을 수 있다. 이 단계에서는 Zabbix Agent만 설치하면 되기 때문에 기타 Zabbix 패키지 설치와 관련된 스크립트는 생략하고 Zabbix Agent 설치 스크립트만 따라 수행하도록 한다.
 
 본 가이드에서는 Ubuntu 18.04 운영체제에서 Zabbix 5.0 LTS 버전의 Agent 구성으로 선택해 설치하였다.
 
@@ -86,7 +86,7 @@ Zabbix Agent를 재시작하여 Agent 설치와 설정을 완료한다.
 $ sudo systemctl restart zabbix-agent
 ```
 
-여기까지의 '2.2.' 항목의 Zabbix Agent 설치 가이드를 CP 환경 구성을 위한 모든 쿠버네티스 클러스터 노드(Master 노드 및 모든 Slave 노드)에서 동일하게 반복한다.
+여기까지의 **'2.2. Zabbix Agent 설치'** 항목의 설치 가이드를 CP 환경 구성을 위한 모든 쿠버네티스 클러스터 노드(Master 노드 및 모든 Slave 노드)에서 동일하게 반복하여 수행한다.
 
 
 ### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Zabbix Agent
