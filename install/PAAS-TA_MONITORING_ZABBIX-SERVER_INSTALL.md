@@ -163,7 +163,7 @@ PaaS-TA 플랫폼에서 IaaS 모니터링을 위해 필수 설정되어야 할 �
 
 ![](images/zabbix_server_install_guide_14.png)
 
-위와 같이 사용자 정의 호스트 그룹을 생성할 수 있으며, PaaS-TA 플랫폼의 IaaS 모니터링 환경에서 필수 설정되어야 할 호스트 그룹은 다음과 같다.
+위와 같이 사용자 정의 호스트 그룹을 생성할 수 있으며 PaaS-TA 플랫폼의 IaaS 모니터링 환경에서 필수 설정되어야 할 호스트 그룹은 다음과 같다.
 
 > **[ 필수 호스트 그룹 ]**   
 . PaaS-TA Group  
@@ -176,7 +176,7 @@ PaaS-TA 플랫폼에서 IaaS 모니터링을 위해 필수 설정되어야 할 �
 </table>
 
 
-### 3.2. Autoregistration actions(호스트 자동 등록)
+### 3.2. Autoregistration actions(호스트 자동 등록 설정)
 PaaS-TA 플랫폼에서 IaaS 모니터링을 위해 필수 설정되어야 할 **'Autoregistration actions'** 옵션 설정 방법에 대해 알아본다. 앞서 생성한 필수 호스트 그룹에 따라 옵션이 다소 다르므로 다음 가이드에 안내된 내용을 참고한다.
 
 **│ PaaS-TA Group**  
@@ -236,7 +236,7 @@ Zabbix Proxy가 설치된 노드(인스턴스) 정보를 Zabbix Server 프론트
 
 ![](images/zabbix_server_install_guide_15.png)
 
-OpenStack 환경에서는 Proxy 인스턴스에 Floting IP를 할당함으로 가상 네트워크로 격리된 PaaS-TA 네트워크 간의 중계 역할을 하도록 설계되었으므로 'Proxy address'란에는 Proxy 인스턴스에 할당된 Floting IP가 설정될 수 있도록 한다.
+OpenStack 환경에서는 Proxy 인스턴스에 Floating IP를 할당함으로 가상 네트워크로 격리된 PaaS-TA 네트워크 간의 중계 역할을 하도록 설계되었으므로 'Proxy address'란에는 Proxy 인스턴스에 할당된 Floating IP가 설정될 수 있도록 한다.
 
 
 ### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Zabbix Server
