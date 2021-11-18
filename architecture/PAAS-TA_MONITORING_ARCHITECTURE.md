@@ -13,7 +13,7 @@
 
 1. BOSH Document: <a href="https://bosh.io">bosh.io</a>
 2. CF Document: <a href="https://docs.cloudfoundry.org">docs.cloudfoundry.org</a>
-3. BOSH Deployment: <a href="https://docs.cloudfoundry.org">docs.cloudfoundry.org</a>
+3. BOSH Deployment: <a href="https://github.com/cloudfoundry/bosh-deployment">github.com/cloudfoundry/bosh-deployment</a>
 4. CF Deployment: <a href="https://github.com/cloudfoundry/cf-deployment">github.com/cloudfoundry/cf-deployment</a>
 
 
