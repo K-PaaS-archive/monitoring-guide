@@ -1,8 +1,7 @@
 ### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > BOSH
 
 
-## Table of Contents
-
+# BOSH Install Guide (Using Monitoring Dashboard) 
 1. [개요](#1)  
  1.1. [목적](#1.1)  
  1.2. [범위](#1.2)  
@@ -27,6 +26,7 @@
  3.2. [Jumpbox](#3.2)   
 4. [기타](#4)  
  4.1. [BOSH 로그인 생성 스크립트](#4.1)   
+
 
 ## Executive Summary
 
@@ -94,7 +94,7 @@ BOSH 및 PaaS-TA 설치를 위해 Inception 서버에 구성해야 할 컴포넌
 - IaaS Security Group의 inbound 의 ICMP types 13 (timestamp request), types 14 (timestamp response) Rule을 비활성화 한다. (CVE-1999-0524 ICMP timestamp response 보안 이슈 적용)  
 
   예 - AWS security group config)  
-  ![Security_Group_ICMP_Image1](./images/bosh/security-group-icmp-01.png)  
+  ![Security_Group_ICMP_Image1](./images/bosh-monitoring/security-group-icmp-01.png)  
 
 
 ### <div id='2.3.2'/>2.3.2.    BOSH CLI 및 Dependency 설치
@@ -160,6 +160,14 @@ README.md  bosh  cloud-config  paasta
 <td>PaaS-TA AP 설치를 위한 manifest 및 설치 파일이 존재하는 폴더</td>
 </tr>
 </table>
+
+모니터링 배포 파일을 다음 저장소 링크를 통해 내려 받은 후 모니터링 대시보드를 사용하기 위한 모니터링 배포 파일 중 일부를 PaaS-TA 배포 파일 내 해당 디렉터리로 이동(복사) 시킨다. 특정 모니터링 대시보드 버전이 필요하다면 저장소 내 브랜치나 태그 정보를 참고하여 `-b` 옵션을 사용해 내려 받아 사용할 수도 있다.
+```
+$ git clone https://github.com/PaaS-TA/monitoring-deployment.git
+
+$ cp -r monitoring-deployment/bosh-addon/* paasta-deployment/bosh/
+$ cp -r monitoring-deployment/paasta-addon/* paasta-deployment/paasta/
+```
 
 
 ### <div id='2.3.4'/>2.3.4.    BOSH 설치 파일
@@ -364,7 +372,7 @@ Variable File과 설치 Shell Script의 설정이 완료되었으면 다음 명�
 
 ```
 $ cd ~/workspace/paasta-deployment/bosh
-$ ./deploy-{iaas}.sh
+$ ./deploy-{iaas}-monitoring.sh
 ```
 
 - BOSH 설치 완료
