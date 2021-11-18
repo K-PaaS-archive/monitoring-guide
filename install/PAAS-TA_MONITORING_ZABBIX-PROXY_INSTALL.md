@@ -124,7 +124,7 @@ ConfigFrequency=100
 . `Server`: Zabbix Server의 IP 주소를 입력.  
 . `ServerPort`: Zabbix Server와 통신하기 위한 목적지 포트 번호.  
 . `Hostname`: 호스트명을 입력. 이곳에 설정된 값이 Zabbix Server 프록시 설정에서 프록시명으로 적용.    
-. `ListenPort`: Zabbix Server 및 Agent와 통신하기 위한 포트 번호.    
+. `ListenPort`: Zabbix Server 및 Agent와 통신하기 위한 포트 번호.  
 . `DBHost`: DB IP 주소를 입력.  
 . `DBName`: DB 이름을 입력.  
 . `DBUser`: DB 유저 정보를 입력.  
