@@ -11,24 +11,10 @@
 ### │ References
 본 문서는 클라우드 파운드리(Cloud Foundry) 재단에서 제공하는 레퍼런스를 참고하여 작성되었다.
 
-<table>
-  <tr>
-    <td>BOSH Document</td>
-    <td><a href="https://bosh.io">bosh.io</a></td>
-  </tr>
-  <tr>
-    <td>CF Document</td>
-    <td><a href="https://docs.cloudfoundry.org">docs.cloudfoundry.org</a></td>
-  </tr>
-  <tr>
-    <td>BOSH Deployment</td>
-    <td><a href="https://github.com/cloudfoundry/bosh-deployment">github.com/cloudfoundry/bosh-deployment</a></td>
-  </tr>
-  <tr>
-    <td>CF Deployment</td>
-    <td><a href="https://github.com/cloudfoundry/cf-deployment">github.com/cloudfoundry/cf-deployment</a></td>
-  </tr>  
-</table>
+1. BOSH Document: <a href="https://bosh.io">bosh.io</a>
+2. CF Document: <a href="https://docs.cloudfoundry.org">docs.cloudfoundry.org</a>
+3. BOSH Deployment: <a href="https://docs.cloudfoundry.org">docs.cloudfoundry.org</a>
+4. CF Deployment: <a href="https://github.com/cloudfoundry/cf-deployment">github.com/cloudfoundry/cf-deployment</a>
 
 
 ### │ Architecture Document by Service Platform
