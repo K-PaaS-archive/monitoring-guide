@@ -11,8 +11,8 @@
   </tr>
 </table>
 
-1. [BOSH 배포(모니터링 대시보드 사용 옵션)](PAAS-TA_BOSH2_MONITORING_INSTALL_GUIDE.md) **(작업중)**
-2. [PaaS-TA 배포(모니터링 대시보드 사용 옵션)](PAAS-TA_CORE_MONITORING_INSTALL_GUIDE.md) **(작업중)**
+1. [BOSH 배포(모니터링 대시보드 사용)](PAAS-TA_BOSH2_MONITORING_INSTALL_GUIDE.md) **(작업중)**
+2. [PaaS-TA 배포(모니터링 대시보드 사용)](PAAS-TA_CORE_MONITORING_INSTALL_GUIDE.md) **(작업중)**
 3. [[PaaS] Log Monitoring - Logsearch 배포(선택)](PAAS-TA_MONITORING_LOGSEARCH_INSTALL.md)
 4. [[SaaS] Application Monitoring -  Pinpoint Monitoring 배포(선택)](PAAS-TA_MONITORING_PINPOINT_MONITORING_INSTALL.md)
 5. [[CaaS] Container Monitoring - Prometheus 설치(선택)](PAAS-TA_MONITORING_CONTAINER_SERVICE_INSTALL.md)

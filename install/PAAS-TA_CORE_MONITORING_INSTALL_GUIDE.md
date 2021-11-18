@@ -1,8 +1,7 @@
-### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > PaaS-TA
+### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > PaaS-TA (+Monitoring Dashboard)
 
 
-## Table of Contents
-
+# PaaS-TA Install Guide (+Using Monitoring Dashboard) 
 1. [개요](#1)  
  1.1. [목적](#1.1)  
  1.2. [범위](#1.2)  
@@ -23,15 +22,13 @@
 # <div id='1'/>1.  문서 개요
 
 ## <div id='1.1'/>1.1. 목적
-본 문서는 Monitoring을 적용하지 않은 PaaS-TA Application Platform(이하 PaaS-TA AP)을 수동으로 설치하기 위한 가이드를 제공하는 데 그 목적이 있다.
+본 문서는 모니터링 대시보드를 사용하는 PaaS-TA Application Platform(이하 PaaS-TA AP)을 수동으로 설치하기 위한 가이드를 제공하는 데 그 목적이 있다.
 
-<br>
 
 ## <div id='1.2'/>1.2. 범위
 PaaS-TA AP는 bosh-deployment를 기반으로 한 BOSH 환경에서 설치하며 paasta-deployment v5.6.2의 설치를 기준으로 가이드를 작성하였다.  
 PaaS-TA AP는 VMware vSphere, Google Cloud Platform, Amazon Web Services EC2, OpenStack, Microsoft Azure 등의 IaaS를 지원하며,  paasta-deployment v5.6.2에서 검증한 IaaS 환경은 AWS, OpenStack 환경이다.
 
-<br>
 
 ## <div id='1.3'/>1.3. 참고 자료
 
@@ -67,7 +64,15 @@ $ cd ~/workspace
 $ git clone https://github.com/PaaS-TA/paasta-deployment.git -b v5.6.2
 ```
 
-<br>
+모니터링 배포 파일을 다음 저장소 링크를 통해 내려 받은 후 모니터링 대시보드를 사용하기 위한 모니터링 배포 파일 중 일부를 PaaS-TA 배포 파일 내 해당 디렉터리로 이동(복사) 시킨다. 특정 모니터링 대시보드 버전이 필요하다면 저장소 내 브랜치나 태그 정보를 참고하여 `-b` 옵션을 사용해 내려 받아 사용할 수도 있다.
+```
+$ git clone https://github.com/PaaS-TA/monitoring-deployment.git
+
+$ cp -r monitoring-deployment/bosh-addon/* paasta-deployment/bosh/
+$ cp -r monitoring-deployment/paasta-addon/* paasta-deployment/paasta/
+```
+만약 [BOSH 배포(모니터링 대시보드 사용)](PAAS-TA_BOSH2_MONITORING_INSTALL_GUIDE.md) 가이드에서 이미 위 작업을 수행하였다면 생략이 가능하다. 
+
 
 ## <div id='2.3'/>2.3. Stemcell 업로드
 Stemcell은 배포 시 생성되는 PaaS-TA AP VM Base OS Image이다.  
@@ -244,7 +249,7 @@ z1 ~ z3까지는 PaaS-TA AP VM이 설치되는 Zone이며, z4 ~ z6까지는 서�
 VM Type은 IaaS에서 정의된 VM Type이다.  
 
 ※ 다음은 AWS에서 정의한 Instance Type이다.
-![PaaSTa_FLAVOR_Image]
+![](images/paasta-monitoring/aws-vmtype.png)
 
 - Compilation
 
@@ -650,7 +655,7 @@ bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy paasta-deployment.yml \	# PaaS-T
 
 ```
 $ cd ~/workspace/paasta-deployment/paasta
-$ ./deploy-{IaaS}.sh
+$ ./deploy-{IaaS}-monitoring.sh
 ```
 
 - PaaS-TA AP 설치 확인
@@ -750,8 +755,4 @@ Select an org (or press enter to skip):
 ```
 
 
-### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > PaaS-TA
-
-
-<!-- Images Links -->
-[PaaSTa_FLAVOR_Image]:./images/ap/aws-vmtype.png
+### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > PaaS-TA (+Monitoring Dashboard)

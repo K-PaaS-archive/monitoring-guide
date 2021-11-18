@@ -1,7 +1,7 @@
-### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > BOSH
+### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > BOSH (+Monitoring Dashboard)
 
 
-# BOSH Install Guide (Using Monitoring Dashboard) 
+# BOSH Install Guide (+Using Monitoring Dashboard) 
 1. [개요](#1)  
  1.1. [목적](#1.1)  
  1.2. [범위](#1.2)  
@@ -510,4 +510,4 @@ $ source {BOSH_LOGIN_FILE_PATH}/{BOSH_LOGIN_FILE_NAME}
 ```
 
 
-### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > BOSH
+### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > BOSH (+Monitoring Dashboard)
