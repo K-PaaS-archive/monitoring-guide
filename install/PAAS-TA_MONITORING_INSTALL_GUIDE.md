@@ -11,17 +11,17 @@
   </tr>
 </table>
 
-#### 🞱 ─ *Essential Installation.*
-🞱 1. [BOSH (+Monitoring Dashboard) 설치](PAAS-TA_BOSH2_MONITORING_INSTALL_GUIDE.md)  
-🞱 2. [PaaS-TA (+Monitoring Dashboard) 설치](PAAS-TA_CORE_MONITORING_INSTALL_GUIDE.md)  
-　 3. [[PaaS] Log Monitoring - Logsearch 설치](PAAS-TA_MONITORING_LOGSEARCH_INSTALL.md)  
-　 4. [[SaaS] Application Monitoring - Pinpoint Monitoring 설치](PAAS-TA_MONITORING_PINPOINT_MONITORING_INSTALL.md)  
-　 5. [[CaaS] Container Monitoring - Prometheus 설치](PAAS-TA_MONITORING_CONTAINER_SERVICE_INSTALL.md)  
-　 6. [[IaaS] Infrastructure Monitoring - Zabbix 설치](#)  
- 　　 🢒 [Zabbix Server 설치](PAAS-TA_MONITORING_ZABBIX-SERVER_INSTALL.md)  
- 　　 🢒 [Zabbix Proxy 설치](PAAS-TA_MONITORING_ZABBIX-PROXY_INSTALL.md)  
- 　　 🢒 [Zabbix Agent 설치](PAAS-TA_MONITORING_ZABBIX-AGENT_INSTALL.md)  
-🞱 7. [**Monitoring Dashboard** 설치](PAAS-TA_MONITORING_PAAS-TA_MONITORING_INSTALL.md)
+#### ⋆ ─ *Essential Installation.*  
+⋆ 1. [BOSH (+Monitoring Dashboard) 설치](PAAS-TA_BOSH2_MONITORING_INSTALL_GUIDE.md)  
+⋆ 2. [PaaS-TA (+Monitoring Dashboard) 설치](PAAS-TA_CORE_MONITORING_INSTALL_GUIDE.md)  
+  3. [[PaaS] Log Monitoring - Logsearch 설치](PAAS-TA_MONITORING_LOGSEARCH_INSTALL.md)  
+  ⁨⁨4. [[SaaS] Application Monitoring - Pinpoint Monitoring 설치](PAAS-TA_MONITORING_PINPOINT_MONITORING_INSTALL.md)  
+  5. [[CaaS] Container Monitoring - Prometheus 설치](PAAS-TA_MONITORING_CONTAINER_SERVICE_INSTALL.md)  
+  6. [[IaaS] Infrastructure Monitoring - Zabbix 설치](#)  
+ 　　🢒 [Zabbix Server 설치](PAAS-TA_MONITORING_ZABBIX-SERVER_INSTALL.md)  
+ 　　🢒 [Zabbix Proxy 설치](PAAS-TA_MONITORING_ZABBIX-PROXY_INSTALL.md)  
+ 　　🢒 [Zabbix Agent 설치](PAAS-TA_MONITORING_ZABBIX-AGENT_INSTALL.md)  
+⋆ 7. [**Monitoring Dashboard** 설치](PAAS-TA_MONITORING_PAAS-TA_MONITORING_INSTALL.md)
 
 
 
