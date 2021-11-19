@@ -30,9 +30,15 @@
  
  
 ### 1.3. Proxy 인스턴스 권장 사양
-Zabbix 모니터링 환경에서 Proxy 구성을 위한 인스턴스 사양으로 다음을 권장하고 있다.
+사용자의 IaaS 플랫폼을 통해 Zabbix Proxy 설치를 위한 인스턴스를 생성한다. Zabbix 모니터링 환경에서 Proxy 구성을 위한 인스턴스 사양으로는 다음을 권장하고 있다.
 
+**│ OpenStack Default Flavor 기준**
 <table>
+  <tr>
+    <td colspan="""2">
+    m1.large
+    </td>
+  </tr>
   <tr>
     <td><b>CPU</b></td>
     <td>XX Core 이상</td>
