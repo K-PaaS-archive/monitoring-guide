@@ -32,24 +32,19 @@
 ### 1.3. Proxy 인스턴스 권장 사양
 사용자의 IaaS 플랫폼을 통해 Zabbix Proxy 설치를 위한 인스턴스를 생성한다. Zabbix 모니터링 환경에서 Proxy 구성을 위한 인스턴스 사양으로는 다음을 권장하고 있다.
 
-**│ OpenStack Default Flavor 기준**
+**│ OpenStack Default Flavor - m1.large**
 <table>
   <tr>
-    <td colspan="""2">
-    m1.large
-    </td>
-  </tr>
-  <tr>
     <td><b>CPU</b></td>
-    <td>XX Core 이상</td>
+    <td>4 Core 이상</td>
   </tr>
   <tr>
     <td><b>RAM</b></td>
-    <td>XX GB 이상</td>
+    <td>8 GB 이상</td>
   </tr>
   <tr>
     <td><b>DISK</b></td>
-    <td>XX GB 이상</td>
+    <td>80 GB 이상</td>
   </tr>
 </table>
 
@@ -129,7 +124,7 @@ ConfigFrequency=100
 . `ProxyMode`: `0`은 액티브 모드, `1`은 패시브 모드.  
 . `Server`: Zabbix Server의 IP 주소를 입력.  
 . `ServerPort`: Zabbix Server와 통신하기 위한 목적지 포트 번호.  
-. `Hostname`: 호스트명을 입력. 이곳에 설정된 값이 Zabbix Server 프록시 설정에서 프록시명으로 적용.    
+. `Hostname`: 호스트명을 입력. 이곳에 설정된 값이 Zabbix Server 프록시 설정에서 프록시명으로 사용됨.    
 . `ListenPort`: Zabbix Server 및 Agent와 통신하기 위한 포트 번호.  
 . `DBHost`: DB IP 주소를 입력.  
 . `DBName`: DB 이름을 입력.  

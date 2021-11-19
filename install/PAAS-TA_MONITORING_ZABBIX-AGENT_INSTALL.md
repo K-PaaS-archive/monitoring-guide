@@ -66,9 +66,9 @@ $ sudo apt -y install zabbix-agent
 Zabbix Agent 설정을 위해 `/etc/zabbix/zabbix_agentd.conf` 파일을 각 사용자의 설치 환경에 알맞게 편집한다.
 ```
 ...
-Server=10.10.10.10
+Server=11.11.11.11
 ...
-ServerActive=10.10.10.10:1005
+ServerActive=11.11.11.11:1005
 ...
 Hostname=dev-kube-master
 ...
@@ -76,9 +76,9 @@ HostMetadata=paasta
 ...
 ```
 > **[ 주요 설정 파라미터 ]**  
-. `Server`: Zabbix Server의 IP 주소를 입력.  
-. `ServerActive`: Zabbix Server의 IP 주소와 서비스 포트 번호를 콜론으로 연결하여 입력.  
-. `Hostname`: 호스트명을 입력. 이곳에 설정된 값이 Zabbix Server의 모니터링 호스트명으로 적용.  
+. `Server`: Zabbix Server의 IP 주소를 입력. Zabbix Proxy 구성 환경에서는 Proxy의 IP 주소를 입력.  
+. `ServerActive`: Zabbix Server(또는 Proxy)의 IP 주소와 서비스 포트 번호를 콜론으로 연결하여 입력.  
+. `Hostname`: 호스트명을 입력. 이곳에 설정된 값이 Zabbix Server의 모니터링 호스트명으로 적용됨.  
 . `HostMetadata`: 자동 모니터링 호스트 등록과 그룹핑을 위해 인스턴스 범위를 구분하기 위한 일종의 태그와 같은 역할.
 
 Zabbix Agent를 재시작하여 Agent 설치와 설정을 완료한다.
