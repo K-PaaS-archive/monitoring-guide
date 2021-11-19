@@ -1,7 +1,7 @@
-### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Intergrated Monitoring Dashboard
+### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Monitoring Dashboard
 
 
-## Table of Contents
+# Monitoring Dashboard Install Guide
 1\. [개요](#1)  
 2\. [PaaS-TA Monitoring 설치](#2)  
 　2.1\. [Prerequisite](#3)  
@@ -234,7 +234,7 @@ PaaS-TA Monitoring Main Dashboard 화면
  ![PaaSTa_monitoring_main_dashboard_5.0]
 
 
-### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Intergrated Monitoring Dashboard
+### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Monitoring Dashboard
 
 
 <!-- Images Links -->
