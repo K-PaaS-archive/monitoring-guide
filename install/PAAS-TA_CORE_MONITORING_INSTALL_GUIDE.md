@@ -280,7 +280,7 @@ $ bosh -e ${BOSH_ENVIRONMENT} cloud-config
 
 <br>
 
-## <div id='2.6'/>2.6.  PaaS-TA AP 설치 파일
+## <div id='2.6'/>2.6.  PaaS-TA (+Monitoring Dashboard) 설치 파일
 
 common_vars.yml파일과 vars.yml을 수정하여 PaaS-TA AP 설치시 적용하는 변수를 설정할 수 있다.
 
@@ -363,6 +363,7 @@ syslog_port: "2514"                              # Logsearch의 ls-router Port
 syslog_transport: "relp"                         # Logsearch Protocol
 saas_monitoring_url: "10.5.1.122"                # Pinpoint HAProxy WEBUI의 Public IP
 monitoring_api_url: "10.5.1.121"                 # Monitoring-WEB의 Public IP
+
 ...
 ```
 
@@ -669,7 +670,7 @@ $ chmod +x ~/workspace/paasta-deployment/paasta/*.sh
 
 <br>
 
-## <div id='2.7'/>2.7.  PaaS-TA AP 설치
+## <div id='2.7'/>2.7.  PaaS-TA (+Monitoring Dashboard) 설치
 - 서버 환경에 맞추어 common_vars.yml와 vars.yml를 수정 한 뒤, Deploy 스크립트 파일의 설정을 수정한다.
 
 ```
