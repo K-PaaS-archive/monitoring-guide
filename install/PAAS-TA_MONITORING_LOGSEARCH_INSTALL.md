@@ -1,7 +1,7 @@
 ### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > [PaaS] Logsearch
 
 
-## Table of Contents
+# Logsearch Install Guide
 
 1\. [개요](#1)  
 2\. [Logsearch 설치](#2)  
