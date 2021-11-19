@@ -71,7 +71,7 @@ $ git clone https://github.com/PaaS-TA/monitoring-deployment.git
 $ cp -r monitoring-deployment/bosh-addon/* paasta-deployment/bosh/
 $ cp -r monitoring-deployment/paasta-addon/* paasta-deployment/paasta/
 ```
-만약 '1. [BOSH 배포(모니터링 대시보드 사용)](PAAS-TA_BOSH2_MONITORING_INSTALL_GUIDE.md)' 가이드에서 이미 위 작업을 수행하였다면 생략이 가능하다. 
+만약 '[BOSH 배포(모니터링 대시보드 사용)](PAAS-TA_BOSH2_MONITORING_INSTALL_GUIDE.md)' 가이드에서 이미 위 작업을 수행하였다면 생략이 가능하다. 
 
 
 ## <div id='2.3'/>2.3. Stemcell 업로드
@@ -309,7 +309,7 @@ common_vars.yml파일과 vars.yml을 수정하여 PaaS-TA AP 설치시 적용하
 
 <br>
 
-### <div id='2.6.1'/>2.6.1. PaaS-TA AP 설치 Variable File
+### <div id='2.6.1'/>2.6.1. PaaS-TA (+Monitoring Dashboard) 설치 Variable File
 
 
 - common_vars.yml  
@@ -317,18 +317,53 @@ common_vars.yml파일과 vars.yml을 수정하여 PaaS-TA AP 설치시 적용하
 ~/workspace/common 폴더에 있는 [common_vars.yml](https://github.com/PaaS-TA/common/blob/master/common_vars.yml)에는 PaaS-TA AP 및 각종 Service 설치 시 적용하는 공통 변수 설정 파일이 존재한다.  
 PaaS-TA AP를 설치 시 system_domain, paasta_admin_username, paasta_admin_password, paasta_database_port, paasta_cc_db_password, paasta_uaa_db_password, uaa_client_admin_secret, uaa_client_portal_secret의 값을 변경 하여 설치 할 수 있다.
 
+다음 파일 내용은 가이드 작성을 위한 실습 환경에서 테스트한 설정 정보로 독자들의 필요에 따라 다음 예제를 참고하여 Host Address 영역 IP 구성을 하여도 좋다. 단 사용자의 설치 환경(대표적으로 사용 네트워크 환경에 따른 IP 주소의 Network Address 영역 등)에 따라 구성이 유기적으로 설정되어야 할 부분은 반드시 설치자가 각 요소를 잘 고려하여 설정하도록 한다.  
+
 > $ vi ~/workspace/common/common_vars.yml
-```
-... ((생략)) ...
-system_domain: "xx.xx.xxx.xxx.nip.io"			# Domain (nip.io를 사용하는 경우 HAProxy Public IP와 동일)
-paasta_admin_username: "admin"				# PaaS-TA Admin Username
-paasta_admin_password: "admin"				# PaaS-TA Admin Password
-paasta_database_port: 5524				# PaaS-TA Database Port (e.g. 5524(postgresql)/13307(mysql)) -- Do Not Use "3306"&"13306" in mysql
-paasta_cc_db_password: "cc_admin"			# CCDB Password(e.g. "cc_admin")
-paasta_uaa_db_password: "uaa_admin"			# UAADB Password(e.g. "uaa_admin")
-uaa_client_admin_secret: "admin-secret"			# UAAC Admin Client에 접근하기 위한 Secret 변수
-uaa_client_portal_secret: "clientsecret"		# UAAC Portal Client에 접근하기 위한 Secret 변수
-... ((생략)) ...
+```yaml
+# BOSH INFO
+bosh_ip: "10.5.0.6"                              # BOSH IP
+bosh_url: "https://10.5.0.6"                     # BOSH URL (e.g. "https://00.000.0.0")
+bosh_client_admin_id: "admin"                    # BOSH Client Admin ID
+bosh_client_admin_secret: "mf4nxvkzytihm61fo0sl" # BOSH Client Admin Secret ('echo $(bosh int ~/workspace/paasta-5.0/deployment/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
+bosh_director_port: 25555                        # BOSH director port
+bosh_oauth_port: 8443                            # BOSH oauth port
+bosh_version: 271.2                              # BOSH version ('bosh env' 명령어를 통해 확인 가능, on-demand service용, e.g. "271.2")
+
+# PAAS-TA INFO
+system_domain: "10.5.0.240.nip.io"               # Domain (nip.io를 사용하는 경우 HAProxy Public IP와 동일)
+paasta_admin_username: "admin"                   # PaaS-TA Admin Username
+paasta_admin_password: "admin"                   # PaaS-TA Admin Password
+paasta_nats_ip: "10.5.0.121"
+paasta_nats_port: 4222
+paasta_nats_user: "nats"
+paasta_nats_password: "VB29evJTNK63PM0lLR91UBhqyiKtcR" # PaaS-TA Nats Password (CredHub 로그인후 'credhub get -n /micro-bosh/paasta/nats_password' 명령어를 통해 확인 가능)
+paasta_nats_private_networks_name: "default"     # PaaS-TA Nats 의 Network 이름
+paasta_database_ips: "10.5.0.123"                # PaaS-TA Database IP (e.g. "10.0.1.123")
+paasta_database_port: 5524                       # PaaS-TA Database Port (e.g. 5524(postgresql)/13307(mysql)) -- Do Not Use "3306"&"13306" in mysql
+paasta_database_type: "postgresql"               # PaaS-TA Database Type (e.g. "postgresql" or "mysql")
+paasta_database_driver_class: "org.postgresql.Driver" # PaaS-TA Database driver-class (e.g. "org.postgresql.Driver" or "com.mysql.jdbc.Driver")
+paasta_cc_db_id: "cloud_controller"              # CCDB ID (e.g. "cloud_controller")
+paasta_cc_db_password: "cc_admin"                # CCDB Password (e.g. "c418e687c4Kx!" 영어/숫자/특수문자 혼용 8자리 이상)
+paasta_uaa_db_id: "uaa"                          # UAADB ID (e.g. "uaa")
+paasta_uaa_db_password: "uaa_admin"              # UAADB Password (e.g. "ifb2497iEA5!" 영어/숫자/특수문자 혼용 8자리 이상)
+paasta_api_version: "v3"
+
+# UAAC INFO
+uaa_client_admin_id: "admin"                     # UAAC Admin Client Admin ID
+uaa_client_admin_secret: "admin-secret"          # UAAC Admin Client에 접근하기 위한 Secret 변수
+uaa_client_portal_secret: "clientsecret"         # UAAC Portal Client에 접근하기 위한 Secret 변수
+
+# Monitoring INFO
+metric_url: "10.5.1.101"                         # Monitoring InfluxDB IP
+elasticsearch_master_ip: "10.5.2.101"            # Logsearch의 elasticsearch master IP
+elasticsearch_master_port: 9200                  # Logsearch의 elasticsearch master Port
+syslog_address: "10.5.2.100"                     # Logsearch의 ls-router IP
+syslog_port: "2514"                              # Logsearch의 ls-router Port
+syslog_transport: "relp"                         # Logsearch Protocol
+saas_monitoring_url: "10.5.1.122"                # Pinpoint HAProxy WEBUI의 Public IP
+monitoring_api_url: "10.5.1.121"                 # Monitoring-WEB의 Public IP
+...
 ```
 
 - vars.yml  

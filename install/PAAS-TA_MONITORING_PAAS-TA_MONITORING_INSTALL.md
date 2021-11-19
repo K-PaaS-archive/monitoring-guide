@@ -1,4 +1,4 @@
-### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Intergrated  Monitoring Solution
+### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Intergrated Monitoring Dashboard
 
 
 ## Table of Contents
@@ -234,7 +234,7 @@ PaaS-TA Monitoring Main Dashboard 화면
  ![PaaSTa_monitoring_main_dashboard_5.0]
 
 
-### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Intergrated  Monitoring Solution
+### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Intergrated Monitoring Dashboard
 
 
 <!-- Images Links -->
@@ -251,4 +251,3 @@ PaaS-TA Monitoring Main Dashboard 화면
 [PaaSTa_paasta_container_service_nodes]:./images/paasta-container-service-nodes.png
 [PaaSTa_paasta_container_service_kubernetes_api]:./images/paasta-container-service-kubernetes-api.png
 [PaaSTa_paasta_container_service_kubernetes_token]:./images/paasta-container-service-kubernetes-token.png
-
