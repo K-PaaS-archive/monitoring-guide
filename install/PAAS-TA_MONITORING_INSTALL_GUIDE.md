@@ -16,7 +16,7 @@
 3. [[PaaS] Log Monitoring - Logsearch 설치](PAAS-TA_MONITORING_LOGSEARCH_INSTALL.md) (선택)
 4. [[SaaS] Application Monitoring - Pinpoint Monitoring 설치](PAAS-TA_MONITORING_PINPOINT_MONITORING_INSTALL.md) (선택)
 5. [[CaaS] Container Monitoring - Prometheus 설치](PAAS-TA_MONITORING_CONTAINER_SERVICE_INSTALL.md) (선택)
-6. [[IaaS] Infrastructure Monitoring - Zabbix 설치](#) (선택)  ㅇㅇ
+6. [[IaaS] Infrastructure Monitoring - Zabbix 설치](#) (선택)  
  6.1. [Zabbix Server 설치](PAAS-TA_MONITORING_ZABBIX-SERVER_INSTALL.md)  
  6.2. [Zabbix Proxy 설치](PAAS-TA_MONITORING_ZABBIX-PROXY_INSTALL.md)  
  6.3. [Zabbix Agent 설치](PAAS-TA_MONITORING_ZABBIX-AGENT_INSTALL.md)  
