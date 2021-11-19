@@ -1,7 +1,7 @@
 ### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Zabbix Proxy
 
 
-# Zabbix Server Install Guide
+# Zabbix Proxy Install Guide
 1. [개요](#1)
 2. [Zabbix Proxy의 설치](#2)
 
