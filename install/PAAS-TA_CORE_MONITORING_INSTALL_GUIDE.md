@@ -64,14 +64,14 @@ $ cd ~/workspace
 $ git clone https://github.com/PaaS-TA/paasta-deployment.git -b v5.6.2
 ```
 
-모니터링 배포 파일을 다음 저장소 링크를 통해 내려 받은 후 모니터링 대시보드를 사용하기 위한 모니터링 배포 파일 중 일부를 PaaS-TA 배포 파일 내 해당 디렉터리로 이동(복사) 시킨다. 특정 모니터링 대시보드 버전이 필요하다면 저장소 내 브랜치나 태그 정보를 참고하여 `-b` 옵션을 사용해 내려 받아 사용할 수도 있다.
+모니터링 대시보드 배포 파일을 다음 저장소 링크를 통해 내려 받은 후 배포 파일 중 일부(`*-addon` 디렉터리 이하)를 PaaS-TA 배포 파일 내 해당 디렉터리로 다음과 같이 이동(복사) 시킨다. 모니터링 대시보드 배포 파일 다운로드 시 특정 버전이 필요한 경우라면 저장소 내 브랜치나 태그 정보를 참고하여 `-b` 옵션을 사용해 내려 받아 사용할 수도 있다.
 ```
 $ git clone https://github.com/PaaS-TA/monitoring-deployment.git
 
 $ cp -r monitoring-deployment/bosh-addon/* paasta-deployment/bosh/
 $ cp -r monitoring-deployment/paasta-addon/* paasta-deployment/paasta/
 ```
-만약 [BOSH 배포(모니터링 대시보드 사용)](PAAS-TA_BOSH2_MONITORING_INSTALL_GUIDE.md) 가이드에서 이미 위 작업을 수행하였다면 생략이 가능하다. 
+만약 '1. [BOSH 배포(모니터링 대시보드 사용)](PAAS-TA_BOSH2_MONITORING_INSTALL_GUIDE.md)' 가이드에서 이미 위 작업을 수행하였다면 생략이 가능하다. 
 
 
 ## <div id='2.3'/>2.3. Stemcell 업로드
