@@ -140,7 +140,7 @@ Zabbix Server와 Agent 그리고 프론트엔드 관련 패키지들을 재시�
 
 ![](images/zabbix_server_install_guide_07.png)
 
-**⑦ Login** -  관리자 게정 정보를 사용하여 로그인한다(Username: Admin, Password: zabbix).
+**⑦ Login** - 관리자 계정 정보를 사용하여 로그인한다(Username: Admin, Password: zabbix).
 
 ![](images/zabbix_server_install_guide_08.png)
 
