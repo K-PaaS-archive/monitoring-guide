@@ -365,7 +365,16 @@ saas_monitoring_url: "10.5.1.122"                # Pinpoint HAProxy WEBUI의 Pub
 monitoring_api_url: "10.5.1.121"                 # Monitoring-WEB의 Public IP
 
 ...
+
+### Zabbix Agent for monitoring ###
+server_ip: "10.5.0.68"                           # Zabbix server (or Proxy) IP address
+listen_port: "10050"                             # Zabbix server (or Proxy) Port number
+server_active: "10.5.0.68:10051"                 # Zabbix server (or Proxy) IP:Port string
+host_metadata: "paasta"                          # Metadata for Zabbix Agent autoregistration
+
+...
 ```
+Zabbix Agent를 위한 Zabbix Proxy의 주소는 아직 Proxy 인스턴스를 생성하지 않았다면 생성한 후 값을 참조할 수 있도록 한다.
 
 - vars.yml  
 
