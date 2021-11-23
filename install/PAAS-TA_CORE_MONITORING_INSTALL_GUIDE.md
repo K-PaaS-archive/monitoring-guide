@@ -374,7 +374,7 @@ host_metadata: "paasta"                          # Metadata for Zabbix Agent aut
 
 ...
 ```
-Zabbix Agent를 위한 Zabbix Proxy의 주소는 아직 Proxy 인스턴스를 생성하지 않았다면 생성한 후 값을 참조할 수 있도록 한다.
+Zabbix Agent를 위한 Zabbix Proxy의 주소는 아직 Proxy 인스턴스를 생성하지 않았다면 인스턴스를 생성한 후 값을 참조할 수 있도록 한다.
 
 - vars.yml  
 
