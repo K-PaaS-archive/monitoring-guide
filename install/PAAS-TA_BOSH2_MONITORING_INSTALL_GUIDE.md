@@ -329,44 +329,44 @@ BOSH 설치 Option은 아래와 같다.
 ```
 $ vi deploy-aws-monitoring.sh
 ```
-```yaml
+```shell script
 #!/bin/bash
 
 bosh create-env bosh.yml \
-	--state=aws/state.json \
-	--vars-store=aws/creds.yml \
-	-o aws/cpi.yml \
-	-o uaa.yml \
-	-o cce.yml \
-	-o credhub.yml \
-	-o jumpbox-user.yml \
-	-o syslog.yml \
-	-o paasta-addon/paasta-monitoring-agent.yml \
-	-l aws-vars.yml \
-	-l bosh-monitoring-vars.yml
+    --state=aws/state.json \
+    --vars-store=aws/creds.yml \
+    -o aws/cpi.yml \
+    -o uaa.yml \
+    -o cce.yml \
+    -o credhub.yml \
+    -o jumpbox-user.yml \
+    -o syslog.yml \
+    -o paasta-addon/paasta-monitoring-agent.yml \
+    -l aws-vars.yml \
+    -l bosh-monitoring-vars.yml
 ```
 
 **│ OpenStack 환경 설치 스크립트**
 ```
 $ vi deploy-openstack-monitoring.sh
 ```
-```yaml
+```shell script
 #!/bin/bash
 
 bosh create-env bosh.yml \
-	--state=openstack/state.json \
-	--vars-store=openstack/creds.yml \
-	-o openstack/cpi.yml \
-	-o uaa.yml \
-	-o cce.yml \
-	-o credhub.yml \
-	-o jumpbox-user.yml \
-	-o openstack/disable-readable-vm-names.yml \
-	-o syslog.yml \
-	-o zabbix-agent.yml \
-	-o paasta-addon/paasta-monitoring-agent.yml \
-	-l openstack-vars.yml \
-	-l bosh-monitoring-vars.yml
+    --state=openstack/state.json \
+    --vars-store=openstack/creds.yml \
+    -o openstack/cpi.yml \
+    -o uaa.yml \
+    -o cce.yml \
+    -o credhub.yml \
+    -o jumpbox-user.yml \
+    -o openstack/disable-readable-vm-names.yml \
+    -o syslog.yml \
+    -o zabbix-agent.yml \
+    -o paasta-addon/paasta-monitoring-agent.yml \
+    -l openstack-vars.yml \
+    -l bosh-monitoring-vars.yml
 ```
 
 - Shell Script 파일에 실행 권한 부여
