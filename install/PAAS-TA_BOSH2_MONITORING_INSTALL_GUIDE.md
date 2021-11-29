@@ -325,37 +325,49 @@ BOSH 설치 Option은 아래와 같다.
 
 설치 Shell Script에 Option을 변경필요가 있다면 해당 명령어를 실행하여 변경한다.
 
-- AWS 환경 설치 시 
-
+**│ AWS 환경 설치 스크립트**
 ```
-$ vi ~/workspace/paasta-deployment/bosh/deploy-aws.sh
-bosh create-env bosh.yml \                         
-	--state=aws/state.json \			# BOSH Latest Running State, 설치 시 생성, Backup 필요
-	--vars-store=aws/creds.yml \			# BOSH Credentials and Certs, 설치 시 생성, Backup 필요
-	-o aws/cpi.yml \				# AWS CPI 적용
-	-o uaa.yml \					# UAA 적용      
-	-o credhub.yml \				# CredHub 적용    
-	-o jumpbox-user.yml \				# Jumpbox-user 적용  
-	-o cce.yml \					# CCE 조치 적용
- 	-l aws-vars.yml					# AWS 환경에 BOSH 설치시 적용하는 변수 설정 파일
+$ vi deploy-aws-monitoring.sh
 ```
+```yaml
+#!/bin/bash
 
-- OpenStack 환경 설치 시 
-
-```
-$ vi ~/workspace/paasta-deployment/bosh/deploy-openstack.sh
-bosh create-env bosh.yml \                       
-	--state=openstack/state.json \			# BOSH Latest Running State, 설치 시 생성, Backup 필요
-	--vars-store=openstack/creds.yml \		# BOSH Credentials and Certs, 설치 시 생성, Backup 필요
-	-o openstack/cpi.yml \				# Openstack CPI 적용
-	-o uaa.yml \					# UAA 적용
-	-o credhub.yml \				# CredHub 적용
-	-o jumpbox-user.yml \				# Jumpbox-user 적용
-	-o cce.yml \					# CCE 조치 적용
-	-o openstack/disable-readable-vm-names.yml \	# VM 명을 UUIDs로 적용
-	-l openstack-vars.yml				# OpenStack 환경에 BOSH 설치시 적용하는 변수 설정 파일
+bosh create-env bosh.yml \
+	--state=aws/state.json \
+	--vars-store=aws/creds.yml \
+	-o aws/cpi.yml \
+	-o uaa.yml \
+	-o cce.yml \
+	-o credhub.yml \
+	-o jumpbox-user.yml \
+	-o syslog.yml \
+	-o paasta-addon/paasta-monitoring-agent.yml \
+	-l aws-vars.yml \
+	-l bosh-monitoring-vars.yml
 ```
 
+**│ OpenStack 환경 설치 스크립트**
+```
+$ vi deploy-openstack-monitoring.sh
+```
+```yaml
+#!/bin/bash
+
+bosh create-env bosh.yml \
+	--state=openstack/state.json \
+	--vars-store=openstack/creds.yml \
+	-o openstack/cpi.yml \
+	-o uaa.yml \
+	-o cce.yml \
+	-o credhub.yml \
+	-o jumpbox-user.yml \
+	-o openstack/disable-readable-vm-names.yml \
+	-o syslog.yml \
+	-o zabbix-agent.yml \
+	-o paasta-addon/paasta-monitoring-agent.yml \
+	-l openstack-vars.yml \
+	-l bosh-monitoring-vars.yml
+```
 
 - Shell Script 파일에 실행 권한 부여
 
