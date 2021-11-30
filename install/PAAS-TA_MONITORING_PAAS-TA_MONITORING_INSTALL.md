@@ -126,6 +126,7 @@ host_metadata: "paasta"                # Metadata for Zabbix Agent autoregistrat
 ### <div id='7'/>● paasta-monitoring-vars.yml
 mariadb 및 influxdb에 대한 계정은 보안 설정이 되어 있으므로, 변경하여 배포할 경우 이를 이용하는 관련 모듈이 정상적으로 동작하지 않을 수 있으며, 
 이를 수정하기 위해서는 PaaS-TA-Monitoring-Release 및 paas-ta-monitoring-influxdb-release 레파지토리의 Job에 대한 설정 수정이 필요하다.
+오픈스택과 Zabbix 설정 정보는 IaaS 모니터링 기능에서 필요한 설정값
 ```
 # SERVICE VARIABLE
 inception_os_user_name: "ubuntu"
@@ -154,9 +155,24 @@ pinpoint_was_ip: "10.0.0.122"		# Pinpoint HAProxy WEBUI Private IP
 cassbroker_ip: "52.141.6.113"		# CaaS 서비스 로그인 인증 처리를 위한 API IP
 kubernetes_token: "eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJtb25pdG9yaW5nLWFkbWluLXRva2VuLWQ0OXc3Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6Im1vbml0b3JpbmctYWRtaW4iLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiI4MDkwNTU5Yy0wYzE2LTExZWEtYjZiYi0wMDIyNDgwNTk4NzciLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZS1zeXN0ZW06bW9uaXRvcmluZy1hZG1pbiJ9.ZKPWJLo0LFXY9ZpW7nGlTBLJYDNL7MFB9X1i4JoEn8jPLsCQhG3lvzTjh7420lvoP5hWdV0SpsMMfZnV2WFFUWaQkYcnKhB2qsVX_xOd45gm2IfI-f1QmxcAspoGY_r8kC-vX9L4oTLA5sJTI5m_RIiuckVGcVR0OeWB5NtUFz0-iCpQRfuy9LYH0NCEEopfDji-T0Pxta8S1n8YyxVwYKpZE0PvT9H9ZVNUUAt2Z_l4B0akP6G3O6t53Xvp_l8DXzxRFXTw3sHPvvea_Uv3QbGcFkH-gNHBeG9-F8C8NMcSlCUeyAGfxZlpsdRFMB01Wh6RZzvUqeS8Kc-8Csp_jw"	# Kubernetes 서비스 API Request 호출시 Header(Authorization) 인증을 위한 Token값 
 
+# Zabbix API INFO - IaaS 모니터링에 필요한 설정
+zabbix_host: "http://192.169.124.55:8080/zabbix/api_jsonrpc.php"   # Zabbix_Server_IP:PORT/zabbix/api_jsonrpc.php 형태
+zabbix_admin_id: "Admin"           # Zabbix 관리자 계정
+zabbix_admin_pw: "password"        # Zabbix 관리자 비밀번호
+
+# Openstack INFO - IaaS 모니터링에 필요한 설정
+openstack_region: "RegionOne"    # 오픈스택 Region 정보
+openstack_domain: "default"      # 오픈스택 도메인 정보
+openstack_username: ""           # 오픈스택 관리자 계정
+openstack_password: ""           # 오픈스택 관리자 비밀번호
+openstack_tenant_name: "paas-ta-monitoring"               # 오픈스택 프로젝트(테넌트) 이름
+openstack_tenant_id: "944774277a034e648ab72e318db3f976"   # 오픈스택 프로젝트(테넌트) 아이디
+openstack_endpoint: "http://192.168.124.55:5000/v3"       # 오픈스택 API URL
+openstack_keystone_url: "http://192.168.124.55:35357/v3"  # 오픈스택 keystone(Identity) API URL
+
 # STEMCELL
-stemcell_os: "ubuntu-xenial"		# Stemcell OS
-stemcell_version: "621.94"		# Stemcell Version
+stemcell_os: "ubuntu-bionic"		# Stemcell OS
+stemcell_version: "1.34"		# Stemcell Version
 
 
 # REDIS
@@ -212,9 +228,9 @@ monitoring_web_network: "default"	# Monitoring-WEB 네트워크
 
 #### <div id='8'/>●	deploy-paasta-monitoring.sh
 ```
-bosh -e {director_name} -n -d paasta-monitoring deploy paasta-monitoring.yml  \
-	-o use-public-network-openstack.yml \
-	-o use-compiled-releases-paasta-monitoring.yml \
+bosh -e micro-bosh -n -d paasta-monitoring deploy paasta-monitoring.yml  \
+	-o use-public-network-aws.yml \
+	-o addons/enable-zabbix-agent.yml \
 	-l paasta-monitoring-vars.yml \
 	-l ../../common/common_vars.yml
 ```
@@ -227,14 +243,15 @@ bosh -e {director_name} -n -d paasta-monitoring deploy paasta-monitoring.yml  \
 
 ```
 bosh -e {director_name} -n -d paasta-monitoring deploy paasta-monitoring.yml  \
-	-o use-public-network-openstack.yml \
+	-o use-public-network-aws.yml \
+	-o addons/enable-zabbix-agent.yml \
 	-l paasta-monitoring-vars.yml \
 	-l ../../common/common_vars.yml
 ```
 
 - PaaS-TA Monitoring 설치 Shell Script 파일 실행 (BOSH 로그인 필요)
 ```
-$ cd ${HOME}/workspace/paasta-5.1/deployment/monitoring-deployment/paasta-monitoring
+$ cd ${HOME}/workspace/paasta-5.6/deployment/monitoring-deployment/paasta-monitoring
 $ sh deploy-paasta-monitoring.sh
 ```
 
