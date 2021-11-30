@@ -268,7 +268,7 @@ $ bosh –e {director_name} vms
  
  http://{monitoring_api_url}:8080/public/login.html 에 접속하여 회원 가입 후 Main Dashboard에 접속한다.
 
- Login 화면에서 회원 가입 버튼을 클릭한다.
+ Login 화면에서 Registro now! 버튼을 클릭한다.
 
  ![PaaSTa_monitoring_login_5.0]
 
