@@ -24,7 +24,7 @@
 
 1. BOSH 설치가 되어있으며, BOSH Login이 되어 있어야 한다.
 2. cloud-config와 runtime-config가 업데이트 되어있는지 확인한다.
-3. Stemcell 목록을 확인하여 서비스 설치에 필요한 Stemcell(ubuntu xenial 621.78)이 업로드 되어 있는 것을 확인한다.
+3. Stemcell 목록을 확인하여 서비스 설치에 필요한 Stemcell(ubuntu bionic 1.34)이 업로드 되어 있는 것을 확인한다.
 
 
 > cloud-config 확인  
@@ -41,9 +41,9 @@
 
 - Logsearch를 설치하기 위한 deployment가 존재하지 않는다면 다운로드 받는다
 ```
-$ cd ${HOME}/workspace/paasta-5.5.2/deployment
+$ cd ${HOME}/workspace
 $ git clone https://github.com/paas-ta/common.git
-$ git clone https://github.com/paas-ta/monitoring-deployment.git –b v5.5.2
+$ git clone https://github.com/paas-ta/monitoring-deployment.git
 ```
 
 ### <div id='5'/>2.3. Logsearch 설치 환경설정
@@ -51,7 +51,7 @@ $ git clone https://github.com/paas-ta/monitoring-deployment.git –b v5.5.2
 PaaS-TA VM Log수집을 위해서는 Logsearch가 설치되어야 한다. 
 
 ```
-$ cd ${HOME}/workspace/paasta-5.5.2/deployment/monitoring-deployment/logsearch
+$ cd ${HOME}/workspace/monitoring-deployment/logsearch
 ```
 
 ### <div id='6'/>● common_vars.yml
@@ -126,8 +126,8 @@ host_metadata: "paasta"                # Metadata for Zabbix Agent autoregistrat
 inception_os_user_name: "ubuntu"		# Deployment Name
 
 # STEMCELL
-stemcell_os: "ubuntu-xenial"			# Stemcell OS
-stemcell_version: "621.78"			# Stemcell Version
+stemcell_os: "ubuntu-bionic"			# Stemcell OS
+stemcell_version: "1.34"			# Stemcell Version
 
 # ELASTICSEARCH-MASTER
 elasticsearch_master_azs: ["z5"]		# Elasticsearch-Master 가용 존
@@ -179,8 +179,9 @@ ls_router_network: "default"			# LS-Router 네트워크
 
 ### <div id='8'/>● deploy-logsearch.sh
 ```
-bosh –e {director_name} -d logsearch deploy logsearch-deployment.yml \		
+bosh -e micro-bosh -n -d logsearch deploy logsearch-deployment.yml \
 	-o operations/enable-router.yml \
+	-o addons/enable-zabbix-agent.yml \
 	-l logsearch-vars.yml \
 	-l ../../common/common_vars.yml
 ```
@@ -190,12 +191,13 @@ bosh –e {director_name} -d logsearch deploy logsearch-deployment.yml \
 - 서버 환경에 맞추어 Deploy 스크립트 파일의 설정을 수정한다.  
   기본적으로 온라인 설치로 되어 있음.
 
-> $ vi ${HOME}/workspace/paasta-5.5.2/deployment/monitoring-deployment/logsearch/deploy-logsearch.sh
+> $ vi ${HOME}/workspace/monitoring-deployment/logsearch/deploy-logsearch.sh
 
 ```
 # .yml 파일들 설정 변경 이슈 있는지 같이 확인한다.  
-bosh –e {director_name} -d logsearch deploy logsearch-deployment.yml \	
+bosh -e micro-bosh -n -d logsearch deploy logsearch-deployment.yml \
 	-o operations/enable-router.yml \
+	-o addons/enable-zabbix-agent.yml \
 	-l logsearch-vars.yml \
 	-l ../../common/common_vars.yml
 ```
@@ -203,7 +205,7 @@ bosh –e {director_name} -d logsearch deploy logsearch-deployment.yml \
 - Logsearch 설치 Shell Script 파일 실행 (BOSH 로그인 필요)
 
 ```
-$ cd ~/workspace/paasta-5.5.2/deployment/monitoring-deployment/logsearch
+$ cd ~/workspace/monitoring-deployment/logsearch
 $ sh deploy-logsearch.sh
 ```
 
