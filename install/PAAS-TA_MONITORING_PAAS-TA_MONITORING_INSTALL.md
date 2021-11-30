@@ -17,16 +17,16 @@
 
 ## <div id='1'/>1. 개요
 
-본 문서(PaaS-TA Monitoring 설치 가이드)는 전자정부프레임워크 기반의 PaaS-TA 5.1 환경 기준으로 BOSH 2.0을 이용하여 PaaS-TA Monitoring 설치를 위한 가이드를 제공한다.
+본 문서(PaaS-TA Monitoring 설치 가이드)는 전자정부프레임워크 기반의 PaaS-TA 5.6.2 환경 기준으로 BOSH 2.0을 이용하여 PaaS-TA Monitoring 설치를 위한 가이드를 제공한다.
 
 ## <div id='2'/>2. PaaS-TA Monitoring 설치
 ### <div id='3'/>2.1. Prerequisite
 
 1. BOSH 설치가 되어있으며, BOSH Login이 되어 있어야 한다.
 2. cloud-config와 runtime-config가 업데이트 되어있는지 확인한다.
-3. Stemcell 목록을 확인하여 서비스 설치에 필요한 Stemcell(ubuntu xenial 621.94)이 업로드 되어 있는 것을 확인한다.
-4. PaaS-TA 5.0이 설치되어 있어야 하며, BOSH와 PaaS-TA를 설치하는 과정에서 Monitoring 옵션을 포함하여 설치되어 있어야 한다.
-5. PaaS(logsearch), IaaS(Monasca), SaaS(PaaS-TA Pinpoint Monitoring), CaaS(PaaS-TA CaaS Service)등 Monitoring을 하고 싶은 환경에 해당되는 서비스가 설치되어 있어야 한다. (logsearch 설치 필수)
+3. Stemcell 목록을 확인하여 서비스 설치에 필요한 Stemcell(ubuntu bionic 1.34)이 업로드 되어 있는 것을 확인한다.
+4. PaaS-TA 5.6.2가 설치되어 있어야 하며, BOSH와 PaaS-TA를 설치하는 과정에서 Monitoring 옵션을 포함시켜 설치되어 있어야 한다.
+5. PaaS(logsearch), IaaS(Zabbix), SaaS(PaaS-TA Pinpoint Monitoring), CaaS(PaaS-TA CaaS Service)등 Monitoring을 하고 싶은 환경에 해당되는 서비스가 설치되어 있어야 한다. (logsearch 설치 필수, Zabbix Server 및 Zabbix Proxy 설치 필수)
 
 > cloud-config 확인  
 > $ bosh -e {director-name} cloud-config  
@@ -42,22 +42,14 @@
 
 - PaaS-TA Monitoring을 설치하기 위한 deployment가 존재하지 않는다면 다운로드 받는다
 ```
-$ cd ${HOME}/workspace/paasta-5.1/deployment
-$ git clone https://github.com/paas-ta/common.git –b v5.0.1
-$ git clone https://github.com/paas-ta/monitoring-deployment.git –b v5.5.2
-```
-기본적으로 온라인 설치로 설정되어 있으나 오프라인 설치 시 release, stemcell 설치 파일 다운로드는 아래 다운로드 에서 받고 설치한다.
-```
-아래 주소로 이동한다. 관련 release, stemcell 파일들을 받을 수 있다.
-https://nextcloud.paas-ta.org/index.php/s/Z2zfK6RjYNE3CeT
-
-위 주소 항목 중 아래 경로로 이동하면 paasta-monitoring 파일을 받을 수 있다
-release > paasta-monitoring > paasta-monitoring-release-5.5.tgz
+$ cd ${HOME}/workspace
+$ git clone https://github.com/paas-ta/common.git
+$ git clone https://github.com/paas-ta/monitoring-deployment.git
 ```
 
 ### <div id='5'/>2.3. PaaS-TA Monitoring 설치 환경설정
 
-${HOME}/workspace/paasta-5.1/deployment/monitoring-deployment/paasta-monitoring 이하 디렉터리에는 PaaS-TA Monitoring 설치를 위한 Shell Script 파일이 존재한다.
+${HOME}/workspace/monitoring-deployment/paasta-monitoring 이하 디렉터리에는 PaaS-TA Monitoring 설치를 위한 Shell Script 파일이 존재한다.
 
 ### <div id='6'/>● common_vars.yml
 common 폴더에 있는 common_vars.yml PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일이 존재한다.
@@ -238,7 +230,7 @@ bosh -e micro-bosh -n -d paasta-monitoring deploy paasta-monitoring.yml  \
 
 - 서버 환경에 맞추어 Deploy 스크립트 파일의 설정을 수정한다. 
 
-> $ vi ${HOME}/workspace/paasta-5.1/deployment/monitoring-deployment/paasta-monitoring/deploy-paasta-monitoring.sh
+> $ vi ${HOME}/workspace/monitoring-deployment/paasta-monitoring/deploy-paasta-monitoring.sh
 
 ```
 bosh -e {director_name} -n -d paasta-monitoring deploy paasta-monitoring.yml  \
