@@ -273,9 +273,12 @@ $ bosh –e {director_name} vms
  ![PaaSTa_monitoring_login_5.0]
 
 
-member_info에는 사용자가 사용할 ID/PWD를 입력하고 하단 paas-info에는 PaaS-TA admin 권한의 계정을 입력한다.  
-PaaS-TA deploy시 입력한 admin/pwd를 입력해야 한다.  
-입력후 [인증수행]를 실행후 Join버튼을 클릭하면 회원가입이 완료된다.  
+paas-info에는 PaaS-TA admin 권한의 계정을 입력한다. PaaS-TA deploy시 입력한 admin/pwd를 입력해야 한다.
+IaaS Certification 에는 오픈스택 관리자 계정과 비밀번호를 입력한다.
+Member Info에는 사용자가 사용할 아이디와 비밀번호를 입력한다.   
+각 항목별로 [인증하기] 버튼을 클릭하여 반드시 인증을 진행시켜야 한다.
+최종적으로 Join 버튼을 클릭하면 회원가입이 완료된다.  
+
 
  ![PaaSTa_monitoring_join_5.0]
 
