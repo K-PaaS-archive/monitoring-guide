@@ -103,14 +103,16 @@ Pinpoint-Monitoring을 설치할 때는 saas_monitoring_url 값을 변경 하여
 
 ```
 # BOSH INFO
-bosh_url: "http://10.0.1.6"			# BOSH URL (e.g. "https://00.000.0.0")
+bosh_ip: "10.0.1.6"				# BOSH IP
+bosh_url: "https://10.0.1.6"				# BOSH URL (e.g. "https://00.000.0.0")
 bosh_client_admin_id: "admin"			# BOSH Client Admin ID
-bosh_client_admin_secret: "ert7na4jpewscztsxz48"	# BOSH Client Admin Secret('echo $(bosh int ~/workspace/paasta-5.5.2/deployment/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
-bosh_director_port: 25555			# BOSH Director Port
-bosh_oauth_port: 8443				# BOSH OAuth Port
+bosh_client_admin_secret: "ert7na4jpewscztsxz48"	# BOSH Client Admin Secret('echo $(bosh int ~/workspace/paasta-5.0/deployment/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
+bosh_director_port: 25555			# BOSH director port
+bosh_oauth_port: 8443				# BOSH oauth port
+bosh_version: 271.2				# BOSH version('bosh env' 명령어를 통해 확인 가능, on-demand service용, e.g. "271.2")
 
 # PAAS-TA INFO
-system_domain: "61.252.53.246.xip.io"		# Domain (xip.io를 사용하는 경우 HAProxy Public IP와 동일)
+system_domain: "61.252.53.246.nip.io"		# Domain (nip.io를 사용하는 경우 HAProxy Public IP와 동일)
 paasta_admin_username: "admin"			# PaaS-TA Admin Username
 paasta_admin_password: "admin"			# PaaS-TA Admin Password
 paasta_nats_ip: "10.0.1.121"
@@ -118,14 +120,15 @@ paasta_nats_port: 4222
 paasta_nats_user: "nats"
 paasta_nats_password: "7EZB5ZkMLMqT73h2JtxPv1fvh3UsqO"	# PaaS-TA Nats Password (CredHub 로그인후 'credhub get -n /micro-bosh/paasta/nats_password' 명령어를 통해 확인 가능)
 paasta_nats_private_networks_name: "default"	# PaaS-TA Nats 의 Network 이름
-paasta_database_ips: "10.0.1.123"		# PaaS-TA Database IP(e.g. "10.0.1.123")
-paasta_database_port: 5524			# PaaS-TA Database Port(e.g. 5524)
-paasta_cc_db_id: "cloud_controller"		# CCDB ID(e.g. "cloud_controller")
-paasta_cc_db_password: "cc_admin"		# CCDB Password(e.g. "cc_admin")
-paasta_uaa_db_id: "uaa"				# UAADB ID(e.g. "uaa")
-paasta_uaa_db_password: "uaa_admin"		# UAADB Password(e.g. "uaa_admin")
+paasta_database_ips: "10.0.1.123"		# PaaS-TA Database IP (e.g. "10.0.1.123")
+paasta_database_port: 5524			# PaaS-TA Database Port (e.g. 5524(postgresql)/13307(mysql)) -- Do Not Use "3306"&"13306" in mysql
+paasta_database_type: "postgresql"                      # PaaS-TA Database Type (e.g. "postgresql" or "mysql")
+paasta_database_driver_class: "org.postgresql.Driver"   # PaaS-TA Database driver-class (e.g. "org.postgresql.Driver" or "com.mysql.jdbc.Driver")
+paasta_cc_db_id: "cloud_controller"		# CCDB ID (e.g. "cloud_controller")
+paasta_cc_db_password: "cc_admin"		# CCDB Password (e.g. "c418e687c4Kx!" 영어/숫자/특수문자 혼용 8자리 이상)
+paasta_uaa_db_id: "uaa"				# UAADB ID (e.g. "uaa")
+paasta_uaa_db_password: "uaa_admin"		# UAADB Password (e.g. "ifb2497iEA5!" 영어/숫자/특수문자 혼용 8자리 이상)
 paasta_api_version: "v3"
-
 
 # UAAC INFO
 uaa_client_admin_id: "admin"			# UAAC Admin Client Admin ID
@@ -144,10 +147,16 @@ monitoring_api_url: "61.252.53.241"        	# Monitoring-WEB의 Public IP
 
 ### Portal INFO
 portal_web_user_ip: "52.78.88.252"
-portal_web_user_url: "http://portal-web-user.52.78.88.252.xip.io" 
+portal_web_user_url: "http://portal-web-user.52.78.88.252.nip.io" 
 
 ### ETC INFO
-abacus_url: "http://abacus.61.252.53.248.xip.io"	# Abacus URL (e.g. "http://abacus.xxx.xxx.xxx.xxx.xip.io")
+abacus_url: "http://abacus.61.252.53.248.nip.io"	# abacus url (e.g. "http://abacus.xxx.xxx.xxx.xxx.nip.io")
+
+### Zabbix Agent for monitoring ###
+server_ip: "10.37.2.114"               # Zabbix server (or Proxy) IP address
+listen_port: "10050"                   # Zabbix server (or Proxy) Port number
+server_active: "10.37.2.114:10051"     # Zabbix server (or Proxy) IP:Port string
+host_metadata: "paasta"                # Metadata for Zabbix Agent autoregistration
 ```
 
 
