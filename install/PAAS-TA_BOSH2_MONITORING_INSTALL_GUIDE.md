@@ -234,8 +234,8 @@ syslog_transport: "relp"				# Logsearch Protocol
 ```
 
 - OpenStack 환경 설치 시
-
-```
+    - OpenStack 환경에서는 IaaS 모니터링을 위한 bosh-monitoring-vars.yml 파일이 추가로 포함되어 있다.
+```shell script
 $ vi ~/workspace/paasta-deployment/bosh/openstack-vars.yml
 # BOSH VARIABLE
 bosh_client_admin_id: "admin"				# Bosh Client Admin ID
@@ -260,7 +260,14 @@ syslog_address: "10.0.121.100"				# Logsearch의 ls-router IP
 syslog_port: "2514"					# Logsearch의 ls-router Port
 syslog_transport: "relp"				# Logsearch Protocol
 ```
-
+```shell script
+$ vi ~/workspace/paasta-deployment/bosh/bosh-monitoring-vars.yml
+#Zabbix agent
+server_ip: "127.0.0.1"
+listen_port: "10050"
+server_active: "10.0.240.10:10051"
+host_metadata: "zabbix"
+```
 
 
 #### <div id='2.3.4.2'/>2.3.4.2. BOSH 설치 Option 파일
