@@ -55,7 +55,7 @@ Cloud Foundry Document: [https://docs.cloudfoundry.org](https://docs.cloudfoundr
 
 ## <div id='2.1'/>2.1. BOSH 설치 절차
 Inception(PaaS-TA 설치 환경)은 BOSH 및 PaaS-TA를 설치하기 위한 설치 환경으로, VM 또는 서버 장비이다.  
-OS Version은 Ubuntu 18.04를 기준으로 한다. IaaS에서 수동으로 Inception VM을 생성해야 한다.
+OS Version은 Ubuntu 18.04 (Stemcell 1.34)를 기준으로 한다. IaaS에서 수동으로 Inception VM을 생성해야 한다.
 
 Inception VM은 Ubuntu 18.04, vCPU 2 Core, Memory 4G, Disk 100G 이상을 권고한다.
 
