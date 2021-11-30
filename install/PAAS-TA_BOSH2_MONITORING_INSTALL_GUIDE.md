@@ -175,7 +175,7 @@ $ cp -r monitoring-deployment/paasta-addon/* paasta-deployment/paasta/
 ~/workspace/paasta-deployment/bosh 폴더에는 BOSH 설치를 위한 IaaS별 Shell Script 파일이 존재한다.  
 
 Shell Script 파일을 이용하여 BOSH를 설치한다.
-파일명은 deploy-{IaaS}.sh 로 만들어졌다.  
+파일명은 deploy-{IaaS}-monitoring.sh 로 만들어졌다.  
 또한 {IaaS}-vars.yml을 수정하여 BOSH 설치시 적용하는 변수을 설정할 수 있다.
 
 <table>
@@ -186,6 +186,10 @@ Shell Script 파일을 이용하여 BOSH를 설치한다.
 <tr>
 <td>openstack-vars.yml</td>
 <td>OpenStack 환경에 BOSH 설치시 적용하는 변수 설정 파일</td>
+</tr>
+<tr>
+<td>bosh-monitoring-vars.yml</td>
+<td>OpenStack 환경 기반 IaaS 모니터링을 위한 Zabbix Agent 설정 파일</td>
 </tr>
 <tr>
 <td>deploy-aws.sh</td>
