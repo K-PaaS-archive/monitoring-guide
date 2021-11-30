@@ -145,5 +145,11 @@ $ sudo systemctl restart zabbix-proxy
 $ sudo systemctl enable zabbix-proxy
 ```
 
+Zabbix Proxy 정보를 Zabbix Frontend에 등록해야 한다. Administraion > Proxies 메뉴에서 프록시를 등록할 수 있다.
+![](images/zabbix_proxy_install_guide_01.png)
+- Proxy name : zabbix-proxy.conf에 명시된 Hostname 값과 동일하게 맞춰야 함
+- Proxy mode : Active로 선택한다.
+- Proxy address : Proxy 서버의 IP 주소
+
 
 ### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Zabbix Proxy
