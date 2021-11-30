@@ -174,7 +174,6 @@ openstack_keystone_url: "http://192.168.124.55:35357/v3"  # 오픈스택 keyston
 stemcell_os: "ubuntu-bionic"		# Stemcell OS
 stemcell_version: "1.34"		# Stemcell Version
 
-
 # REDIS
 redis_azs: ["z4"]			# Redis 가용 존
 redis_instances: 1			# Redis 인스턴스 수
