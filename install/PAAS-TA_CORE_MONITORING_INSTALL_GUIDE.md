@@ -640,35 +640,53 @@ PaaS-TA AP 배포 시, 설치 Option을 추가해야 한다. 설치 Option에 �
 </tr>
 </table>
 
-- AWS 환경 설치 시
+**│ AWS 환경 설치 시**
 
 ```
-$ vi ~/workspace/paasta-deployment/paasta/deploy-aws.sh
-BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"					 # bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
-bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy paasta-deployment.yml \	# PaaS-TA Manifest File
-	-o operations/aws.yml \						# AWS 설정
-	-o operations/use-haproxy.yml \					# HAProxy 적용
-	-o operations/use-haproxy-public-network.yml \			# HAProxy Public Network 적용
-	-o operations/use-postgres.yml \				# Database Type 설정 (3.5버전 이하에서 Migration 시 필수)
-	-o operations/cce.yml \						# CCE 조치 적용
-	-o operations/rename-network-and-deployment.yml \		# Rename Network and Deployment
-	-l vars.yml \							# 환경에 PaaS-TA 설치시 적용하는 변수 설정 파일
-	-l ../../common/common_vars.yml					# PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일
+$ vi ~/workspace/paasta-deployment/paasta/deploy-aws-monitoring.sh
+```
+```yaml
+#!/bin/bash
+
+BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"
+
+bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy paasta-deployment.yml \
+    -o operations/aws.yml \
+    -o operations/use-haproxy.yml \
+    -o operations/use-haproxy-public-network.yml \
+    -o operations/use-postgres.yml \
+    -o operations/cce.yml \
+    -o operations/rename-network-and-deployment.yml \
+    -o operations/addons/paasta-monitoring-agent.yml \
+    -o operations/addons/enable-component-syslog.yml \
+    -o operations/addons/enable-zabbix-agent.yml \
+    -o operations/addons/custom-diego-release-for-monitoring.yml \
+    -l vars.yml \
+    -l ../../common/common_vars.yml
 ```
 
-- OpenStack 환경 설치 시
+**│ OpenStack 환경 설치 시**
+
 ```
-$ vi ~/workspace/paasta-deployment/paasta/deploy-openstack.sh
-BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"					 # bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
-bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy paasta-deployment.yml \	# PaaS-TA Manifest File
-	-o operations/openstack.yml \					# OpenStack 설정
-	-o operations/use-haproxy.yml \					# HAProxy 적용
-	-o operations/use-haproxy-public-network.yml \			# HAProxy Public Network 적용
-	-o operations/use-postgres.yml \				# Database Type 설정 (3.5버전 이하에서 Migration 시 필수)
-	-o operations/cce.yml \						# CCE 조치 적용
-	-o operations/rename-network-and-deployment.yml \		# Rename Network and Deployment
-	-l vars.yml \							# PaaS-TA 설치시 적용하는 변수 설정 파일
-	-l ../../common/common_vars.yml					# PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일
+$ vi ~/workspace/paasta-deployment/paasta/deploy-openstack-monitoring.sh
+```
+```yaml
+#!/bin/bash
+
+BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"
+
+bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy paasta-deployment.yml \
+    -o operations/openstack.yml \
+    -o operations/use-haproxy.yml \
+    -o operations/use-haproxy-public-network.yml \
+    -o operations/use-postgres.yml \
+    -o operations/cce.yml \
+    -o operations/rename-network-and-deployment.yml \
+    -o operations/addons/paasta-monitoring-agent.yml \
+    -o operations/addons/enable-component-syslog.yml \
+    -o operations/addons/enable-zabbix-agent.yml \
+    -l vars.yml \
+    -l ../../common/common_vars.yml
 ```
 
 - Shell script 파일에 실행 권한 부여
@@ -683,17 +701,26 @@ $ chmod +x ~/workspace/paasta-deployment/paasta/*.sh
 - 서버 환경에 맞추어 common_vars.yml와 vars.yml를 수정 한 뒤, Deploy 스크립트 파일의 설정을 수정한다.
 
 ```
-$ vi ~/workspace/paasta-deployment/paasta/deploy-aws.sh
-BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"			 		# bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
-bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy paasta-deployment.yml \	# PaaS-TA Manifest File
-	-o operations/aws.yml \						# AWS 설정
-	-o operations/use-haproxy.yml \					# HAProxy 적용
-	-o operations/use-haproxy-public-network.yml \			# HAProxy Public Network 적용
-	-o operations/use-postgres.yml \				# Database Type 설정 (3.5버전 이하에서 Migration 시 필수)
-	-o operations/cce.yml \						# CCE 조치 적용
-	-o operations/rename-network-and-deployment.yml \		# Rename Network and Deployment
-	-l vars.yml \							# 환경에 PaaS-TA 설치시 적용하는 변수 설정 파일
-	-l ../../common/common_vars.yml					# PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일
+$ vi ~/workspace/paasta-deployment/paasta/deploy-aws-monitoring.sh
+```
+```yaml
+#!/bin/bash
+
+BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"
+
+bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy paasta-deployment.yml \
+    -o operations/aws.yml \
+    -o operations/use-haproxy.yml \
+    -o operations/use-haproxy-public-network.yml \
+    -o operations/use-postgres.yml \
+    -o operations/cce.yml \
+    -o operations/rename-network-and-deployment.yml \
+    -o operations/addons/paasta-monitoring-agent.yml \
+    -o operations/addons/enable-component-syslog.yml \
+    -o operations/addons/enable-zabbix-agent.yml \
+    -o operations/addons/custom-diego-release-for-monitoring.yml \
+    -l vars.yml \
+    -l ../../common/common_vars.yml
 ```
 
 - PaaS-TA AP 설치 시 Shell Script 파일 실행 (BOSH 로그인 필요)
