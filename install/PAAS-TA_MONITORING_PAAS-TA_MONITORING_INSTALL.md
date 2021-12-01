@@ -242,7 +242,7 @@ bosh -e {director_name} -n -d paasta-monitoring deploy paasta-monitoring.yml  \
 
 - PaaS-TA Monitoring 설치 Shell Script 파일 실행 (BOSH 로그인 필요)
 ```shell script
-$ cd ${HOME}/workspace/paasta-5.6/deployment/monitoring-deployment/paasta-monitoring
+$ cd ${HOME}/workspace/monitoring-deployment/paasta-monitoring
 $ sh deploy-paasta-monitoring.sh
 ```
 
