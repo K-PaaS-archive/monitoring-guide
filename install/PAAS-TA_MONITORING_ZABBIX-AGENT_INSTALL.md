@@ -19,7 +19,7 @@
 <table>
   <tr>
     <td><b>Virtual Machine OS</b></td>
-    <td>[AP] Ubuntu 16.04.7 LTS (Xenial)<br>
+    <td>[AP] Ubuntu 18.04.6 LTS (Bionic)<br>
         [CP] Ubuntu 18.04.6 LTS (Bionic)</td>
   </tr>
   <tr>
@@ -36,7 +36,7 @@
 ### 2.1. 서비스 플랫폼에 따른 Zabbix Agent 설치
 **│ Application Platform (AP)**  
 
-AP 환경에서 Zabbix Agent는 PaaS-TA 플랫폼 배포와 함께 PaaS-TA 환경을 구성하는 각 인스턴스에 내장 설치된다. 따라서 AP 환경에서는 Zabbix Agent를 별도로 설치할 필요가 없으며 다만 PaaS-TA 설치 시에 사용되는 공통 변수 참조 파일(`common-vars.yml`)등에서 Zabbix Server 혹은 Zabbix Proxy IP 정보만 알맞게 설정해주면 된다.
+AP 환경에서 Zabbix Agent는 PaaS-TA 플랫폼 배포와 동시에 PaaS-TA 환경을 구성하는 각 인스턴스에 내장 설치된다. 따라서 AP 환경에서는 Zabbix Agent를 별도로 설치할 필요가 없으며 다만 PaaS-TA 설치 시에 사용되는 공통 변수 참조 파일(`common-vars.yml`)등에서 Zabbix Server 혹은 Zabbix Proxy IP 정보만 알맞게 설정해주면 된다.
 
 **│ Container Platform (CP)**  
 
