@@ -645,7 +645,7 @@ PaaS-TA AP 배포 시, 설치 Option을 추가해야 한다. 설치 Option에 �
 ```
 $ vi ~/workspace/paasta-deployment/paasta/deploy-aws-monitoring.sh
 ```
-```yaml
+```shell script
 #!/bin/bash
 
 BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"
@@ -670,7 +670,7 @@ bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy paasta-deployment.yml \
 ```
 $ vi ~/workspace/paasta-deployment/paasta/deploy-openstack-monitoring.sh
 ```
-```yaml
+```shell script
 #!/bin/bash
 
 BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"
@@ -703,7 +703,7 @@ $ chmod +x ~/workspace/paasta-deployment/paasta/*.sh
 ```
 $ vi ~/workspace/paasta-deployment/paasta/deploy-aws-monitoring.sh
 ```
-```yaml
+```shell script
 #!/bin/bash
 
 BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"
