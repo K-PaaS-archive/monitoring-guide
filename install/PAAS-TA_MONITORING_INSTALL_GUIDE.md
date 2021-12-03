@@ -11,9 +11,9 @@
 
  ① IaaS 모니터링을 사용할 경우,  
 　📄 [[IaaS] Infrastructure Monitoring - Zabbix Package 설치](#)  
-　　▸ [Zabbix Server 설치](PAAS-TA_MONITORING_ZABBIX-SERVER_INSTALL.md)  
-　　▸ [Zabbix Proxy 설치](PAAS-TA_MONITORING_ZABBIX-PROXY_INSTALL.md)  
-　　▸ [Zabbix Agent 설치](PAAS-TA_MONITORING_ZABBIX-AGENT_INSTALL.md)  
+　 ▸ [Zabbix Server 설치](PAAS-TA_MONITORING_ZABBIX-SERVER_INSTALL.md)  
+　 ▸ [Zabbix Proxy 설치](PAAS-TA_MONITORING_ZABBIX-PROXY_INSTALL.md)  
+　 ▸ [Zabbix Agent 설치](PAAS-TA_MONITORING_ZABBIX-AGENT_INSTALL.md)  
 
  ② IaaS 모니터링을 사용하지 않을 경우,  
 　📑 **[BOSH (+Monitoring Dashboard) 설치](PAAS-TA_BOSH2_MONITORING_INSTALL_GUIDE.md)**  
@@ -21,8 +21,8 @@
 　📑 **[Monitoring Dashboard 설치](PAAS-TA_MONITORING_PAAS-TA_MONITORING_INSTALL.md)**  
 　📄 [[PaaS] Log Monitoring - Logsearch 설치](PAAS-TA_MONITORING_LOGSEARCH_INSTALL.md)  
 　📄 [[SaaS] Application Monitoring - Pinpoint Monitoring 설치](PAAS-TA_MONITORING_PINPOINT_MONITORING_INSTALL.md)  
-　　▸ [Pinpoint Java Buildpack 생성/등록](PAAS-TA_MONITORING_PINPOINT_JAVA_BUILDPACK_CREATING.md)  
-　　▸ [Application & Pinpoint Service 푸싱/바인딩](PAAS-TA_MONITORING_PINPOINT_APPLICATION_PUSHING_AND_BINDING.md)      
+　 ▸ [Pinpoint Java Buildpack 생성/등록](PAAS-TA_MONITORING_PINPOINT_JAVA_BUILDPACK_CREATING.md)  
+　 ▸ [Application & Pinpoint Service 푸싱/바인딩](PAAS-TA_MONITORING_PINPOINT_APPLICATION_PUSHING_AND_BINDING.md)      
 　📄 [[CaaS] Container Monitoring - Prometheus 설치](PAAS-TA_MONITORING_CONTAINER_SERVICE_INSTALL.md)  
 
 <table>
