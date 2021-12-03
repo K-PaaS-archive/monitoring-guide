@@ -1,16 +1,16 @@
-### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Sample Application Push/Binding
+### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Sample Application & Pinpoint Service
 
 
-# Sample Application & Pinpoint Service Push/Binding
+# Application & Pinpoint Service Pushing/Binding
 1. [개요](#1)
-2. [Sample Application & Pinpoint Service Push/Binding](#2)
+2. [Application & Pinpoint Service 푸싱/바인딩](#2)
 
 
 ## <div id="1">1. 개요
 본 문서는 설치된 PaaS-TA 플랫폼에 애플리케이션을 푸시하고 서비스를 바인딩하는 방법에 대한 설명을 다루고 있다.
 
 
-## <div id="2">2. Sample Application & Pinpoint Service Push/Binding
+## <div id="2">2. Application & Pinpoint Service 푸싱/바인딩
 
 
 ### 2.1. Sample Application 빌드와 푸시
@@ -95,8 +95,8 @@ $ cf cups pinpoint-monitoring-service -p '{"application_name":"spring-music-paas
 ```
 
 
-### 2.3. Sample Application과 Service의 바인딩
-Sample Application과 Service를 바인딩한다.
+### 2.3. Application과 Service의 바인딩
+Application과 Service를 바인딩한다.
 
 ```
 $ cf bind-service spring-music-oyj pinpoint-monitoring-servic
@@ -130,4 +130,4 @@ spring-music-paasta   started           web:1/1, task:0/0   spring-music-paasta-
 
 
 
-### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Sample Application Push/Binding
+### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Sample Application & Pinpoint Service

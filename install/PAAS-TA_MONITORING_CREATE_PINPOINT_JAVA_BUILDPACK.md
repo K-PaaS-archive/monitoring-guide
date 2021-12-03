@@ -1,7 +1,7 @@
 ### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Pinpoint Java Buildpack
 
 
-# Create Pinpoint Java Buildpack
+# Pinpoint Java Buildpack Creating
 1. [개요](#1)
 2. [Pinpoint Java Buildpack 생성/등록](#2)
 
@@ -83,7 +83,7 @@ $ mv build/java-buildpack-offline-745b745.zip build/java-buildpack-for-pinpoint.
 $ cf create-buildpack java-buildpack-pinpoint build/java-buildpack-for-pinpoint.zip 12
 ```
 
-빌드팩이 등록이 정상적으로 완료 되었는지 확인한다.
+빌드팩 등록이 정상적으로 완료 되었는지 확인한다.
 
 ```
 $ cf buildpacks

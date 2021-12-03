@@ -22,7 +22,7 @@
 　📄 [[PaaS] Log Monitoring - Logsearch 설치](PAAS-TA_MONITORING_LOGSEARCH_INSTALL.md)  
 　📄 [[SaaS] Application Monitoring - Pinpoint Monitoring 설치](PAAS-TA_MONITORING_PINPOINT_MONITORING_INSTALL.md)  
 　　▸ [Pinpoint Java Buildpack 생성/등록](PAAS-TA_MONITORING_CREATE_PINPOINT_JAVA_BUILDPACK.md)  
-　　▸ [Sample Application & Pinpoint Service 푸시/바인딩](PAAS-TA_MONITORING_PUSH_SAMPLE_APPLICATION.md)      
+　　▸ [Application & Pinpoint Service 푸싱/바인딩](PAAS-TA_MONITORING_PUSH_SAMPLE_APPLICATION.md)      
 　📄 [[CaaS] Container Monitoring - Prometheus 설치](PAAS-TA_MONITORING_CONTAINER_SERVICE_INSTALL.md)  
 
 <table>
