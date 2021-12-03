@@ -3,90 +3,106 @@
 
 # Create Pinpoint Java Buildpack
 1. [개요](#1)
-2. [Zabbix Agent의 설치](#2)
+2. [Pinpoint Java Buildpack 생성/등록](#2)
 
 
 ## <div id="1">1. 개요
+본 문서는 Pinpoint Monitoring 서비스에서 사용할 Java Builpack을 생성하는 방법에 대한 설명을 다루고 있다.
 
 
-### 1.1. 소개
-본 문서는 사용자의 IaaS 환경에 대한 시스템 자원 정보를 수집하여 실시간 컴퓨팅 자원의 사용량 또는 유휴 자원량을 측정해 PaaS-TA 플랫폼에서 사용 가능한 모니터링 대시보드와 연계하기 위한 Zabbix Agent 설치 및 환경설정 방법에 대한 설명을 다루고 있다.
-  
-
-### 1.2. 범위와 한계
-또한 본 가이드는 다음과 같은 설치 환경을 바탕으로 작성되었으므로 가이드에서 언급되지 않은 기타 범위에 대하여는 일부 제약이나 설치 또는 적용에 한계가 있을 수 있다.
-
-<table>
-  <tr>
-    <td><b>Virtual Machine OS</b></td>
-    <td>[AP] Ubuntu 18.04.6 LTS (Bionic)<br>
-        [CP] Ubuntu 18.04.6 LTS (Bionic)</td>
-  </tr>
-  <tr>
-    <td><b>IaaS Vendor SW</b></td>
-    <td> OpenStack 5.4.0 (Stein)
-    </td>
-  </tr>
-</table>
+## <div id="2">2. Pinpoint Java Buildpack 생성/등록
 
 
-## <div id="2">2. Zabbix Agent의 설치
+### 2.1. Ruby 설치
+푸시할 Sample Application에 적용할 자바 빌드팩을 만들기 위해서는 먼저 Ruby 설치가 선행되어야 한다. 아래와 같이 의존성 패키지를 설치를 진행한다.
 
-
-### 2.1. 서비스 플랫폼에 따른 Zabbix Agent 설치
-**│ Application Platform (AP)**  
-
-AP 환경에서 Zabbix Agent는 PaaS-TA 플랫폼 배포와 동시에 PaaS-TA 환경을 구성하는 각 인스턴스에 내장 설치된다. 따라서 AP 환경에서는 Zabbix Agent를 별도로 설치할 필요가 없으며 다만 PaaS-TA 설치 시에 사용되는 공통 변수 참조 파일(`common-vars.yml`)등에서 Zabbix Server 혹은 Zabbix Proxy IP 정보만 알맞게 설정해주면 된다.
-
-**│ Container Platform (CP)**  
-
-AP 환경에서 배포 자동화 스크립트를 이용해 플랫폼을 배포했던 방식과는 달리 CP 환경에서는 쿠버네티스를 사용해 클러스터링을 구현할 노드의 수를 결정하거나 혹은 IaaS 플랫폼에서 가상 머신을 생성하거나 하는 일련의 작업이 수동으로 이루어지게 된다. 따라서 CP 환경을 구성하는 각 노드에 Zabbix Agent를 별도로 설치하는 작업이 필요하다.
-
-Zabbix 공식 홈페이지를 방문하면 [다운로드](https://www.zabbix.com/download) 페이지를 통해 설치하고자 하는 Zabbix 버전, 운영체제 종류와 버전 등을 선택하여 사용자의 운영 환경에 알맞는 설치 스크립트를 제공 받을 수 있다.
-
-![](images/zabbix_agent_install_guide_01.png)
-
-**Zabbix Packages** 탭에서 제공 받을 수 있는 설치 스크립트를 통해 Zabbix Server, Proxy, Agent 등 Zabbix 관련 패키지를 모두 설치할 수 있는 저장소 정보를 내려 받을 수 있다. 이 단계에서는 Zabbix Agent만 설치하면 되기 때문에 기타 Zabbix 패키지 설치와 관련된 스크립트는 생략하고 Zabbix Agent 설치 스크립트만 따라 수행하도록 한다.
-
-본 가이드에서는 Ubuntu 18.04 운영체제에서 Zabbix 5.0 LTS 버전의 Agent 구성으로 선택해 설치하였다.
-
-
-### 2.2. Zabbix Agent 설치
-Zabbix 저장소를 설치한다.
 ```
-$ wget https://repo.zabbix.com/zabbix/5.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_5.0-1+bionic_all.deb
-$ sudo dpkg -i zabbix-release_5.0-1+bionic_all.deb
 $ sudo apt update
+$ sudo apt install git curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev libffi-dev nodejs openjdk-8-jdk
 ```
 
-Zabbix Agent를 설치한다.
-```
-$ sudo apt -y install zabbix-agent
-```
-Zabbix Agent 설정을 위해 `/etc/zabbix/zabbix_agentd.conf` 파일을 각 사용자의 설치 환경에 알맞게 편집한다.
-```
-...
-Server=11.11.11.11
-...
-ServerActive=11.11.11.11:10051
-...
-Hostname=dev-kube-master
-...
-HostMetadata=paasta
-...
-```
-> **[ 주요 설정 파라미터 ]**  
-. `Server`: Zabbix Server의 IP 주소를 입력. Zabbix Proxy 구성 환경에서는 Proxy의 IP 주소를 입력.  
-. `ServerActive`: Zabbix Server(또는 Proxy)의 IP 주소와 서비스 포트 번호를 콜론으로 연결하여 입력.  
-. `Hostname`: 호스트명을 입력. 이곳에 설정된 값이 Zabbix Server의 모니터링 호스트명으로 적용됨.  
-. `HostMetadata`: 자동 모니터링 호스트 등록과 그룹핑을 위해 인스턴스 범위를 구분하기 위한 일종의 태그와 같은 역할.
+**rbenv**(Ruby 설치 및 버전 관리 도구)를 설치한다.
 
-Zabbix Agent를 재시작하여 Agent 설치와 설정을 완료한다.
 ```
-$ sudo systemctl restart zabbix-agent
+$ git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+$ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+$ echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+$ source ~/.bashrc
 ```
 
-여기까지의 **'2.2. Zabbix Agent 설치'** 항목의 설치 가이드를 CP 환경 구성을 위한 모든 쿠버네티스 클러스터 노드(Master 노드 및 모든 Slave 노드)에서 동일하게 반복하여 수행한다.
+**ruby-build**(Ruby를 위한 CLI 도구)를 설치한다.
+
+```
+$ git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+$ echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+$ source ~/.bashrc
+```
+
+**Ruby**를 설치한다.
+
+```
+$ rbenv install 2.7.3
+$ rbenv global 2.7.3
+$ rbenv rehash
+$ ruby -v
+```
 
 
-### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Zabbix Agent
+### 2.2. Java Buildpack 생성과 등록
+자바 빌드팩을 생성하기 위한 소스를 PaaS-TA 저장소로부터 내려 받는다.
+
+```
+$ cd ~/workspace
+$ git clone https://github.com/PaaS-TA/PAAS-TA-PINPOINT-MONITORING-BUILDPACK.git
+```
+
+Bundler를 설치한다.
+
+```
+$ gem install bundler
+$ rbenv rehash
+```
+
+Gemfile에 등록된 gem들을 설치한다.
+
+```
+$ cd PaaS-TA/PAAS-TA-PINPOINT-MONITORING-BUILDPACK
+$ bundle install
+```
+
+빌드팩을 패키징한다.
+
+```
+$ bundle exec rake package OFFLINE=true
+```
+
+`build` 하위 폴더에 생성된 빌드팩의 파일명을 변경하고 cf의 빌드팩 리스트에 등록한다. 빌드팩을 등록할 때 `cf create-buildpack` 명령 후미의 `12`는 빌드팩 리스트 넘버를 의미하고 파일명을 변경하는 이유는 단순히 다른 빌드팩과 구분을 위함이다.
+
+```
+$ mv build/java-buildpack-offline-745b745.zip build/java-buildpack-for-pinpoint.zip
+$ cf create-buildpack java-buildpack-pinpoint build/java-buildpack-java-buildpack-for-pinpoint.zip 12
+```
+
+빌드팩이 등록이 정상적으로 완료 되었는지 확인한다.
+
+```
+$ cf buildpacks
+Getting buildpacks as admin...
+
+position   name                      stack        enabled   locked   filename
+1          staticfile_buildpack      cflinuxfs3   true      false    staticfile_buildpack-cflinuxfs3-v1.5.10.zip
+2          java_buildpack            cflinuxfs3   true      false    java-buildpack-cflinuxfs3-v4.32.1.zip
+3          ruby_buildpack            cflinuxfs3   true      false    ruby_buildpack-cflinuxfs3-v1.8.23.zip
+4          dotnet_core_buildpack     cflinuxfs3   true      false    dotnet-core_buildpack-cflinuxfs3-v2.3.14.zip
+5          nodejs_buildpack          cflinuxfs3   true      false    nodejs_buildpack-cflinuxfs3-v1.7.26.zip
+6          go_buildpack              cflinuxfs3   true      false    go_buildpack-cflinuxfs3-v1.9.17.zip
+7          python_buildpack          cflinuxfs3   true      false    python_buildpack-cflinuxfs3-v1.7.20.zip
+8          php_buildpack             cflinuxfs3   true      false    php_buildpack-cflinuxfs3-v4.4.20.zip
+9          nginx_buildpack           cflinuxfs3   true      false    nginx_buildpack-cflinuxfs3-v1.1.14.zip
+10         r_buildpack               cflinuxfs3   true      false    r_buildpack-cflinuxfs3-v1.1.7.zip
+11         binary_buildpack          cflinuxfs3   true      false    binary_buildpack-cflinuxfs3-v1.0.36.zip
+12         java-buildpack-pinpoint                true      false    java-buildpack-for-pinpoint.zip
+```
+
+
+### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Pinpoint Java Buildpack
