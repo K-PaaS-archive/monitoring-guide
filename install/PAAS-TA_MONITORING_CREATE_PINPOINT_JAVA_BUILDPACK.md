@@ -14,7 +14,7 @@
 
 
 ### 2.1. Ruby 설치
-푸시할 Sample Application에 적용할 자바 빌드팩을 만들기 위해서는 먼저 Ruby 설치가 선행되어야 한다. 아래와 같이 의존성 패키지를 설치를 진행한다.
+푸시할 Sample Application에 적용할 자바 빌드팩을 만들기 위해서는 먼저 Ruby 설치가 선행되어야 한다. 아래와 같이 필요한 의존성 패키지들의 설치를 진행한다.
 
 ```
 $ sudo apt update
@@ -80,7 +80,7 @@ $ bundle exec rake package OFFLINE=true
 
 ```
 $ mv build/java-buildpack-offline-745b745.zip build/java-buildpack-for-pinpoint.zip
-$ cf create-buildpack java-buildpack-pinpoint build/java-buildpack-java-buildpack-for-pinpoint.zip 12
+$ cf create-buildpack java-buildpack-pinpoint build/java-buildpack-for-pinpoint.zip 12
 ```
 
 빌드팩이 등록이 정상적으로 완료 되었는지 확인한다.

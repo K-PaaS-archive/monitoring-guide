@@ -1,92 +1,133 @@
-### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Zabbix Agent
+### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Sample Application Push/Binding
 
 
-# Zabbix Agent Install Guide
+# Sample Application & Pinpoint Service Push/Binding
 1. [개요](#1)
-2. [Zabbix Agent의 설치](#2)
+2. [Sample Application & Pinpoint Service Push/Binding](#2)
 
 
 ## <div id="1">1. 개요
+본 문서는 설치된 PaaS-TA 플랫폼에 애플리케이션을 푸시하고 서비스를 바인딩하는 방법에 대한 설명을 다루고 있다.
 
 
-### 1.1. 소개
-본 문서는 사용자의 IaaS 환경에 대한 시스템 자원 정보를 수집하여 실시간 컴퓨팅 자원의 사용량 또는 유휴 자원량을 측정해 PaaS-TA 플랫폼에서 사용 가능한 모니터링 대시보드와 연계하기 위한 Zabbix Agent 설치 및 환경설정 방법에 대한 설명을 다루고 있다.
-  
-
-### 1.2. 범위와 한계
-또한 본 가이드는 다음과 같은 설치 환경을 바탕으로 작성되었으므로 가이드에서 언급되지 않은 기타 범위에 대하여는 일부 제약이나 설치 또는 적용에 한계가 있을 수 있다.
-
-<table>
-  <tr>
-    <td><b>Virtual Machine OS</b></td>
-    <td>[AP] Ubuntu 18.04.6 LTS (Bionic)<br>
-        [CP] Ubuntu 18.04.6 LTS (Bionic)</td>
-  </tr>
-  <tr>
-    <td><b>IaaS Vendor SW</b></td>
-    <td> OpenStack 5.4.0 (Stein)
-    </td>
-  </tr>
-</table>
+## <div id="2">2. Sample Application & Pinpoint Service Push/Binding
 
 
-## <div id="2">2. Zabbix Agent의 설치
+### 2.1. Sample Application 빌드와 푸시
+샘플 앱 테스트를 위해 개발된 'spring-music' 소스를 Cloud Foundry Sample Applications 저장소로부터 내려 받는다.
 
-
-### 2.1. 서비스 플랫폼에 따른 Zabbix Agent 설치
-**│ Application Platform (AP)**  
-
-AP 환경에서 Zabbix Agent는 PaaS-TA 플랫폼 배포와 동시에 PaaS-TA 환경을 구성하는 각 인스턴스에 내장 설치된다. 따라서 AP 환경에서는 Zabbix Agent를 별도로 설치할 필요가 없으며 다만 PaaS-TA 설치 시에 사용되는 공통 변수 참조 파일(`common-vars.yml`)등에서 Zabbix Server 혹은 Zabbix Proxy IP 정보만 알맞게 설정해주면 된다.
-
-**│ Container Platform (CP)**  
-
-AP 환경에서 배포 자동화 스크립트를 이용해 플랫폼을 배포했던 방식과는 달리 CP 환경에서는 쿠버네티스를 사용해 클러스터링을 구현할 노드의 수를 결정하거나 혹은 IaaS 플랫폼에서 가상 머신을 생성하거나 하는 일련의 작업이 수동으로 이루어지게 된다. 따라서 CP 환경을 구성하는 각 노드에 Zabbix Agent를 별도로 설치하는 작업이 필요하다.
-
-Zabbix 공식 홈페이지를 방문하면 [다운로드](https://www.zabbix.com/download) 페이지를 통해 설치하고자 하는 Zabbix 버전, 운영체제 종류와 버전 등을 선택하여 사용자의 운영 환경에 알맞는 설치 스크립트를 제공 받을 수 있다.
-
-![](images/zabbix_agent_install_guide_01.png)
-
-**Zabbix Packages** 탭에서 제공 받을 수 있는 설치 스크립트를 통해 Zabbix Server, Proxy, Agent 등 Zabbix 관련 패키지를 모두 설치할 수 있는 저장소 정보를 내려 받을 수 있다. 이 단계에서는 Zabbix Agent만 설치하면 되기 때문에 기타 Zabbix 패키지 설치와 관련된 스크립트는 생략하고 Zabbix Agent 설치 스크립트만 따라 수행하도록 한다.
-
-본 가이드에서는 Ubuntu 18.04 운영체제에서 Zabbix 5.0 LTS 버전의 Agent 구성으로 선택해 설치하였다.
-
-
-### 2.2. Zabbix Agent 설치
-Zabbix 저장소를 설치한다.
 ```
-$ wget https://repo.zabbix.com/zabbix/5.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_5.0-1+bionic_all.deb
-$ sudo dpkg -i zabbix-release_5.0-1+bionic_all.deb
-$ sudo apt update
+$ cd ~/workspace
+$ git clone https://github.com/cloudfoundry-samples/spring-music.git
 ```
 
-Zabbix Agent를 설치한다.
+내려 받은 소스를 빌드한다.
+
 ```
-$ sudo apt -y install zabbix-agent
+$ cd spring-music
+$ ./gradlew clean assemble
 ```
-Zabbix Agent 설정을 위해 `/etc/zabbix/zabbix_agentd.conf` 파일을 각 사용자의 설치 환경에 알맞게 편집한다.
+
+`manifest.yml` 파일을 편집한다. `name` 값 정도를 사용자 임의대로 변경해 준다.
+
 ```
+$ vi manifest.yml
+```
+```yaml
+---
+applications:
+- name: spring-music-paasta
+  memory: 1G
+  random-route: true
+  path: build/libs/spring-music-1.0.jar
+  env:
+    JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'
+```
+
+빌드팩 옵션을 추가해 앱을 푸시한다. `-b`는 빌드팩 추가 옵션, `--no-start`는 앱을 푸시한 후 시작시키지 않는 옵션이다. 즉 기본 옵션은 푸시 후 앱이 시작된다. 푸시가 완료되면 앱이 정상적으로 푸시되었는지 확인한다.
+
+```
+$ cf push -b java-buildpack-pinpoint --no-start
+
 ...
-Server=11.11.11.11
-...
-ServerActive=11.11.11.11:10051
-...
-Hostname=dev-kube-master
-...
-HostMetadata=paasta
-...
-```
-> **[ 주요 설정 파라미터 ]**  
-. `Server`: Zabbix Server의 IP 주소를 입력. Zabbix Proxy 구성 환경에서는 Proxy의 IP 주소를 입력.  
-. `ServerActive`: Zabbix Server(또는 Proxy)의 IP 주소와 서비스 포트 번호를 콜론으로 연결하여 입력.  
-. `Hostname`: 호스트명을 입력. 이곳에 설정된 값이 Zabbix Server의 모니터링 호스트명으로 적용됨.  
-. `HostMetadata`: 자동 모니터링 호스트 등록과 그룹핑을 위해 인스턴스 범위를 구분하기 위한 일종의 태그와 같은 역할.
 
-Zabbix Agent를 재시작하여 Agent 설치와 설정을 완료한다.
-```
-$ sudo systemctl restart zabbix-agent
+$ cf apps
+Getting apps in org system / space paasta as admin...
+
+name                  requested state   processes   routes
+spring-music-paasta   stopped           web:0/1     spring-music-paasta-impressive-shark-pd.10.5.0.240.nip.io
 ```
 
-여기까지의 **'2.2. Zabbix Agent 설치'** 항목의 설치 가이드를 CP 환경 구성을 위한 모든 쿠버네티스 클러스터 노드(Master 노드 및 모든 Slave 노드)에서 동일하게 반복하여 수행한다.
+만약 cf의 space가 지정되어 있지 않다면 다음과 같이 space를 지정해 준다.
+
+```
+$ cf create-space paasta
+$ cf target -s paasta
+```
 
 
-### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Zabbix Agent
+### 2.2. Security Group과 User Provided Service 등록
+`pinpoint-asg.json` 이라는 이름의 JSON 파일을 새로 생성한 후 아래와 같이 작성한다. 이때 `destination` 값을 작업자의 환경에 알맞게 수정한다.
+
+```json
+[
+  {
+    "protocol": "all",
+    "destination": "10.5.0.0/24",
+    "log": true,
+    "description": "Allow tcp traffic to z1"
+  }
+]
+```
+
+'pinpoint'라는 security-group을 앞에서 생성한 JSON 파일을 이용해 등록하고 바인딩한다.
+
+```
+$ cf create-security-group pinpoint pinpoint-asg.json
+$ cf bind-staging-security-group pinpoint
+$ cf bind-running-security-group pinpoint
+```
+
+User Provided Service를 등록한다. 이때 작업자의 환경에 맞게 `application_name`, `collector_host` 값을 적절하게 수정해 주어야 하는 것에 유의한다.
+
+```
+$ cf cups pinpoint-monitoring-service -p '{"application_name":"spring-music-paasta","collector_host":"10.5.0.139","collector_span_port":"29996","collector_stat_port":"29995","collector_tcp_port":"29994"}' -t 'pinpoint'
+```
+
+
+### 2.3. Sample Application과 Service의 바인딩
+Sample Application과 Service를 바인딩한다.
+
+```
+$ cf bind-service spring-music-oyj pinpoint-monitoring-servic
+```
+
+Application을 시작시킨다.
+
+```
+$ cf start spring-music-oyj
+```
+
+Application이 실행되었으면 다음 명령어로 조회되는 URL(`routes`)을 인터넷 브라우저를 통해 접속해 앱이 정상적으로 서비스되고 있는지 확인할 수 있다.
+
+```
+$ cf apps
+Getting apps in org system / space paasta as admin...
+
+name                  requested state   processes           routes
+spring-music-paasta   started           web:1/1, task:0/0   spring-music-paasta-brash-alligator-tz.10.5.0.240.nip.io
+```
+
+![](images/cf_pushed_spring_music_app.png)
+
+또한 Monitoring Dashboard에서도 사용자가 푸시한 Application에 대한 모니터링 정보를 확인할 수 있다.
+
+![](images/cf_pushed_spring_music_app_info_on_monitoring-dashboard_01.png)
+
+![](images/cf_pushed_spring_music_app_info_on_monitoring-dashboard_02.png)
+
+![](images/cf_pushed_spring_music_app_info_on_monitoring-dashboard_03.png)
+
+
+
+### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Sample Application Push/Binding
