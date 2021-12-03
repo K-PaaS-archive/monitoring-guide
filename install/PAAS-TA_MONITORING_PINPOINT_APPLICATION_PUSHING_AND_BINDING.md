@@ -99,13 +99,13 @@ $ cf cups pinpoint-monitoring-service -p '{"application_name":"spring-music-paas
 Application과 Service를 바인딩한다.
 
 ```
-$ cf bind-service spring-music-oyj pinpoint-monitoring-servic
+$ cf bind-service spring-music-paasta pinpoint-monitoring-servic
 ```
 
 Application을 시작시킨다.
 
 ```
-$ cf start spring-music-oyj
+$ cf start spring-music-paasta
 ```
 
 Application이 실행되었으면 다음 명령어로 조회되는 URL(`routes`)을 인터넷 브라우저를 통해 접속해 앱이 정상적으로 서비스되고 있는지 확인할 수 있다.
