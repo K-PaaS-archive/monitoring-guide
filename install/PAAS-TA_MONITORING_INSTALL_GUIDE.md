@@ -18,7 +18,7 @@
  ② IaaS 모니터링을 사용하지 않을 경우,  
 　📑 **[BOSH (+Monitoring Dashboard) 설치](PAAS-TA_BOSH2_MONITORING_INSTALL_GUIDE.md)**  
 　📑 **[PaaS-TA (+Monitoring Dashboard) 설치](PAAS-TA_CORE_MONITORING_INSTALL_GUIDE.md)**  
-　📑 **[Monitoring Dashboard 설치](PAAS-TA_MONITORING_PAAS-TA_MONITORING_INSTALL.md)**  
+　📑 **[Monitoring Dashboard 설치](PAAS-TA_MONITORING_MONITORING_DASHBOARD_INSTALL.md)**  
 　📄 [[PaaS] Log Monitoring - Logsearch 설치](PAAS-TA_MONITORING_LOGSEARCH_INSTALL.md)  
 　📄 [[SaaS] Application Monitoring - Pinpoint Monitoring 설치](PAAS-TA_MONITORING_PINPOINT_MONITORING_INSTALL.md)  
 　 ▸ [Pinpoint Java Buildpack 생성/등록](PAAS-TA_MONITORING_PINPOINT_JAVA_BUILDPACK_CREATING.md)  
