@@ -5,7 +5,7 @@
 
 
 ## 필수 설치 항목
-> ⚠️ <b>PaaS-TA 플랫폼</b>에서 모니터링 옵션을 사용할 경우 <b>BOSH</b>와 <b>PaaS-TA</b> 설치 시에 **모니터링 기능에 필요한 옵션을 적용한 설치 작업**이 필수 선행되어야 한다.
+> ⚠️ <b>PaaS-TA 플랫폼</b>에서 모니터링 기능을 사용할 경우 <b>BOSH</b>와 <b>PaaS-TA</b> 설치 시에 **모니터링 기능에 필요한 옵션을 적용한 설치 작업**이 필수 선행되어야 한다.
 
 - [BOSH (+Monitoring Dashboard Option) 설치](PAAS-TA_BOSH2_MONITORING_INSTALL_GUIDE.md)
 - [PaaS-TA (+Monitoring Dashboard Option) 설치](PAAS-TA_CORE_MONITORING_INSTALL_GUIDE.md)
