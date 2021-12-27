@@ -1,16 +1,16 @@
 ### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Pinpoint Java Buildpack
 
 
-# Pinpoint Java Buildpack Creating
+# Pinpoint Java Buildpack Creating and Uploading
 1. [개요](#1)
-2. [Pinpoint Java Buildpack 생성/등록](#2)
+2. [Pinpoint Java Buildpack 생성과 등록](#2)
 
 
 ## <div id="1">1. 개요
 본 문서는 Pinpoint Monitoring 서비스에서 사용할 Java Builpack을 생성하는 방법에 대한 설명을 다루고 있다.
 
 
-## <div id="2">2. Pinpoint Java Buildpack 생성/등록
+## <div id="2">2. Pinpoint Java Buildpack 생성과 등록
 
 
 ### 2.1. Ruby 설치
