@@ -1,4 +1,4 @@
-### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > Monitoring Install
+### [Index](https://github.com/PaaS-TA/Guide) > Monitoring Install
 
 
 # PaaS-TA Monitoring Install Guide
@@ -29,4 +29,4 @@
 - [**[CaaS] Container Monitoring** - Prometheus 설치](PAAS-TA_MONITORING_CONTAINER_SERVICE_INSTALL.md)
 
 
-### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > Monitoring Install
+### [Index](https://github.com/PaaS-TA/Guide) > Monitoring Install

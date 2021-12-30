@@ -1,4 +1,4 @@
-### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > BOSH (+Monitoring Dashboard)
+### [Index](https://github.com/PaaS-TA/Guide) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > BOSH (+Monitoring Dashboard)
 
 
 # BOSH Install Guide (+Using Monitoring Dashboard) 
@@ -6,6 +6,7 @@
  1.1. [목적](#1.1)  
  1.2. [범위](#1.2)  
  1.3. [참고 자료](#1.3)  
+ 
 2. [BOSH 설치 환경 구성 및 설치](#2)  
  2.1. [BOSH 설치 절차](#2.1)  
  2.2. [Inception 서버 구성](#2.2)  
@@ -19,11 +20,13 @@
 　　2.3.4.3. [BOSH 설치 Shell Script](#2.3.4.3)  
 　2.3.5. [BOSH 설치](#2.3.5)  
 　2.3.6. [BOSH 로그인](#2.3.6)  
+
 3. [BOSH Option 파일 활용](#3)  
  3.1. [CredHub](#3.1)   
 　 3.1.1. [CredHub CLI 설치](#3.1.1)  
 　 3.1.2. [CredHub 로그인](#3.1.2)  
  3.2. [Jumpbox](#3.2)   
+
 4. [기타](#4)  
  4.1. [BOSH 로그인 생성 스크립트](#4.1)   
 
@@ -533,4 +536,4 @@ $ source {BOSH_LOGIN_FILE_PATH}/{BOSH_LOGIN_FILE_NAME}
 ```
 
 
-### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > BOSH (+Monitoring Dashboard)
+### [Index](https://github.com/PaaS-TA/Guide) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > BOSH (+Monitoring Dashboard)

@@ -1,4 +1,4 @@
-### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > [PaaS] Logsearch
+### [Index](https://github.com/PaaS-TA/Guide) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > [PaaS] Logsearch
 
 
 # Logsearch Install Guide
@@ -217,7 +217,7 @@ $ bosh –e {director_name} vms
 ![PaaSTa_logsearch_vms_5.0]
 
 
-### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Logsearch
+### [Index](https://github.com/PaaS-TA/Guide) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Logsearch
 
 
 <!-- Images Links -->

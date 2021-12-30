@@ -1,4 +1,4 @@
-### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Zabbix Proxy
+### [Index](https://github.com/PaaS-TA/Guide) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Zabbix Proxy
 
 
 # Zabbix Proxy Install Guide
@@ -152,4 +152,4 @@ Zabbix Proxy 정보를 Zabbix Frontend에 등록해야 한다. Administraion > P
 - Proxy address : Proxy 서버의 IP 주소
 
 
-### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Zabbix Proxy
+### [Index](https://github.com/PaaS-TA/Guide) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Zabbix Proxy

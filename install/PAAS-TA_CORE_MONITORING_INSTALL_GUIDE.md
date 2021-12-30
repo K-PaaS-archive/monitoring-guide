@@ -1,11 +1,12 @@
-### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > PaaS-TA (+Monitoring Dashboard)
+### [Index](https://github.com/PaaS-TA/Guide) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > PaaS-TA (+Monitoring Dashboard)
 
 
 # PaaS-TA Install Guide (+Using Monitoring Dashboard) 
 1. [개요](#1)  
  1.1. [목적](#1.1)  
  1.2. [범위](#1.2)  
- 1.3. [참고 자료](#1.3)  
+ 1.3. [참고 자료](#1.3)
+   
 2. [PaaS-TA AP 설치](#2)  
  2.1. [Prerequisite](#2.1)  
  2.2. [설치 파일 다운로드](#2.2)  
@@ -827,4 +828,4 @@ Select an org (or press enter to skip):
 ```
 
 
-### [Index](https://github.com/PaaS-TA/Guide/tree/working-new-template) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > PaaS-TA (+Monitoring Dashboard)
+### [Index](https://github.com/PaaS-TA/Guide) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > PaaS-TA (+Monitoring Dashboard)
