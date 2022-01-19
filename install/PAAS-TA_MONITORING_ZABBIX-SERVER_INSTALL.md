@@ -40,7 +40,7 @@ Zabbix 공식 홈페이지를 방문하면 [다운로드](https://www.zabbix.com
 
 **Zabbix Packages** 탭에서 제공 받을 수 있는 설치 스크립트를 통해 Zabbix Server, Proxy, Agent 등 Zabbix 관련 패키지를 모두 설치할 수 있는 저장소 정보를 내려 받을 수 있다. Zabbix Server가 설치될 Physical Node 자체의 시스템 모니터링 역시 필요하므로 패키지 설치를 통해서 Zabbix Server와 Zabbix Agent를 함께 설치한다.
 
-본 가이드에서는 CentOS 7 운영체제에서 Zabbix 5.0 LTS 버전의 Server 및 Agent, 데이터베이스 SW로는 MySQL, 웹 서버 SW로는 Apache 구성으로 선택해 설치하였다.
+본 가이드에서는 CentOS 7 운영체제에서 Zabbix 5.0 LTS 버전의 Server 및 Agent, 데이터베이스 SW로는 MySQL, 웹 서버 SW로는 Apache 구성으로 선택해 설치하였다. 따라서 가이드 내용이 운영체제나 데이터베이스 또는 웹 서버 SW 종류에 따라 설치 스크립트가 일부 다를 수 있으므로 Zabbix 공식 홈페이지에서 확인할 수 있는 설치 스크립트를 참고하는 것을 권장한다.
 
 
 ### 2.2. Zabbix Packages 설치
@@ -63,9 +63,13 @@ Zabbix 프론트엔드 설치를 위해 Red Hat 소프트웨어 컬렉션을 설
 Zabbix 프론트엔드 저장소를 활성화를 위해 `/etc/yum.repos.d/zabbix.repo` 파일을 다음과 같이 편집한다. 
 ```
 ...
+
 [zabbix-frontend]
+
 ...
+
 enabled=1
+
 ...
 ```
 
@@ -77,13 +81,14 @@ Zabbix 프론트엔드 패키지를 설치한다.
 서버의 데이터베이스가 작동(활성화) 상태인지 확인한 후 다음과 같이 데이터베이스 및 계정을 생성한 후 데이터베이스 명령 프롬프트에서 빠져나온다.
 ```
 # mysql -uroot -p
-Enter password: 
+Enter password:
+
 ...
+
 mysql> create database zabbix character set utf8 collate utf8_bin;
 mysql> create user zabbix@localhost identified by 'paasta';
 mysql> grant all privileges on zabbix.* to zabbix@localhost;
 mysql> quit;
-...
 ```
 
 생성한 `zabbix` 데이터베이스에 다음과 같이 Zabbix 운영에 필요한 스키마와 데이터를 삽입한다. 이 때 앞서 생성한 계정의 비밀번호를 요구하므로 알맞은 비밀번호를 입력해준다(가이드에서는`paasta`로 설정하였다).
@@ -95,16 +100,22 @@ Enter Password:
 Zabbix Server의 데이터베이스 비밀번호를 `/etc/zabbix/zabbix_server.conf` 파일 내 `DBPassword` 항목을 찾아 다음과 같이 추가한다. 
 ```
 ...
+
 DBPassword=paasta
+
 ...
+
 HostMetadata=openstack
+
 ...
 ```
 
 Zabbix 프론트엔드를 위한 PHP 설정 파일을 수정한다. `/etc/opt/rh/rh-php72/php-fpm.d/zabbix.conf` 파일 내 타임존 설정을 사용자 환경에 맞는 시각으로 변경한다. 만약 해당 항목에 `;` 기호가 있다면 제거한다.
 ```
 ...
+
 php_value[date.timezone] = Asia/Seoul
+
 ...
 ```
 

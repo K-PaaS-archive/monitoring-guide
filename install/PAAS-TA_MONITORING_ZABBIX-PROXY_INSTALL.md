@@ -59,7 +59,7 @@ Zabbix 공식 홈페이지를 방문하면 [다운로드](https://www.zabbix.com
 
 **Zabbix Packages** 탭에서 제공 받을 수 있는 설치 스크립트를 통해 Zabbix Server, Proxy, Agent 등 Zabbix 관련 패키지를 모두 설치할 수 있는 저장소 정보를 내려 받을 수 있다. 이 단계에서는 Zabbix Proxy만 설치하면 되기 때문에 기타 Zabbix 패키지 설치와 관련된 스크립트는 생략하고 Zabbix Proxy 설치와 데이터베이스 설정 관련 스크립트만 따라 수행하도록 한다.
 
-본 가이드에서는 Ubuntu 18.04 운영체제에서 Zabbix 5.0 LTS 버전의 Proxy, 데이터베이스 SW로는 MySQL 구성으로 선택해 설치하였다.
+본 가이드에서는 Ubuntu 18.04 운영체제에서 Zabbix 5.0 LTS 버전의 Proxy, 데이터베이스 SW로는 MySQL 구성으로 선택해 설치하였다. 따라서 가이드 내용이 운영체제나 데이터베이스 또는 웹 서버 SW 종류에 따라 설치 스크립트가 일부 다를 수 있으므로 Zabbix 공식 홈페이지에서 확인할 수 있는 설치 스크립트를 참고하는 것을 권장한다.
 
 
 ### 2.2. Zabbix Proxy 설치
@@ -79,12 +79,13 @@ $ sudo apt install -y zabbix-proxy-mysql
 ```
 $ mysql -uroot -p
 Enter password: 
+
 ...
+
 mysql> create database zabbix_proxy character set utf8 collate utf8_bin;
 mysql> create user zabbix_proxy@localhost identified by 'paasta';
 mysql> grant all privileges on zabbix_proxy.* to zabbix_proxy@localhost;
 mysql> quit;
-...
 ```
 
 생성한 `zabbix_proxy` 데이터베이스에 다음과 같이 Zabbix 운영에 필요한 스키마와 데이터를 삽입한다. 이 때 앞서 생성한 계정의 비밀번호를 요구하므로 알맞은 비밀번호를 입력해준다(가이드에서는`paasta`로 설정하였다).
@@ -96,27 +97,49 @@ Enter Password:
 Zabbix Proxy 설정을 위해 `/etc/zabbix/zabbix_proxy.conf` 파일의 다음 항목들을 각 사용자의 환경에 알맞게 편집한다.
 ```
 ...
+
 ProxyMode=0
+
 ...
+
 Server=10.10.10.10
+
 ...
+
 ServerPort=10051
+
 ...
+
 Hostname=zabbix proxy 01
+
 ...
+
 ListenPort=10051
+
 ...
+
 DBHost=11.11.11.11
+
 ...
+
 DBName=zabbix_proxy
+
 ...
+
 DBUser=zabbix_proxy
+
 ...
+
 DBPassword=paasta
+
 ...
+
 DBPort=3306
+
 ...
+
 ConfigFrequency=100	
+
 ...
 ```
 
