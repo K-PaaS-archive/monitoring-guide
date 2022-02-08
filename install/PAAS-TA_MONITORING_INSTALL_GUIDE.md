@@ -13,7 +13,7 @@
 
 
 ## 선택 설치 항목
-> ⚠️ **IaaS 모니터링 옵션**을 사용할 경우에 한해서 배포 시 IaaS 모니터링 환경과 관련된 옵션 정보를 입력하거나 하는 등의 의존성 문제 예방을 위해 **Zabbix Package** 설치를 **'필수 설치 항목'** 보다도 반드시 선행되어야 하는 것에 주의한다.
+> ⚠️ **IaaS 모니터링 옵션**을 사용할 경우에 한해서 배포 시 IaaS 모니터링 환경과 관련된 옵션 정보를 입력하는 등의 의존성 문제 예방을 위해 **Zabbix Package** 설치를 **'필수 설치 항목'** 보다도 반드시 선행되어야 하는 것에 주의한다.
 
 + [**[IaaS] Infrastructure Monitoring** - Zabbix Package](#)
   + [Zabbix Server 설치](PAAS-TA_MONITORING_ZABBIX-SERVER_INSTALL.md)
