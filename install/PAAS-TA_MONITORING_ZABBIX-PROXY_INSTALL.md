@@ -10,11 +10,11 @@
 
 
 ### 1.1. 소개
-본 문서는 사용자의 IaaS 환경에 대한 시스템 자원 정보를 수집하여 실시간 컴퓨팅 자원의 사용량 또는 유휴 자원량을 측정해 PaaS-TA 플랫폼에서 사용 가능한 모니터링 대시보드와 연계하기 위한 Zabbix Proxy 설치 및 환경설정 방법에 대한 설명을 다루고 있다.
-  
+본 문서는 사용자의 IaaS 환경에 대한 시스템 자원 정보를 수집하여 실시간 컴퓨팅 자원의 사용량 또는 유휴 자원량을 측정해 PaaS-TA 플랫폼에서 사용할 수 있는 모니터링 대시보드와 연계하여 사용하기 위한 Zabbix Proxy의 설치 및 환경설정 방법에 대한 안내를 다루고 있다.
+
 
 ### 1.2. 범위와 한계
-또한 본 가이드는 다음과 같은 설치 환경을 바탕으로 작성되었으므로 가이드에서 언급되지 않은 기타 범위에 대하여는 일부 제약이나 설치 또는 적용에 한계가 있을 수 있다.
+또한 본 가이드는 다음과 같은 설치 환경을 바탕으로 작성되었으므로 가이드에서 언급되지 않은 기타 범위에 대하여는 일부 제약이나 설치 또는 적용에 한계와 차이가 있을 수 있다.
 
 <table>
   <tr>
@@ -168,11 +168,6 @@ $ sudo systemctl restart zabbix-proxy
 $ sudo systemctl enable zabbix-proxy
 ```
 
-Zabbix Proxy 정보를 Zabbix Frontend에 등록해야 한다. Administraion > Proxies 메뉴에서 프록시를 등록할 수 있다.
-![](images/zabbix_proxy_install_guide_01.PNG)
-- Proxy name : zabbix-proxy.conf에 명시된 Hostname 값과 동일하게 맞춰야 함
-- Proxy mode : Active로 선택한다.
-- Proxy address : Proxy 서버의 IP 주소
-
+Zabbix Proxy 설치가 마무리 되었다면 Zabbix Server 설치 가이드의 **'3.3. Create proxy(프록시 설정)'** 항목으로 돌아가 프록시 설정 단계를 이어서 수행한다.
 
 ### [Index](https://github.com/PaaS-TA/Guide) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Zabbix Proxy

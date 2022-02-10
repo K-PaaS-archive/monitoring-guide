@@ -11,11 +11,11 @@
 
 
 ### 1.1. 소개
-본 문서는 사용자의 IaaS 환경에 대한 시스템 자원 정보를 수집하여 실시간 컴퓨팅 자원의 사용량 또는 유휴 자원량을 측정해 PaaS-TA 플랫폼에서 사용 가능한 모니터링 대시보드와 연계하기 위한 Zabbix Server 설치 및 환경설정 방법에 대한 설명을 다루고 있다.
-  
+본 문서는 사용자의 IaaS 환경에 대한 시스템 자원 정보를 수집하여 실시간 컴퓨팅 자원의 사용량 또는 유휴 자원량을 측정해 PaaS-TA 플랫폼에서 사용할 수 있는 모니터링 대시보드와 연계하여 사용하기 위한 Zabbix Server의 설치 및 환경설정 방법에 대한 안내를 다루고 있다.
+
 
 ### 1.2. 범위와 한계
-또한 본 가이드는 다음과 같은 설치 환경을 바탕으로 작성되었으므로 가이드에서 언급되지 않은 기타 범위에 대하여는 일부 제약이나 설치 또는 적용에 한계가 있을 수 있다.
+또한 본 가이드는 다음과 같은 설치 환경을 바탕으로 작성되었으므로 가이드에서 언급되지 않은 기타 범위에 대하여는 일부 제약이나 설치 또는 적용에 한계와 차이가 있을 수 있다.
 
 <table>
   <tr>
@@ -34,11 +34,11 @@
 
 
 ### 2.1. 운영 환경 선택
-Zabbix 공식 홈페이지를 방문하면 [다운로드](https://www.zabbix.com/download) 페이지를 통해 설치하고자 하는 Zabbix 버전, 운영체제 종류와 버전 등을 선택하여 사용자의 운영 환경에 알맞는 설치 스크립트를 제공 받을 수 있다.
+Zabbix 공식 홈페이지를 방문하면 [다운로드](https://www.zabbix.com/download) 페이지를 통해 설치하고자 하는 Zabbix 버전, 사용자의 운영체제 종류와 버전 등을 선택하여 사용자의 운영 환경에 알맞는 설치 스크립트를 제공 받을 수 있다.
 
 ![](images/zabbix_server_install_guide_01.png)
 
-**Zabbix Packages** 탭에서 제공 받을 수 있는 설치 스크립트를 통해 Zabbix Server, Proxy, Agent 등 Zabbix 관련 패키지를 모두 설치할 수 있는 저장소 정보를 내려 받을 수 있다. Zabbix Server가 설치될 Physical Node 자체의 시스템 모니터링 역시 필요하므로 패키지 설치를 통해서 Zabbix Server와 Zabbix Agent를 함께 설치한다.
+**Zabbix Packages** 탭에서 제공 받을 수 있는 설치 스크립트를 통해 Zabbix Server, Proxy, Agent 등 Zabbix 관련 패키지를 모두 설치할 수 있는 저장소 정보를 내려 받을 수 있다. Zabbix Server가 설치될 Physical Node 자체의 시스템 모니터링도 필요하므로 해당 패키지 설치를 통해서 Zabbix Server와 Zabbix Agent를 함께 설치한다.
 
 본 가이드에서는 CentOS 7 운영체제에서 Zabbix 5.0 LTS 버전의 Server 및 Agent, 데이터베이스 SW로는 MySQL, 웹 서버 SW로는 Apache 구성으로 선택해 설치하였다. 따라서 가이드 내용이 운영체제나 데이터베이스 또는 웹 서버 SW 종류에 따라 설치 스크립트가 일부 다를 수 있으므로 Zabbix 공식 홈페이지에서 확인할 수 있는 설치 스크립트를 참고하는 것을 권장한다.
 
@@ -110,7 +110,7 @@ HostMetadata=openstack
 ...
 ```
 
-Zabbix 프론트엔드를 위한 PHP 설정 파일을 수정한다. `/etc/opt/rh/rh-php72/php-fpm.d/zabbix.conf` 파일 내 타임존 설정을 사용자 환경에 맞는 시각으로 변경한다. 만약 해당 항목에 `;` 기호가 있다면 제거한다.
+Zabbix 프론트엔드를 위한 PHP 설정 파일을 수정한다. `/etc/opt/rh/rh-php72/php-fpm.d/zabbix.conf` 파일 내 타임존 설정을 사용자 환경에 맞는 시각으로 변경한다. 만약 해당 항목에 `;` 기호 등이 있다면 제거한다.
 ```
 ...
 
@@ -236,9 +236,9 @@ PaaS-TA 플랫폼에서 IaaS 모니터링을 위해 필수 설정되어야 할 *
 
 
 ### 3.3. Create proxy(프록시 설정)
-Zabbix Proxy가 설치된 노드(인스턴스) 정보를 Zabbix Server 프론트엔드를 통해 등록하는 방법에 대해 알아본다.
+Zabbix Proxy가 설치된 노드(인스턴스) 정보를 Zabbix Server 프론트엔드를 통해 등록하는 방법에 대해 알아본다. 이 단계를 진행하기 위해서는 Zabbix Proxy가 필요하므로 먼저 [Zabbix Proxy 설치](https://github.com/PaaS-TA/monitoring-guide/blob/master/install/PAAS-TA_MONITORING_ZABBIX-PROXY_INSTALL.md)를 마친 후 다시 본 가이드로 돌아와 해당 단계를 이어서 수행한다.
  
-**Administration > Proxies** 메뉴로 이동해 우측 상단의 'Create proxy' 버튼을 통해 프록시 설정이 가능하다. Zabbix Proxy가 설치된 인스턴스에서 설정된 환경설정 값을 바탕으로 각 사용자 설정에 알맞게 Proxy 정보를 입력한 후 설정을 완료한다.
+**Administration > Proxies** 메뉴로 이동해 우측 상단의 'Create proxy' 버튼을 통해 프록시 설정이 가능하다. Zabbix Proxy를 설치할 때 설정된 환경설정 값(`zabbix-proxy.conf` 파일 참고)을 바탕으로 각 사용자 설정에 알맞게 Proxy 정보를 입력한 후 설정을 완료한다.
 
 > **[ Proxy ]**  
 . Proxy name: zabbix proxy 01  
@@ -249,5 +249,10 @@ Zabbix Proxy가 설치된 노드(인스턴스) 정보를 Zabbix Server 프론트
 
 OpenStack 환경에서는 Proxy 인스턴스에 Floating IP를 할당함으로 가상 네트워크로 격리된 PaaS-TA 네트워크 간의 중계 역할을 하도록 설계되었으므로 'Proxy address'란에는 Proxy 인스턴스에 할당된 Floating IP가 설정될 수 있도록 한다.
 
+<table>
+  <tr>
+    <td >✒️ 추가적으로 참고할 만한 내용으로는 Zabbix Proxy를 사용하지 않고도 Zabbix Server만 설치해 간단하게 모니터링 기능 테스트를 해볼 수도 있다. 예를 들면 Physical Node가 아니라 Inception VM에 Zabbix Server를 설치한 후 PaaS-TA AP 환경의 각 VM에 배포된 Zabbix Agent가 통신하고자 하는 Zabbix Server 정보를 Inception VM으로 설정해 준다면 굳이 Zabbix Proxy를 거치지 않고 바로 Server와 연결되는 구조가 된다.</td>
+  </tr>
+</table>
 
 ### [Index](https://github.com/PaaS-TA/Guide) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Zabbix Server
