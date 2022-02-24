@@ -53,7 +53,7 @@ $ ruby -v
 
 ```
 $ cd ~/workspace
-$ git clone https://github.com/PaaS-TA/PAAS-TA-PINPOINT-MONITORING-BUILDPACK.git
+$ git clone https://github.com/PaaS-TA/monitoring-pinpoint-buildpack.git
 ```
 
 Bundler를 설치한다.
@@ -66,7 +66,7 @@ $ rbenv rehash
 Gemfile에 등록된 gem들을 설치한다.
 
 ```
-$ cd PaaS-TA/PAAS-TA-PINPOINT-MONITORING-BUILDPACK
+$ cd monitoring-pinpoint-buildpack/
 $ bundle install
 ```
 
