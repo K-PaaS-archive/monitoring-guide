@@ -99,7 +99,7 @@ $ cf cups pinpoint-monitoring-service -p '{"application_name":"spring-music-paas
 Application과 Service를 바인딩한다.
 
 ```
-$ cf bind-service spring-music-paasta pinpoint-monitoring-servic
+$ cf bind-service spring-music-paasta pinpoint-monitoring-service
 ```
 
 Application을 시작시킨다.
