@@ -11,4 +11,4 @@
 | --- | :---: |
 | paasta-deployment (AP) | [5.6.6](https://github.com/PaaS-TA/paasta-deployment/tree/v5.6.6) |
 | container-platform (CP) | [1.0](https://github.com/PaaS-TA/paas-ta-container-platform/blob/master/install-guide/standalone/paas-ta-container-platform-standalone-deployment-guide-v1.0.md) |
-| monitoring-deployment | [5.6.2](https://github.com/PaaS-TA/monitoring-deployment/tree/v5.6.2) |
+| monitoring-deployment | [5.6.3](https://github.com/PaaS-TA/monitoring-deployment/tree/v5.6.3) |
