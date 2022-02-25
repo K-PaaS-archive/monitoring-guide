@@ -148,7 +148,7 @@ service/kube-prometheus-stack-1617006674-prometheus-node-exporter   ClusterIP   
 service/prometheus-operated                                         ClusterIP   None            <none>        9090/TCP                     20m
 ```
 
-> Prometheus ClusterIP 타입을 NodePort 타입으로 변경 (Port 30090)    
+> Prometheus ClusterIP 타입을 NodePort 타입으로 변경 (Port 30060)    
 ```
 $  kubectl edit svc kube-prometheus-stack-1617-prometheus
 -----------------------------before-----------------------------------
@@ -281,7 +281,7 @@ spec:
   clusterIP: 10.233.50.86
   ports:
   - name: web
-    nodePort: 30090
+    nodePort: 30060
     port: 9090
     protocol: TCP
     targetPort: 9090
@@ -295,7 +295,7 @@ status:
 
 ```
 
-> Grafana의 ClusterIP 타입을 NodePort 타입으로 변경 (Port 30091)    
+> Grafana의 ClusterIP 타입을 NodePort 타입으로 변경 (Port 30061)    
 ```
 $  kubectl edit svc kube-prometheus-stack-1617006674-grafana
 -----------------------------before-----------------------------------
@@ -447,7 +447,7 @@ spec:
   externalTrafficPolicy: Cluster
   ports:
   - name: service
-    nodePort: 30091
+    nodePort: 30061
     port: 80
     protocol: TCP
     targetPort: 3000
