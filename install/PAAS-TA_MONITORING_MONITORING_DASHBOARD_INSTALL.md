@@ -57,7 +57,6 @@ $ git clone https://github.com/paas-ta/monitoring-deployment.git
 
 
 ### <div id="2.3">2.3. PaaS-TA Monitoring Dashboard 설치를 위한 설정
-
 **│ common_vars.yml**
 
 `common/common_vars.yml` 파일은 PaaS-TA 환경 및 각종 Deployment 설치시 필요한 공통 변수 설정을 담고 있다. 다음 파일 예제를 실제 환경 구성시에 참고하여 작성할 수 있다.
@@ -269,7 +268,7 @@ $ cd ~/workspace/monitoring-deployment/paasta-monitoring
 $ source deploy-paasta-monitoring.sh
 ```
 
-배포가 완료되었다면 다음 명령을 이용해 배포 상태가 정상인지 확인할 수 있다.
+배포가 완료되었다면 다음 명령을 이용해 배포 상태를 확인할 수 있다.
 
 ```shell script
 $ bosh vms
@@ -281,7 +280,7 @@ $ bosh vms
 ## <div id="3">3. PaaS-TA Monitoring Dashboard 접속
 웹 브라우저를 이용해 ***http://{monitoring-web_ip}:8080/public/login.html***에 접속하여 계정을 생성한 후 PaaS-TA Monitoring Dashboard를 이용할 수 있다. Login 화면에서 **Register now!** 버튼을 클릭한다.
 
-![](images/member_join_5.0.png)
+![](images/monit_login_5.0.png)
 
 PaaS Certification 항목에는 PaaS-TA(AP) 배포시 공통 변수 파일(`common_vars.yml`)에서 설정한 계정 정보를 입력한다. IaaS Certification 항목에는 모니터링 배포시에 필요한 변수 파일(`paasta-monitoring-vars.yml`)에 설정한 계정 정보를 입력한다. Member Info 항목에는 사용자가 사용할 아이디와 비밀번호를 입력한다. 각 항목 별로 **인증하기** 버튼을 클릭하여 인증 확인을 거쳐야 하며 최종적으로 **Join** 버튼을 클릭하면 계정 생성이 완료된다. 
 
