@@ -275,41 +275,21 @@ $ source deploy-paasta-monitoring.sh
 $ bosh vms
 ```
 
-![PaaSTa_monitoring_vms_5.0]
+![](images/paasta-monitoring_5.0.png)
 
 
 ## <div id="3">3. PaaS-TA Monitoring Dashboard 접속
- 
-웹 브라우저를 이용해 ***http://{monitoring-web_ip}:8080/public/login.html***에 접속하여 계정을 생성한 후 PaaS-TA Monitoring Dashboard를 이용할 수 있다.
+웹 브라우저를 이용해 ***http://{monitoring-web_ip}:8080/public/login.html***에 접속하여 계정을 생성한 후 PaaS-TA Monitoring Dashboard를 이용할 수 있다. Login 화면에서 **Register now!** 버튼을 클릭한다.
 
-Login 화면에서 **Register now!** 버튼을 클릭한다.
-
-![PaaSTa_monitoring_login_5.0]
+![](images/member_join_5.0.png)
 
 PaaS Certification 항목에는 PaaS-TA(AP) 배포시 공통 변수 파일(`common_vars.yml`)에서 설정한 계정 정보를 입력한다. IaaS Certification 항목에는 모니터링 배포시에 필요한 변수 파일(`paasta-monitoring-vars.yml`)에 설정한 계정 정보를 입력한다. Member Info 항목에는 사용자가 사용할 아이디와 비밀번호를 입력한다. 각 항목 별로 **인증하기** 버튼을 클릭하여 인증 확인을 거쳐야 하며 최종적으로 **Join** 버튼을 클릭하면 계정 생성이 완료된다. 
 
+![](images/member_join_5.0.png)
 
-![PaaSTa_monitoring_join_5.0]
+생성한 계정 정보를 이용하여 로그인에 성공하면 다음과 같은 대시보드 메인 화면을 확인할 수 있다. 여기까지 확인했다면 PaaS-TA Monitoring Dashboard 설치에 성공한 것이다.
 
-생성한 계정 정보를 이용하여 로그인에 성공하면 다음과 같은 Dashboard 메인 화면을 확인하였다면 PaaS-TA Monitoring Dashboard 배포에 성공한 것이다.
-
-![PaaSTa_monitoring_main_dashboard_5.0]
+![](images/monit_main_5.0.png)
 
 
 ### [Index](https://github.com/PaaS-TA/Guide) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Monitoring Dashboard
-
-
-<!-- Images Links -->
-[PaaSTa_releases_dir_5.0]:./images/paasta-release_5.0.png
-[PaaSTa_logsearch_vms_5.0]:./images/logsearch_5.0.png
-[PaaSTa_monitoring_vms_5.0]:./images/paasta-monitoring_5.0.png
-
-[PaaSTa_monitoring_login_5.0]:./images/monit_login_5.0.png
-[PaaSTa_monitoring_join_5.0]:./images/member_join_5.0.png
-[PaaSTa_monitoring_main_dashboard_5.0]:./images/monit_main_5.0.png
-
-[PaaSTa_paasta_container_service_vms]:./images/paasta-container-service-vms.png
-[PaaSTa_paasta_container_service_pods]:./images/paasta-container-service-pods.png
-[PaaSTa_paasta_container_service_nodes]:./images/paasta-container-service-nodes.png
-[PaaSTa_paasta_container_service_kubernetes_api]:./images/paasta-container-service-kubernetes-api.png
-[PaaSTa_paasta_container_service_kubernetes_token]:./images/paasta-container-service-kubernetes-token.png
