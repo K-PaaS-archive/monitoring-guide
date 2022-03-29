@@ -106,13 +106,13 @@ Pinpoint-Monitoring을 설치할 때는 saas_monitoring_url 값을 변경 하여
 bosh_ip: "10.0.1.6"				# BOSH IP
 bosh_url: "https://10.0.1.6"				# BOSH URL (e.g. "https://00.000.0.0")
 bosh_client_admin_id: "admin"			# BOSH Client Admin ID
-bosh_client_admin_secret: "ert7na4jpewscztsxz48"	# BOSH Client Admin Secret('echo $(bosh int ~/workspace/paasta-5.0/deployment/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
+bosh_client_admin_secret: "giej8ett7mqsho9tx7s3"	# BOSH Client Admin Secret('echo $(bosh int ~/workspace/paasta-5.0/deployment/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
 bosh_director_port: 25555			# BOSH director port
 bosh_oauth_port: 8443				# BOSH oauth port
 bosh_version: 271.2				# BOSH version('bosh env' 명령어를 통해 확인 가능, on-demand service용, e.g. "271.2")
 
 # PAAS-TA INFO
-system_domain: "61.252.53.246.nip.io"		# Domain (nip.io를 사용하는 경우 HAProxy Public IP와 동일)
+system_domain: "10.0.1.80.nip.io"		# Domain (nip.io를 사용하는 경우 HAProxy Public IP와 동일)
 paasta_admin_username: "admin"			# PaaS-TA Admin Username
 paasta_admin_password: "admin"			# PaaS-TA Admin Password
 paasta_nats_ip: "10.0.1.121"
@@ -136,10 +136,11 @@ uaa_client_admin_secret: "admin-secret"		# UAAC Admin Client에 접근하기 위
 uaa_client_portal_secret: "clientsecret"	# UAAC Portal Client에 접근하기 위한 Secret 변수
 
 # Monitoring INFO
-metric_url: "10.0.161.101"			# Monitoring InfluxDB IP
-elasticsearch_master_ip: "10.0.1.146"           # Logsearch의 elasticsearch master IP
+metric_url: "10.0.1.101"			# Monitoring InfluxDB IP
+elasticsearch_master_ip: "10.0.1.105"           # Logsearch의 elasticsearch master IP
 elasticsearch_master_port: 9200                 # Logsearch의 elasticsearch master Port
-syslog_address: "10.0.121.100"            	# Logsearch의 ls-router IP
+index_retention_period: "10"                    # Logsearch의 logstash index 보유 기간(Days)
+syslog_address: "10.0.1.100"            	# Logsearch의 ls-router IP
 syslog_port: "2514"                          	# Logsearch의 ls-router Port
 syslog_transport: "relp"                        # Logsearch Protocol
 saas_monitoring_url: "61.252.53.248"	   	# Pinpoint HAProxy WEBUI의 Public IP
@@ -166,44 +167,46 @@ host_metadata: "paasta"                # Metadata for Zabbix Agent autoregistrat
 
 ```
 ### On-Demand Bosh Deployment Name Setting ###
-deployment_name: "pinpoint-monitoring"			# On-Demand Deployment Name
-#### Main Stemcells Setting ###
-stemcell_os: "ubuntu-bionic"				# Deployment Main Stemcell OS
-stemcell_version: "1.34"				# Main Stemcell Version
-stemcell_alias: "default"   				# Main Stemcell Alias
-#### On-Demand Release Deployment Setting ### 
-releases_name:  "paasta-pinpoint-monitoring-release"	# On-Demand Release Name
-public_networks_name: "vip"				# Pinpoint Public Network Name
-PemSSH: "true"						# h_master에서 모니터링 하려는 VM에 SSH접근시 사용하는 Key File 지정 여부(default:false) 
+inception_os_user_name: "ubuntu"
+deployment_name: "pinpoint-monitoring"                  # On-Demand Deployment Name
 
+### Main Stemcells Setting ###
+stemcell_os: "ubuntu-bionic"                            # Deployment Main Stemcell OS
+stemcell_version: "1.61"                                # Main Stemcell Version
+stemcell_alias: "default"                               # Main Stemcell Alias
+
+### On-Demand Release Deployment Setting ###
+releases_name:  "paasta-pinpoint-monitoring-release"    # On-Demand Release Name
+public_networks_name: "vip"                             # Pinpoint Public Network Name
+PemSSH: "true"                                          # h_master에서 모니터링 하려는 VM에 SSH접근시 사용하는 Key File 지정 여부(default:false)
 
 # H-Master
-h_master_azs: ["z3"]					# H-Master 가용 존
-h_master_instances: 1					# H-Master 인스턴스 수
-h_master_vm_type: "small-highmem-16GB"			# H-Master VM 종류
-h_master_network: "default"				# H-Master 네트워크
-h_master_persistent_disk_type: "30GB"			# H-Master 영구 Disk 종류
+h_master_azs: ["z1"]                                    # H-Master 가용 존
+h_master_instances: 1                                   # H-Master 인스턴스 수
+h_master_vm_type: "small-highmem-16GB"                  # H-Master VM 종류
+h_master_network: "default"                             # H-Master 네트워크
+h_master_persistent_disk_type: "30GB"                   # H-Master 영구 Disk 종류
 
 # COLLECTOR
-collector_azs: ["z3"]					# Collector 가용 존
-collector_instances: 1					# Collector 인스턴스 수
-collector_vm_type: "small-highmem-16GB"			# Collector VM 종류
-collector_network: "default"				# Collector 네트워크
-collector_persistent_disk_type: "30GB"			# Collector 영구 Disk 종류
+collector_azs: ["z1"]                                   # Collector 가용 존
+collector_instances: 1                                  # Collector 인스턴스 수
+collector_vm_type: "small-highmem-16GB"                 # Collector VM 종류
+collector_network: "default"                            # Collector 네트워크
+collector_persistent_disk_type: "30GB"                  # Collector 영구 Disk 종류
 
-# PINPOINT-WEB
-pinpoint_web_azs: ["z3"]				# Pinpoint-WEB 가용 존
-pinpoint_web_instances: 1				# Pinpoint-WEB 인스턴스 수
-pinpoint_web_vm_type: "small-highmem-16GB"		# Pinpoint-WEB VM 종류
-pinpoint_web_network: "default"				# Pinpoint-WEB 네트워크
-pinpoint_web_persistent_disk_type: "30GB"		# Pinpoint-WEB 영구 Disk 종류
+# PINPOINT
+pinpoint_web_azs: ["z1"]                                # Pinpoint 가용 존
+pinpoint_web_instances: 1                               # Pinpoint 인스턴스 수
+pinpoint_web_vm_type: "small-highmem-16GB"              # Pinpoint VM 종류
+pinpoint_web_network: "default"                         # Pinpoint 네트워크
+pinpoint_web_persistent_disk_type: "30GB"               # Pinpoint 영구 Disk 종류
 
-# HAPROXY-WEBUI
-haproxy_webui_azs: ["z7"]				# HAProxy-WEBUI 가용 존
-haproxy_webui_instances: 1				# HAProxy-WEBUI 인스턴스 수
-haproxy_webui_vm_type: "small-highmem-16GB"		# HAProxy-WEBUI VM 종류
-haproxy_webui_network: "default"			# HAProxy-WEBUI 네트워크
-haproxy_webui_persistent_disk_type: "30GB"		# HAProxy-WEBUI 영구 Disk 종류
+# HAPROXY
+haproxy_webui_azs: ["z1"]                               # HAProxy 가용 존
+haproxy_webui_instances: 1                              # HAProxy 인스턴스 수
+haproxy_webui_vm_type: "small-highmem-16GB"             # HAProxy VM 종류
+haproxy_webui_network: "default"                        # HAProxy 네트워크
+haproxy_webui_persistent_disk_type: "30GB"              # HAProxy 영구 Disk 종류
 ```
 
 ### <div id='233'>● deploy-pinpoint.sh
