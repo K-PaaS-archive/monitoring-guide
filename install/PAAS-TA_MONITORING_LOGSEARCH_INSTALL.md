@@ -64,13 +64,13 @@ syslog_address는 Monitoring 옵션을 포함한 BOSH와 PaaS-TA를 설치할 �
 bosh_ip: "10.0.1.6"				# BOSH IP
 bosh_url: "https://10.0.1.6"				# BOSH URL (e.g. "https://00.000.0.0")
 bosh_client_admin_id: "admin"			# BOSH Client Admin ID
-bosh_client_admin_secret: "ert7na4jpewscztsxz48"	# BOSH Client Admin Secret('echo $(bosh int ~/workspace/paasta-5.0/deployment/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
+bosh_client_admin_secret: "giej8ett7mqsho9tx7s3"	# BOSH Client Admin Secret('echo $(bosh int ~/workspace/paasta-5.0/deployment/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
 bosh_director_port: 25555			# BOSH director port
 bosh_oauth_port: 8443				# BOSH oauth port
 bosh_version: 271.2				# BOSH version('bosh env' 명령어를 통해 확인 가능, on-demand service용, e.g. "271.2")
 
 # PAAS-TA INFO
-system_domain: "61.252.53.246.nip.io"		# Domain (nip.io를 사용하는 경우 HAProxy Public IP와 동일)
+system_domain: "10.0.1.80.nip.io"		# Domain (nip.io를 사용하는 경우 HAProxy Public IP와 동일)
 paasta_admin_username: "admin"			# PaaS-TA Admin Username
 paasta_admin_password: "admin"			# PaaS-TA Admin Password
 paasta_nats_ip: "10.0.1.121"
@@ -94,10 +94,11 @@ uaa_client_admin_secret: "admin-secret"		# UAAC Admin Client에 접근하기 위
 uaa_client_portal_secret: "clientsecret"	# UAAC Portal Client에 접근하기 위한 Secret 변수
 
 # Monitoring INFO
-metric_url: "10.0.161.101"			# Monitoring InfluxDB IP
-elasticsearch_master_ip: "10.0.1.146"           # Logsearch의 elasticsearch master IP
+metric_url: "10.0.1.101"			# Monitoring InfluxDB IP
+elasticsearch_master_ip: "10.0.1.105"           # Logsearch의 elasticsearch master IP
 elasticsearch_master_port: 9200                 # Logsearch의 elasticsearch master Port
-syslog_address: "10.0.121.100"            	# Logsearch의 ls-router IP
+index_retention_period: "10"                    # Logsearch의 logstash index 보유 기간(Days)
+syslog_address: "10.0.1.100"            	# Logsearch의 ls-router IP
 syslog_port: "2514"                          	# Logsearch의 ls-router Port
 syslog_transport: "relp"                        # Logsearch Protocol
 saas_monitoring_url: "61.252.53.248"	   	# Pinpoint HAProxy WEBUI의 Public IP
@@ -123,58 +124,59 @@ host_metadata: "paasta"                # Metadata for Zabbix Agent autoregistrat
 
 ```
 # SERVICE VARIABLE
-inception_os_user_name: "ubuntu"		# Deployment Name
+inception_os_user_name: "ubuntu"                     # Deployment Name
 
 # STEMCELL
-stemcell_os: "ubuntu-bionic"			# Stemcell OS
-stemcell_version: "1.34"			# Stemcell Version
+stemcell_os: "ubuntu-bionic"                         # Stemcell OS
+stemcell_version: "1.61"                             # Stemcell Version
 
 # ELASTICSEARCH-MASTER
-elasticsearch_master_azs: ["z5"]		# Elasticsearch-Master 가용 존
-elasticsearch_master_instances: 1		# Elasticsearch-Master 인스턴스 수
-elasticsearch_master_vm_type: "medium"		# Elasticsearch-Master VM 종류
-elasticsearch_master_network: "default"		# Elasticsearch-Master 네트워크
-elasticsearch_master_persistent_disk_type: "10GB"	# Elasticsearch-Master 영구 Disk 종류
-
-# CLUSTER-MONITOR
-cluster_monitor_azs: ["z6"]			# Cluster-Monitor 가용 존
-cluster_monitor_instances: 1			# Cluster-Monitor 인스턴스 수
-cluster_monitor_vm_type: "medium"		# Cluster-Monitor VM 종류
-cluster_monitor_network: "default"		# Cluster-Monitor 네트워크
-cluster_monitor_persistent_disk_type: "10GB"	# Cluster-Monitor 영구 Disk 종류
-
-# MAINTENANCE
-maintenance_azs: ["z5"]				# Maintenance 가용 존
-maintenance_instances: 1			# Maintenance 인스턴스 수
-maintenance_vm_type: "medium"			# Maintenance VM 종류
-maintenance_network: "default"			# Maintenance 네트워크
+elasticsearch_master_azs: ["z1"]                     # Elasticsearch-Master 가용 존
+elasticsearch_master_instances: 1                    # Elasticsearch-Master 인스턴스 수
+elasticsearch_master_vm_type: "medium"               # Elasticsearch-Master VM 종류
+elasticsearch_master_network: "default"              # Elasticsearch-Master 네트워크
+elasticsearch_master_persistent_disk_type: "50GB"    # Elasticsearch-Master 영구 Disk 종류
 
 # ELASTICSEARCH-DATA
-elasticsearch_data_azs: ["z5", "z6"]		# Elasticsearch-Data 가용 존
-elasticsearch_data_instances: 2			# Elasticsearch-Data 인스턴스 수
-elasticsearch_data_vm_type: "medium"		# Elasticsearch-Data VM 종류
-elasticsearch_data_network: "default"		# Elasticsearch-Data 네트워크
-elasticsearch_data_persistent_disk_type: "30GB"	# Elasticsearch-Data 영구 Disk 종류
+elasticsearch_data_azs: ["z1"]                       # Elasticsearch-Data 가용 존
+elasticsearch_data_instances: 1                      # Elasticsearch-Data 인스턴스 수
+elasticsearch_data_vm_type: "medium"                 # Elasticsearch-Data VM 종류
+elasticsearch_data_network: "default"                # Elasticsearch-Data 네트워크
+elasticsearch_data_persistent_disk_type: "50GB"      # Elasticsearch-Data 영구 Disk 종류
+
+# CLUSTER-MONITOR
+cluster_monitor_azs: ["z1"]                          # Cluster-Monitor 가용 존
+cluster_monitor_instances: 1                         # Cluster-Monitor 인스턴스 수
+cluster_monitor_vm_type: "medium"                    # Cluster-Monitor VM 종류
+cluster_monitor_network: "default"                   # Cluster-Monitor 네트워크
+cluster_monitor_persistent_disk_type: "10GB"         # Cluster-Monitor 영구 Disk 종류
+
+# MAINTENANCE
+maintenance_azs: ["z1"]                              # Maintenance 가용 존
+maintenance_instances: 1                             # Maintenance 인스턴스 수
+maintenance_vm_type: "medium"                        # Maintenance VM 종류
+maintenance_network: "default"                       # Maintenance 네트워크
+maintenance_persistent_disk_type: "5GB"
 
 # KIBANA
-kibana_azs: ["z5"]				# Kibana 가용 존
-kibana_instances: 1				# Kibana 인스턴스 수
-kibana_vm_type: "medium"			# Kibana VM 종류
-kibana_network: "default"			# Kibana 네트워크
-kibana_persistent_disk_type: "5GB"		# Kibana 영구 Disk 종류
+kibana_azs: ["z1"]                                   # Kibana 가용 존
+kibana_instances: 1                                  # Kibana 인스턴스 수
+kibana_vm_type: "medium"                             # Kibana VM 종류
+kibana_network: "default"                            # Kibana 네트워크
+kibana_persistent_disk_type: "5GB"                   # Kibana 영구 Disk 종류
 
 # INGESTOR
-ingestor_azs: ["z4", "z6"]			# Ingestor 가용 존
-ingestor_instances: 2				# Ingestor 인스턴스 수
-ingestor_vm_type: "medium"			# Ingestor VM 종류
-ingestor_network: "default"			# Ingestor 네트워크
-ingestor_persistent_disk_type: "10GB"		# Ingestor 영구 Disk 종류
+ingestor_azs: ["z1"]                                 # Ingestor 가용 존
+ingestor_instances: 1                                # Ingestor 인스턴스 수
+ingestor_vm_type: "medium"                           # Ingestor VM 종류
+ingestor_network: "default"                          # Ingestor 네트워크
+ingestor_persistent_disk_type: "10GB"                # Ingestor 영구 Disk 종류
 
 # LS-ROUTER
-ls_router_azs: ["z4"]			    	# LS-Router 가용 존
-ls_router_instances: 1		  		# LS-Router 인스턴스 수
-ls_router_vm_type: "small"			# LS-Router VM 종류
-ls_router_network: "default"			# LS-Router 네트워크
+ls_router_azs: ["z1"]                                # LS-Router 가용 존
+ls_router_instances: 1                               # LS-Router 인스턴스 수
+ls_router_vm_type: "small"                           # LS-Router VM 종류
+ls_router_network: "default"                         # LS-Router 네트워크
 ```
 
 ### <div id='8'/>● deploy-logsearch.sh
