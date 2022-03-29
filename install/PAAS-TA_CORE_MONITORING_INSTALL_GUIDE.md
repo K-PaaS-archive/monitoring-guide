@@ -405,7 +405,7 @@ syslog_custom_rule: 'if ($msg contains "DEBUG") then stop'	# [MONITORING] PaaS-T
 syslog_fallback_servers: []					# [MONITORING] PaaS-TA Syslog Fallback Servers
 # STEMCELL
 stemcell_os: "ubuntu-bionic"		# Stemcell OS
-stemcell_version: "1.34"		# Stemcell Version
+stemcell_version: "1.61" # Stemcell Version
 # SMOKE-TEST
 smoke_tests_azs: ["z1"]			# Smoke-Test 가용 존
 smoke_tests_instances: 1		# Smoke-Test 인스턴스 수
