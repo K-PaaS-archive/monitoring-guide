@@ -177,7 +177,7 @@ openstack_keystone_url: "http://xxx.xxx.xxx.xxx:5000/v3"
 
 # STEMCELL
 stemcell_os: "ubuntu-bionic"               # Stemcell OS
-stemcell_version: "1.36"                   # Stemcell Version
+stemcell_version: "1.61"                   # Stemcell Version
 
 # REDIS
 redis_azs: ["z1"]                          # Redis 가용 존
