@@ -294,7 +294,7 @@ $ source deploy-paasta-monitoring.sh
 $ bosh vms
 ```
 
-![](images/paasta-monitoring_5.0.png)
+![](images/paasta-monitoring_v5.7.0.png)
 
 
 ## <div id="3">3. PaaS-TA Monitoring Dashboard 접속
