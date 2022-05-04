@@ -2,23 +2,30 @@
 
 
 # Monitoring Dashboard Install Guide
-1. [개요](#1)  
+1. [개요](#1)
 2. [PaaS-TA Monitoring Dashboard 설치](#2)  
-  2.1. [Prerequisite](#2.1)  
+  2.1. [사전 설정 확인](#2.1)  
   2.2. [설치 파일 다운로드](#2.2)  
   2.3. [PaaS-TA Monitoring Dashboard 설치를 위한 설정](#2.3)  
-  2.4. [PaaS-TA Monitoring Dashboard 설치](#2.4)  
+  2.4. [PaaS-TA Monitoring Dashboard 설치](#2.4)
 3. [PaaS-TA Monitoring Dashboard 접속](#3)  
 
 
 ## <div id="1">1. 개요
-본 문서는 BOSH 기반 PaaS-TA(AP) 환경 모니터링을 위한 PaaS-TA Monitoring Dashboard 설치에 관한 내용을 다루고 있다.
+본 문서는 BOSH 기반 PaaS-TA(AP) 환경 모니터링을 위한 PaaS-TA Monitoring Dashboard 설치에 관한 내용을 다루고 있다.  
+PaaS-TA Monitoring Dashboard 설치에는 다음 기능들이 포함된다.
+
+1. PaaS-TA 환경의 시스템 자원 정보(Metric Data) 확인
+2. PaaS-TA 환경의 시스템 자원 정보(Metric Data) 기반 알람 설정
+3. PaaS-TA 환경의 로그 정보 조회
+
+> ⚠️ **Monitoring Dashboard** v5.6.x 이하에서는 '3. PaaS-TA 환경의 로그 정보 조회'의 로깅 기능을 위해 Logsearch Deployment를 별도 설치하여야 했으나 v5.7.x 이후부터는 설치시 로깅 기능이 함께 포함된다. v5.6.x 이하 버전 사용 시에 Logsearch Deployment 설치는 [여기](PAAS-TA_MONITORING_LOGSEARCH_INSTALL.md)를 참고한다.
 
 
 ## <div id="2">2. PaaS-TA Monitoring Dashboard 설치
 
 
-### <div id="2.1">2.1. Prerequisite
+### <div id="2.1">2.1. 사전 설정 확인
 1. BOSH 설치 및 BOSH 로그인이 되어 있어야 한다.
 2. 'cloud-config'와 'runtime-config'가 업데이트 되어 있는지 확인한다.
 3. Stemcell 목록을 확인하여 설치에 필요한 Stemcell이 업로드 되어 있는 것을 확인한다.
@@ -97,12 +104,12 @@ uaa_client_portal_secret: "clientsecret"               # UAAC Portal Client에 �
 
 # Monitoring INFO
 metric_url: "10.200.1.105"                             # Monitoring InfluxDB IP
-elasticsearch_master_ip: "10.200.1.101"                # Logsearch의 elasticsearch master IP
-elasticsearch_master_port: 9200                        # Logsearch의 elasticsearch master Port
-index_retention_period: "10"                           # Logsearch의 logstash index 보유 기간(Days)
-syslog_address: "10.200.1.100"                         # Logsearch의 ls-router IP
-syslog_port: "2514"                                    # Logsearch의 ls-router Port
-syslog_transport: "relp"                               # Logsearch Protocol
+elasticsearch_master_ip: "10.200.1.101"                # Logsearch의 elasticsearch master IP (Deprecated)
+elasticsearch_master_port: 9200                        # Logsearch의 elasticsearch master Port (Deprecated)
+index_retention_period: "10"                           # Logsearch의 logstash index 보유 기간(Days) (Deprecated)
+syslog_address: "10.200.1.100"                         # td-agent IP
+syslog_port: "2514"                                    # td-agent Port
+syslog_transport: "relp"                               # td-agent Logging Protocol
 saas_monitoring_url: "61.252.53.248"                   # Pinpoint HAProxy WEBUI의 Public IP
 monitoring_api_url: "61.252.53.241"                    # Monitoring-WEB의 Public IP
 
@@ -122,7 +129,7 @@ host_metadata: "paasta"                                # Metadata for Zabbix Age
 
 **│ paasta-monitoring-vars.yml**  
 
-`monitoring-deployment/paasta-monitoring/paasta-monitoring-vars.yml` 파일은 PaaS-TA Monitoring Dashboard 설치시 필요한 각종 변수 설정을 담고 있다. 내용 중 `mariadb` 및 `influxdb`의 계정 등은 보안 설정 및 모듈 간 계정 정보가 연결된 부분이 있어 이를 변경하여 배포할 경우 관련 모듈이 정상적으로 동작하지 않을 수 있다. 따라서 이를 수정하여 사용하기 위해서는 [monitoring-dashboard-release](https://github.com/PaaS-TA/monitoring-dashboard-release) 또는 [monitoring-influxdb-release](https://github.com/PaaS-TA/monitoring-influxdb-release) 저장소에서 `job` 디렉토리 내의 관련 파일의 수정이 필요하다. 다음 파일 예제를 실제 환경 구성시에 참고하여 작성할 수 있다.
+`monitoring-deployment/paasta-monitoring/paasta-monitoring-vars.yml` 파일은 PaaS-TA Monitoring Dashboard 설치시 필요한 각종 변수 설정을 담고 있다. 내용 중 `mariadb` 및 `influxdb` 계정 등은 보안 설정 및 모듈 간 계정 정보가 연결된 부분이 있어 이를 변경하여 배포할 경우 관련 모듈이 정상적으로 동작하지 않을 수 있다. 따라서 이를 수정하여 사용하기 위해서는 [monitoring-dashboard-release](https://github.com/PaaS-TA/monitoring-dashboard-release) 또는 [monitoring-influxdb-release](https://github.com/PaaS-TA/monitoring-influxdb-release) 저장소에서 `job` 디렉토리 내의 관련 파일의 수정이 필요하다. 다음 파일 예제를 실제 환경 구성시에 참고하여 작성할 수 있다.
 
 ```yaml
 # SERVICE VARIABLE
@@ -168,16 +175,23 @@ zabbix_admin_pw: "zabbix"
 # Openstack INFO
 openstack_region: "RegionOne"
 openstack_domain: "default"
-openstack_username: "paas-ta-monitoring"
-openstack_password: "paas-ta-monitoring!@#"
+openstack_username: ""
+openstack_password: ""
 openstack_tenant_name: "paas-ta-monitoring"
 openstack_tenant_id: "3f7134b979074ea493c265ca39cc1ead"
 openstack_endpoint: "http://xxx.xxx.xxx.xxx:5000/v3"
 openstack_keystone_url: "http://xxx.xxx.xxx.xxx:5000/v3"
 
+# TD-AGENT(Fluentd) INFO
+td-agent_ip: "10.200.2.130"
+logging_db_name: "logging_db"
+logging_measurement_name: "logging_measurement"
+logging_time_precision: "s"                # hour(h), minutes(m), second(s), millisecond(ms), microsecond(u), nanosecond(ns)
+influxdb_http_port: "8086"                 # default 8086
+
 # STEMCELL
 stemcell_os: "ubuntu-bionic"               # Stemcell OS
-stemcell_version: "1.61"                   # Stemcell Version
+stemcell_version: "1.79"                   # Stemcell Version
 
 # REDIS
 redis_azs: ["z1"]                          # Redis 가용 존
@@ -234,6 +248,12 @@ monitoring_web_azs: ["z1"]                 # Monitoring-WEB 가용 존
 monitoring_web_instances: 1                # Monitoring-WEB 인스턴스 수
 monitoring_web_vm_type: "small"            # Monitoring-WEB VM 종류
 monitoring_web_network: "default"          # Monitoring-WEB 네트워크
+
+# TD-AGENT (Fluentd)
+td-agent_azs: ["z1"]                       # Monitoring-WEB 가용 존
+td-agent_instances: 1                      # Monitoring-WEB 인스턴스 수
+td-agent_vm_type: "small"                  # Monitoring-WEB VM 종류
+td-agent_network: "default"                # Monitoring-WEB 네트워크
 ```
 
 **│ deploy-paasta-monitoring.sh**  

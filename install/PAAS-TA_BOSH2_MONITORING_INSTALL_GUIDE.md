@@ -134,38 +134,30 @@ certificate 갱신 가이드 영상 - [링크](https://youtu.be/zn8VO-fHAFE?t=19
 
 ### <div id='2.3.3'/>2.3.3.    설치 파일 다운로드
 
-- BOSH를 설치하기 위한 deployment가 존재하지 않는다면 다운로드 받는다
-```
+BOSH를 설치하기 위한 Deployment가 존재하지 않는다면 다운로드 받는다.
+
+```shell
 $ mkdir -p ~/workspace
 $ cd ~/workspace
-$ git clone https://github.com/PaaS-TA/paasta-deployment.git -b v5.6.2
+
+$ git clone https://github.com/PaaS-TA/paasta-deployment.git
 ```
 
-- paasta/deployment/paasta-deployment 이하 폴더 확인
+`~/workspace/paasta-deployment` 경로 내 파일을 확인한다.
 
-```
+```shell
 $ cd ~/workspace/paasta-deployment
 $ ls
 README.md  bosh  cloud-config  paasta
 ```
 
-<table>
-<tr>
-<td>bosh</td>
-<td>BOSH 설치를 위한 manifest 및 설치 파일이 존재하는 폴더</td>
-</tr>
-<tr>
-<td>cloud-config</td>
-<td>VM 배포를 위한 IaaS network, storage, vm 관련 설정 파일이 존재하는 폴더</td>
-</tr>
-<tr>
-<td>paasta</td>
-<td>PaaS-TA AP 설치를 위한 manifest 및 설치 파일이 존재하는 폴더</td>
-</tr>
-</table>
+- `bosh`: BOSH 설치를 위한 manifest 및 설치 파일들이 존재하는 폴더.
+- `cloud-config`: VM 배포를 위한 Network, Storage, VM 설정 등을 관장하는 파일들 존재하는 폴더.
+- `paasta`: PaaS-TA(AP) 설치를 위한 manifest 및 설치 파일들이 존재하는 폴더.
 
-모니터링 대시보드 배포 파일을 다음 저장소 링크를 통해 내려 받은 후 배포 파일 중 일부(`*-addon` 디렉터리 이하)를 PaaS-TA 배포 파일 내 해당 디렉터리로 다음과 같이 이동(복사) 시킨다. 모니터링 대시보드 배포 파일 다운로드 시 특정 버전이 필요한 경우라면 저장소 내 브랜치나 태그 정보를 참고하여 `-b` 옵션을 사용해 내려 받아 사용할 수도 있다.
-```
+모니터링 대시보드 배포 파일을 다음 저장소 링크를 통해 내려 받은 후 배포 파일 중 일부(`*-addon` 디렉터리 하위 경로)를 PaaS-TA 배포 파일 내 해당 디렉터리로 다음과 같이 이동(복사) 시킨다. 모니터링 대시보드 배포 파일 다운로드 시 특정 버전이 필요한 경우라면 저장소 내 브랜치나 태그 정보를 참고하여 `-b` 옵션을 사용해 내려 받아 사용할 수도 있다.
+
+```shell
 $ git clone https://github.com/PaaS-TA/monitoring-deployment.git
 
 $ cp -r monitoring-deployment/bosh-addon/* paasta-deployment/bosh/
@@ -209,66 +201,78 @@ Shell Script 파일을 이용하여 BOSH를 설치한다.
 </table>
 
 
-
-
 #### <div id='2.3.4.1'/>2.3.4.1. BOSH 설치 Variable File 설정
 
-BOSH를 설치하는 IaaS환경에 맞춰서 Variable File을 설정한다.
+BOSH를 설치하는 IaaS 환경에 맞춰서 Variable File을 설정한다.
 
-- AWS 환경 설치 시 
+**┃ AWS 환경 설치 시** 
 
-```
+```shell
 $ vi ~/workspace/paasta-deployment/bosh/aws-vars.yml
-# BOSH VARIABLE
-bosh_client_admin_id: "admin"				# Bosh Client Admin ID
-private_cidr: "10.0.1.0/24"				# Private IP Range
-private_gw: "10.0.1.1"					# Private IP Gateway
-bosh_url: "10.0.1.6"					# Private IP
-director_name: "micro-bosh"				# BOSH Director Name
-access_key_id: "XXXXXXXXXXXXXXX"			# AWS Access Key
-secret_access_key: "XXXXXXXXXXXXX"			# AWS Secret Key
-region: "ap-northeast-2"				# AWS Region
-az: "ap-northeast-2a"					# AWS AZ Zone
-default_key_name: "aws-paasta.pem"			# AWS Key Name
-default_security_groups: ["bosh"]			# AWS Security-Group
-subnet_id: "paasta-subnet"				# AWS Subnet
-private_key: "~/.ssh/aws-paasta.pem"			# SSH Private Key Path (해당 IaaS에 접근권한을 가진 Private key의 경로)
-# MONITORING VARIABLE(PaaS-TA Monitoring을 설치할 경우 향후 설치할 VM의 값으로 미리 수정)
-metric_url: "xx.xx.xxx.xxx"				# PaaS-TA Monitoring InfluxDB IP
-syslog_address: "xx.xx.xxx.xxx"				# Logsearch의 ls-router IP
-syslog_port: "2514"					# Logsearch의 ls-router Port
-syslog_transport: "relp"				# Logsearch Protocol
 ```
 
-- OpenStack 환경 설치 시
-    - OpenStack 환경에서는 IaaS 모니터링을 위한 bosh-monitoring-vars.yml 파일이 추가로 포함되어 있다.
-```shell script
-$ vi ~/workspace/paasta-deployment/bosh/openstack-vars.yml
+```shell
 # BOSH VARIABLE
-bosh_client_admin_id: "admin"				# Bosh Client Admin ID
-director_name: "micro-bosh"				# BOSH Director Name
-private_cidr: "10.0.1.0/24"				# Private IP Range
-private_gw: "10.0.1.1"					# Private IP Gateway
-bosh_url: "10.0.1.6"					# Private IP
-auth_url: "http://XX.XXX.XX.XX:XXXX/v3/"		# Openstack Keystone URL
-az: "nova"						# Openstack AZ Zone
-default_key_name: "paasta"				# Openstack Key Name
-default_security_groups: ["paasta"]			# Openstack Security Group
-net_id: "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"		# Openstack Network ID
-openstack_password: "XXXXXX"				# Openstack User Password
-openstack_username: "XXXXXX"				# Openstack User Name
-openstack_domain: "XXXXXXX"				# Openstack Domain Name
-openstack_project: "PaaSTA"				# Openstack Project
-private_key: "~/.ssh/id_rsa.pem"			# SSH Private Key Path (해당 IaaS에 접근권한을 가진 Private key의 경로)
-region: "RegionOne"					# Openstack Region
-# MONITORING VARIABLE(PaaS-TA Monitoring을 설치할 경우 향후 설치할 VM의 값으로 미리 수정)
-metric_url: "10.0.161.101"				# PaaS-TA Monitoring InfluxDB IP
-syslog_address: "10.0.121.100"				# Logsearch의 ls-router IP
-syslog_port: "2514"					# Logsearch의 ls-router Port
-syslog_transport: "relp"				# Logsearch Protocol
+bosh_client_admin_id: "admin"         # Bosh Client Admin ID
+private_cidr: "10.0.1.0/24"           # Private IP Range
+private_gw: "10.0.1.1"                # Private IP Gateway
+bosh_ip: "10.0.1.6"                   # Private IP
+director_name: "micro-bosh"           # BOSH Director Name
+access_key_id: "XXXXXXXXXXXXXXX"      # AWS Access Key
+secret_access_key: "XXXXXXXXXXXXX"    # AWS Secret Key
+region: "ap-northeast-2"              # AWS Region
+az: "ap-northeast-2a"                 # AWS AZ Zone
+default_key_name: "aws-paasta"        # AWS Key Name
+default_security_groups: ["bosh"]     # AWS Security-Group
+subnet_id: "paasta-subnet"            # AWS Subnet
+private_key: "~/.ssh/aws-paasta.pem"  # SSH Private Key Path
+
+# MONITORING VARIABLE(PaaS-TA Monitoring을 설치할 경우 수정)
+metric_url: "10.0.161.101"            # influxdb IP
+syslog_address: "10.0.121.100"        # td-agent IP
+syslog_port: "2514"                   # td-agent Port
+syslog_transport: "udp"               # td-agent Logging Protocol
 ```
-```shell script
-$ vi ~/workspace/paasta-deployment/bosh/bosh-monitoring-vars.yml
+
+**┃ OpenStack 환경 설치 시**
+
+```shell
+$ vi ~/workspace/paasta-deployment/bosh/openstack-vars.yml
+```
+
+```shell
+# BOSH VARIABLE
+bosh_client_admin_id: "admin"                   # Bosh Client Admin ID
+director_name: "micro-bosh"                     # BOSH Director Name
+private_cidr: "10.0.1.0/24"                     # Private IP Range
+private_gw: "10.0.1.1"                          # Private IP Gateway
+bosh_ip: "10.0.1.6"                             # Private IP 
+auth_url: "http://XX.XXX.XX.XX:XXXX/v3/"        # Openstack Keystone URL
+az: "nova"    # Openstack AZ Zone
+default_key_name: "paasta"                      # Openstack Key Name
+default_security_groups: ["paasta"]             # Openstack Security Group
+net_id: "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"  # Openstack Network ID
+openstack_password: "XXXXXX"                    # Openstack User Password
+openstack_username: "XXXXXX"                    # Openstack User Name
+openstack_domain: "XXXXXXX"                     # Openstack Domain Name
+openstack_project: "PaaSTA"                     # Openstack Project
+private_key: "~/.ssh/id_rsa.pem"                # Openstack Region
+region: "RegionOne"                             # SSH Private Key Path
+
+# MONITORING VARIABLE(PaaS-TA Monitoring을 설치할 경우 수정)
+metric_url: "10.0.161.101"                      # influxdb IP
+syslog_address: "10.0.121.100"                  # td-agent IP
+syslog_port: "2514"                             # td-agent Port
+syslog_transport: "udp"                         # td-agent Logging Protocol
+```
+
+OpenStack 환경에서는 IaaS 계층 모니터링을 위한 `zabbix-agent-vars.yml` 파일이 존재한다. 환경에 알맞게 수정한다.
+
+```shell
+$ vi ~/workspace/paasta-deployment/bosh/zabbix-agent-vars.yml
+```
+
+```shell
 #Zabbix agent
 server_ip: "127.0.0.1"
 listen_port: "10050"
@@ -340,10 +344,12 @@ BOSH 설치 Option은 아래와 같다.
 설치 Shell Script에 Option을 변경필요가 있다면 해당 명령어를 실행하여 변경한다.
 
 **│ AWS 환경 설치 스크립트**
-```
+
+```shell
 $ vi deploy-aws-monitoring.sh
 ```
-```shell script
+
+```shell
 #!/bin/bash
 
 bosh create-env bosh.yml \
@@ -351,19 +357,20 @@ bosh create-env bosh.yml \
     --vars-store=aws/creds.yml \
     -o aws/cpi.yml \
     -o uaa.yml \
-    -o cce.yml \
     -o credhub.yml \
     -o jumpbox-user.yml \
+    -o cce.yml \
     -o syslog.yml \
     -o paasta-addon/paasta-monitoring-agent.yml \
-    -l aws-vars.yml \
-    -l bosh-monitoring-vars.yml
+    -l aws-vars.yml
 ```
 
 **│ OpenStack 환경 설치 스크립트**
-```
+
+```shell
 $ vi deploy-openstack-monitoring.sh
 ```
+
 ```shell script
 #!/bin/bash
 
@@ -372,15 +379,15 @@ bosh create-env bosh.yml \
     --vars-store=openstack/creds.yml \
     -o openstack/cpi.yml \
     -o uaa.yml \
-    -o cce.yml \
     -o credhub.yml \
     -o jumpbox-user.yml \
+    -o cce.yml \
     -o openstack/disable-readable-vm-names.yml \
     -o syslog.yml \
     -o zabbix-agent.yml \
     -o paasta-addon/paasta-monitoring-agent.yml \
     -l openstack-vars.yml \
-    -l bosh-monitoring-vars.yml
+    -l zabbix-agent-vars.yml
 ```
 
 - Shell Script 파일에 실행 권한 부여
