@@ -21,11 +21,13 @@
 ## <div id='2'/>2.	CaaS 모니터링 설치
 
 ### <div id='2.1'/>2.1 Prerequisite
-본 설치 가이드는 Ubuntu환경에서 설치하는 것을 기준으로 작성하였다. 서비스 설치를 위해서는 BOSH 2.0과 PaaS-TA 5.5, PaaS-TA 포털 API, PaaS-TA 포털 UI, Kubespray 설치, CaaS 배포가 설치 되어 있어야 한다.
-- [BOSH 2.0 설치 가이드](https://github.com/PaaS-TA/Guide/blob/master/install-guide/bosh/PAAS-TA_BOSH2_INSTALL_GUIDE_V5.0.md)
-- [PaaS-TA 5.5 설치 가이드](https://github.com/PaaS-TA/Guide/blob/master/install-guide/paasta/PAAS-TA_CORE_INSTALL_GUIDE_V5.0.md)
-- [PaaS-TA 포털 API 설치 가이드](https://github.com/PaaS-TA/Guide/blob/master/install-guide/portal/PAAS-TA_PORTAL_API_SERVICE_INSTALL_GUIDE_V1.0.md)
-- [PaaS-TA 포털 UI 설치 가이드](https://github.com/PaaS-TA/Guide/blob/master/install-guide/portal/PAAS-TA_PORTAL_UI_SERVICE_INSTALL_GUIDE_V1.0.md)
+
+본 설치 가이드는 Ubuntu 환경에서 설치하는 것을 기준으로 작성하였다. 서비스 설치를 위해서 다음 가이드의 작업들이 선행되어 있는지 확인한다.
+
+- [BOSH 설치 가이드](https://github.com/PaaS-TA/application-platform-guide/blob/master/install/application_platform/bosh.md)
+- [PaaS-TA AP 설치 가이드](https://github.com/PaaS-TA/application-platform-guide/blob/master/install/application_platform/paasta_ap.md)
+- [PaaS-TA 포털 API 설치 가이드](https://github.com/PaaS-TA/application-platform-guide/blob/master/install/portal/vm_type_api.md)
+- [PaaS-TA 포털 UI 설치 가이드](https://github.com/PaaS-TA/application-platform-guide/blob/master/install/portal/vm_type_ui.md)
 - [Kubespray 설치 가이드](https://github.com/PaaS-TA/paas-ta-container-platform/blob/master/install-guide/standalone/paas-ta-container-platform-standalone-deployment-guide-v1.0.md)
 - [CaaS 배포 설치 가이드](https://github.com/PaaS-TA/paas-ta-container-platform/blob/master/install-guide/bosh/paas-ta-container-platform-bosh-deployment-caas-guide-v1.0.md)
 

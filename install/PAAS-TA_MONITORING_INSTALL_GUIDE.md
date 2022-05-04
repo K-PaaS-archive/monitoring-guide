@@ -9,7 +9,7 @@
 
 - [BOSH (+Monitoring Dashboard Option) 설치](PAAS-TA_BOSH2_MONITORING_INSTALL_GUIDE.md)
 - [PaaS-TA (+Monitoring Dashboard Option) 설치](PAAS-TA_CORE_MONITORING_INSTALL_GUIDE.md)
-- [Monitoring Dashboard 설치](PAAS-TA_MONITORING_MONITORING_DASHBOARD_INSTALL.md)
+- [Monitoring Dashboard (Web, Alarm, Logging) 설치](PAAS-TA_MONITORING_MONITORING_DASHBOARD_INSTALL.md)
 
 
 ## 선택 설치 항목
