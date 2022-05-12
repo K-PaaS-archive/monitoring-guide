@@ -104,9 +104,6 @@ uaa_client_portal_secret: "clientsecret"               # UAAC Portal Client에 �
 
 # Monitoring INFO
 metric_url: "10.200.1.105"                             # Monitoring InfluxDB IP
-elasticsearch_master_ip: "10.200.1.101"                # Logsearch의 elasticsearch master IP (Deprecated)
-elasticsearch_master_port: 9200                        # Logsearch의 elasticsearch master Port (Deprecated)
-index_retention_period: "10"                           # Logsearch의 logstash index 보유 기간(Days) (Deprecated)
 syslog_address: "10.200.1.100"                         # td-agent IP
 syslog_port: "2514"                                    # td-agent Port
 syslog_transport: "relp"                               # td-agent Logging Protocol
@@ -155,9 +152,6 @@ influxdb_username: "admin"            # Influxdb Admin 계정 Username
 influxdb_password: "PaaS-TA2020"      # Influxdb Admin 계정 Password
 influxdb_interval: "30d"              # Influxdb Retention Policy (bootstrapper)
 influxdb_https_enabled: "true"        # Influxdb HTTPS 설정
-elasticsearch_username: "admin"       # Elasticsearch admin 계정 Username
-elasticsearch_password: "logsearch"   # Elasticsearch admin 계정 Password
-elasticsearch_https_enabled: "true"   # Elasticsearch HTTPS 설정
 utc_time_gap: "9"                     # UTC Time Zone과 Client Time Zone과의 시간 차이
 public_network_name: "vip"            # Monitoring-WEB Public Network Name
 system_type: "PaaS,CaaS,SaaS,IaaS"    # 모니터링할 환경 선택
@@ -175,8 +169,8 @@ zabbix_admin_pw: "zabbix"
 # Openstack INFO
 openstack_region: "RegionOne"
 openstack_domain: "default"
-openstack_username: ""
-openstack_password: ""
+openstack_username: "xxxx"
+openstack_password: "xxxx"
 openstack_tenant_name: "paas-ta-monitoring"
 openstack_tenant_id: "3f7134b979074ea493c265ca39cc1ead"
 openstack_endpoint: "http://xxx.xxx.xxx.xxx:5000/v3"

@@ -362,9 +362,6 @@ uaa_client_portal_secret: "clientsecret"         # UAAC Portal Client에 접근�
 
 # Monitoring INFO
 metric_url: "10.0.161.101"                       # Monitoring InfluxDB IP
-elasticsearch_master_ip: "10.0.1.146"            # Logsearch의 elasticsearch master IP (Deprecated)
-elasticsearch_master_port: 9200                  # Logsearch의 elasticsearch master Port (Deprecated)
-index_retention_period: "10"                     # Logsearch의 logstash index 보유 기간(Days) (Deprecated)
 syslog_address: "10.0.121.100"                   # td-agent IP
 syslog_port: "2514"                              # td-agent Port
 syslog_transport: "udp"                          # td-agent Logging Protocol
