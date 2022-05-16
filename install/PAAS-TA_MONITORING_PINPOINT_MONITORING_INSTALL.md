@@ -136,15 +136,12 @@ uaa_client_admin_secret: "admin-secret"		# UAAC Admin Client에 접근하기 위
 uaa_client_portal_secret: "clientsecret"	# UAAC Portal Client에 접근하기 위한 Secret 변수
 
 # Monitoring INFO
-metric_url: "10.0.1.101"			# Monitoring InfluxDB IP
-elasticsearch_master_ip: "10.0.1.105"           # Logsearch의 elasticsearch master IP
-elasticsearch_master_port: 9200                 # Logsearch의 elasticsearch master Port
-index_retention_period: "10"                    # Logsearch의 logstash index 보유 기간(Days)
-syslog_address: "10.0.1.100"            	# Logsearch의 ls-router IP
-syslog_port: "2514"                          	# Logsearch의 ls-router Port
-syslog_transport: "relp"                        # Logsearch Protocol
-saas_monitoring_url: "61.252.53.248"	   	# Pinpoint HAProxy WEBUI의 Public IP
-monitoring_api_url: "61.252.53.241"        	# Monitoring-WEB의 Public IP
+metric_url: "10.0.1.101"                        # InfluxDB IP
+syslog_address: "10.0.1.100"                    # td-agent IP
+syslog_port: "2514"                             # td-agent Port
+syslog_transport: "udp"                         # td-agent Logging Protocol
+saas_monitoring_url: "61.252.53.248"            # Pinpoint HAProxy WEBUI의 Public IP
+monitoring_api_url: "61.252.53.241"             # Monitoring-WEB의 Public IP
 
 ### Portal INFO
 portal_web_user_ip: "52.78.88.252"
@@ -172,7 +169,7 @@ deployment_name: "pinpoint-monitoring"                  # On-Demand Deployment N
 
 ### Main Stemcells Setting ###
 stemcell_os: "ubuntu-bionic"                            # Deployment Main Stemcell OS
-stemcell_version: "1.61"                                # Main Stemcell Version
+stemcell_version: "1.79"                                # Main Stemcell Version
 stemcell_alias: "default"                               # Main Stemcell Alias
 
 ### On-Demand Release Deployment Setting ###
