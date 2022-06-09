@@ -94,7 +94,7 @@ $ vi ~/workspace/paasta-deployment/bosh/upload-stemcell.sh
 
 ```shell
 #!/bin/bash
-STEMCELL_VERSION=1.79
+STEMCELL_VERSION=1.84
 CURRENT_IAAS="${CURRENT_IAAS}"				# IaaS Information (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 aws/azure/gcp/openstack/vsphere/bosh-lite 입력)
 BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"			# bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
 if [[ ${CURRENT_IAAS} = "aws" ]]; then
@@ -415,7 +415,7 @@ syslog_fallback_servers: []             # [MONITORING] PaaS-TA Syslog Fallback S
 
 # STEMCELL
 stemcell_os: "ubuntu-bionic"		# Stemcell OS
-stemcell_version: "1.79"		# Stemcell Version
+stemcell_version: "1.84"		# Stemcell Version
 
 # SMOKE-TEST
 smoke_tests_azs: ["z1"]			# Smoke-Test 가용 존

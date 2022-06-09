@@ -185,7 +185,7 @@ influxdb_http_port: "8086"                 # default 8086
 
 # STEMCELL
 stemcell_os: "ubuntu-bionic"               # Stemcell OS
-stemcell_version: "1.79"                   # Stemcell Version
+stemcell_version: "1.84"                   # Stemcell Version
 
 # REDIS
 redis_azs: ["z1"]                          # Redis 가용 존
