@@ -169,7 +169,7 @@ deployment_name: "pinpoint-monitoring"                  # On-Demand Deployment N
 
 ### Main Stemcells Setting ###
 stemcell_os: "ubuntu-bionic"                            # Deployment Main Stemcell OS
-stemcell_version: "1.84"                                # Main Stemcell Version
+stemcell_version: "1.88"                                # Main Stemcell Version
 stemcell_alias: "default"                               # Main Stemcell Alias
 
 ### On-Demand Release Deployment Setting ###
