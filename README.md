@@ -9,6 +9,6 @@
 ### │ Deployment Version Info
 | Installation            |                                                                         Current Version                                                                          |
 |-------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| paasta-deployment (AP)  |                                                [5.7.6](https://github.com/PaaS-TA/paasta-deployment/tree/v5.7.6)                                                 |
+| paasta-deployment (AP)  |                                                [5.7.8](https://github.com/PaaS-TA/paasta-deployment/tree/v5.7.8)                                                 |
 | container-platform (CP) | [1.0](https://github.com/PaaS-TA/paas-ta-container-platform/blob/master/install-guide/standalone/paas-ta-container-platform-standalone-deployment-guide-v1.0.md) |
-| monitoring-deployment   |                                              [5.7.4](https://github.com/PaaS-TA/monitoring-deployment/tree/v5.7.4)                                               |
+| monitoring-deployment   |                                              [5.7.6](https://github.com/PaaS-TA/monitoring-deployment/tree/v5.7.6)                                               |
