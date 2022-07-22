@@ -101,18 +101,18 @@ ${HOME}/workspace/monitoring-deployment/pinpoint-monitoring 이하 디렉터리�
 common 폴더에 있는 common_vars.yml PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일이 존재한다.  
 Pinpoint-Monitoring을 설치할 때는 saas_monitoring_url 값을 변경 하여 설치 할 수 있다.  
 
-```
+```yaml
 # BOSH INFO
 bosh_ip: "10.0.1.6"				# BOSH IP
 bosh_url: "https://10.0.1.6"				# BOSH URL (e.g. "https://00.000.0.0")
 bosh_client_admin_id: "admin"			# BOSH Client Admin ID
-bosh_client_admin_secret: "giej8ett7mqsho9tx7s3"	# BOSH Client Admin Secret('echo $(bosh int ~/workspace/paasta-5.0/deployment/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
+bosh_client_admin_secret: "ert7na4jpewscztsxz48"	# BOSH Client Admin Secret('echo $(bosh int ~/workspace/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
 bosh_director_port: 25555			# BOSH director port
 bosh_oauth_port: 8443				# BOSH oauth port
 bosh_version: 271.2				# BOSH version('bosh env' 명령어를 통해 확인 가능, on-demand service용, e.g. "271.2")
 
 # PAAS-TA INFO
-system_domain: "10.0.1.80.nip.io"		# Domain (nip.io를 사용하는 경우 HAProxy Public IP와 동일)
+system_domain: "61.252.53.246.nip.io"		# Domain (nip.io를 사용하는 경우 HAProxy Public IP와 동일)
 paasta_admin_username: "admin"			# PaaS-TA Admin Username
 paasta_admin_password: "admin"			# PaaS-TA Admin Password
 paasta_nats_ip: "10.0.1.121"
@@ -135,48 +135,75 @@ uaa_client_admin_id: "admin"			# UAAC Admin Client Admin ID
 uaa_client_admin_secret: "admin-secret"		# UAAC Admin Client에 접근하기 위한 Secret 변수
 uaa_client_portal_secret: "clientsecret"	# UAAC Portal Client에 접근하기 위한 Secret 변수
 
-# Monitoring INFO
-metric_url: "10.0.1.101"                        # InfluxDB IP
-syslog_address: "10.0.1.100"                    # td-agent IP
-syslog_port: "2514"                             # td-agent Port
-syslog_transport: "udp"                         # td-agent Logging Protocol
-saas_monitoring_url: "61.252.53.248"            # Pinpoint HAProxy WEBUI의 Public IP
-monitoring_api_url: "61.252.53.241"             # Monitoring-WEB의 Public IP
+# paasta-monitoring & pinpoint-monitoring deployment configuration
+metric_url: "10.0.1.101"                  # influxdb IP
+syslog_address: "10.0.1.100"              # td-agent IP
+syslog_port: "2514"                       # td-agent Port
+syslog_transport: "udp"                   # td-agent Logging Protocol
+monitoring_api_url: "10.0.1.88"           # monitoring-web IP
+saas_monitoring_url: "10.0.1.89"          # haproxy_webui IP
+pinpoint_was_ip: "10.0.1.90"              # pinpoint_web IP
+
+# zabbix-agent configuration (Essential setting when using IaaS monitoring option)
+server_ip: "xxx.xxx.xxx.xxx"              # Zabbix server (or Proxy) IP address
+listen_port: "10050"                      # Zabbix server (or Proxy) Port number
+server_active: "xxx.xxx.xxx.xxx:10051"    # Zabbix server (or Proxy) IP:Port string
+host_metadata: "paasta"                   # Metadata for Zabbix Agent autoregistration
 
 ### Portal INFO
 portal_web_user_ip: "52.78.88.252"
 portal_web_user_url: "http://portal-web-user.52.78.88.252.nip.io" 
+portal_web_user_language: ["ko", "en"]             # portal webuser language list (e.g. ["ko", "en"])
+portal_web_admin_language: ["ko", "en"]             # portal webadmin language list (e.g. ["ko", "en"])
 
 ### ETC INFO
 abacus_url: "http://abacus.61.252.53.248.nip.io"	# abacus url (e.g. "http://abacus.xxx.xxx.xxx.xxx.nip.io")
-
-### Zabbix Agent for monitoring ###
-server_ip: "10.37.2.114"               # Zabbix server (or Proxy) IP address
-listen_port: "10050"                   # Zabbix server (or Proxy) Port number
-server_active: "10.37.2.114:10051"     # Zabbix server (or Proxy) IP:Port string
-host_metadata: "paasta"                # Metadata for Zabbix Agent autoregistration
 ```
 
 
-### <div id='232'>● pinpoint-vars.yml
+### <div id='232'>● pinpoint-monitoring-vars.yml
 	
 모니터링 하려는 VM에 접근을 하기 위해 PemSSH의 값을 true로 한다면 BOSH를 설치할때 IaaS의 VM을 만들 수 있는 권한을 주었던 Key를 같은 폴더에 있는 pem.yml에 같은 형식으로 복사하여야 한다.
 
-```
-### On-Demand Bosh Deployment Name Setting ###
-inception_os_user_name: "ubuntu"
-deployment_name: "pinpoint-monitoring"                  # On-Demand Deployment Name
-
+```yaml
 ### Main Stemcells Setting ###
 stemcell_os: "ubuntu-bionic"                            # Deployment Main Stemcell OS
-stemcell_version: "1.90"                                # Main Stemcell Version
+stemcell_version: "1.91"                                # Main Stemcell Version
 stemcell_alias: "default"                               # Main Stemcell Alias
 
 ### On-Demand Release Deployment Setting ###
 releases_name:  "paasta-pinpoint-monitoring-release"    # On-Demand Release Name
 public_networks_name: "vip"                             # Pinpoint Public Network Name
-PemSSH: "true"                                          # h_master에서 모니터링 하려는 VM에 SSH접근시 사용하는 Key File 지정 여부(default:false)
-
+pem_ssh: "true"                                         # h_master에서 모니터링 하려는 VM에 SSH 접근시 사용하는 Key File 지정 여부(default:false)
+pem_key: |                                              # h_master에서 SSH 접근시 사용하는 Key
+        -----BEGIN RSA PRIVATE KEY-----
+        WbfwNQMgrQ6D8jgFm1bBcNspaMrSnmHO+1LzM68sHuoneUwRbU4UGlY7M0gQZ2wt
+        Wq8SNeso5soXypO2MelaM0xvRqAqW9Dwp/vwCmia5Wdk07Rsmmu31Mny3rr1zxqR
+        vlOIOasZGPNWuhvjsSaZEkwuenrz+mFiTw22D3T8XrT/XOCQ1R8rsHIR1FRqi/9I
+        E2jSqGYtcJ0lhW/BEwnBOhhvSMkpO7Pemde0vLvdaYHujXySMDMqRp9SmMoPi8xQ
+        G12HcRArk8o2XmVaMBLilEGvFzieq+Q//PZzfsva2rFuotWkn3hV/wBXgNp9gKe9
+        ddGh/H/oumhs9xY3lQKVEXrs7+zNJCx2XYv8T+mLoSI6XTc+6upzComrOes8bxUv
+        Xh5BeLLrQpEZumxv1jGmZPGirjoTl1tE4bnEfCPI4q392brzR8J/N8BcgjAOTVEo
+        uH3OPm5h9eXnG9SXRO4DfrMQ4+aQf2LnKsWsfD1n0Az8iGFxUXZLZgDqyPZgRnRb
+        sRA+g3/GMIpWUjFuUJex7Umf50TD1sKzcwgLYrsX9L8jFgy+96n9DwT2ez3g9k7m
+        3/o6IaIwmMPLd2+pUOcJlYM8TB1XHbPwCeboVvHvzdTyOJOzwAa7i04MMQNcDFBW
+        yilbbuAl6w/sIdzwExMWdOvZHcqEWcRRWeFNlyevjzSOkHROvGwV3XqzmCGte8Sn
+        J/vCMW4lge5yVwtvvM5NfW2tQSV3t6h9f+iSL8fg6izLQI7k47XCZCkuCmJ5XymE
+        9yRQI5r6ZIHry/pEcjLuFVlNwiN9QZndxudfNp7IH9Xh1aWskR+7dB4TNuPP+Iw0
+        UAAnplqmzvjsQhkzHWUjcqIRodyP7ncYz11Z4yTsZ0DFm7I6bPefVumCdeJlog4X
+        UUhZSJGKotjMVKPsvHfbPlU69YyliYkWilOKxlpxEIq8IPmBgMG7HTKmAkYOuGzq
+        qh/jwTnb6fOl5Wm0MhK0zl/RMSBSA9wEJf4Ym+gT4cNmGKb25+Gs8SqJqpwv7CP+
+        UC1idqMHsAxjVJd+BkZHgjTUdx/UNP/zuxkOyuMB1oKWLB/gY5HJzVluAFtbtFkA
+        DFnbsB2aANuHqEv8ylwlbCtOUZ1ZOqwTzV/UAk39WW3FQXWjLK5WPK1tRYFJLVGI
+        zoDj6IR2Es6Ota0xemzZM3w8XCgrc6cdDJ8wSfgb2/+Yz8NOCehN8yVQLcoNLmml
+        s7oHOfIfdJFcYPZZw19zyxVJpp8+ZrPXzi1g67ZDizMFrJfd2qRvV15UetIo5D07
+        +MaFUQ9L7GOEJEtmE88qnWaptyznjO8RDnPj+daF94+6/8BKVDjG53iMoTNZ5etw
+        tE8gNTaelLkkSfB6phZjGNAPhzZA4hCxnilwv7n6nc/faUHkYFkhCO83yBMKwXAR
+        YMiI0R3rSCjzFc8fpFuJzmEwZpS1iqpKIrBu2xVP0+Sf6w+ocHH1FPaFN0X42M1O
+        9JJYhx032Xj9DPcA0GOvWlkUKCENwUv9iCVBfBSah8AUq1y+ETCawqzuO12UkLLL
+        5QG/J2bv4ez7plOTY0gzpl2bZRCSFOzvjdNMAbN8OamIP5rWcuk5anPrdp5tkAXE
+        -----END RSA PRIVATE KEY-----
+        
 # H-Master
 h_master_azs: ["z1"]                                    # H-Master 가용 존
 h_master_instances: 1                                   # H-Master 인스턴스 수
@@ -206,63 +233,53 @@ haproxy_webui_network: "default"                        # HAProxy 네트워크
 haproxy_webui_persistent_disk_type: "30GB"              # HAProxy 영구 Disk 종류
 ```
 
-### <div id='233'>● deploy-pinpoint.sh
-```
-echo 'y' | bosh -e micro-bosh -d pinpoint-monitoring deploy paasta-pinpoint.yml \
-	-o use-public-network.yml \
-	-o addons/enable-zabbix-agent.yml \
-	-l pinpoint-vars.yml \
-	-l ../../common/common_vars.yml \
-	-l pem.yml
-```
+### <div id='233'>● deploy-pinpoint-monitoring.sh
+```shell
+#!/bin/bash
 
-### <div id='234'>● deploy-pinpoint-vsphere.sh
-```
-echo 'y' | bosh -e micro-bosh -d pinpoint-monitoring deploy paasta-pinpoint.yml \
-	-o use-public-network-vsphere.yml \
-	-l pinpoint-vars.yml \
-	-l ../../common/common_vars.yml \
-	-l pem.yml
+# paasta-monitoring-vars.yml 파일에서 IaaS 모니터링 옵션이 사용되는지 확인하고 조건에 따라 zabbix-agent Addon 여부를 분기한다.
+ScanIaaSOption=`grep IaaS ../paasta-monitoring/paasta-monitoring-vars.yml`
+
+if [ -n "$ScanIaaSOption" ]; then
+    bosh -e micro-bosh -n -d pinpoint-monitoring deploy pinpoint-monitoring.yml \
+        -o addons/enable-zabbix-agent.yml \
+        -l pinpoint-monitoring-vars.yml \
+        -l ../../common/common_vars.yml
+else
+    bosh -e micro-bosh -n -d pinpoint-monitoring deploy pinpoint-monitoring.yml \
+        -l pinpoint-monitoring-vars.yml \
+        -l ../../common/common_vars.yml
+fi
 ```
 
 ## <div id='24'> 2.4. Pinpoint Monitoring 설치
-	
-- 서버 환경에 맞추어 Deploy 스크립트 파일의 설정을 수정한다. 
 
-> $ vi ${HOME}/workspace/monitoring-deployment/pinpoint-monitoring/deploy-pinpoint.sh
+다음과 같이 Pinpoint Monitoring 설치를 시작할 수 있다.
 
-```
-echo 'y' | bosh -e micro-bosh -d pinpoint-monitoring deploy paasta-pinpoint.yml \
-	-o use-public-network.yml \
-	-o addons/enable-zabbix-agent.yml \
-	-l pinpoint-vars.yml \
-	-l ../../common/common_vars.yml \
-	-l pem.yml
-```
-
-- Pinpoint Monitoring 설치 Shell Script 파일 실행 (BOSH 로그인 필요)
-
-```
+```shell
 $ cd ~/workspace/monitoring-deployment/paasta-monitoring
-$ sh deploy-pinpoint.sh
+$ source deploy-pinpoint-monitoring.sh
 ```
 
 ## <div id='25'/>2.5. 서비스 설치 확인
+
 Pinpoint Monitoring이 설치 완료 되었음을 확인한다.
+
+```shell
+$ bosh -d pinpoint-monitoring vms
+Using environment '10.0.1.6' as client 'admin'
+
+Task 16921. Done
+
+Deployment 'pinpoint-monitoring'
+
+Instance                                            Process State  AZ  IPs         VM CID               VM Type             Active  Stemcell
+collector/06edc267-b8ee-4153-9a01-b3207bf218f7      running        z1  10.0.1.139  i-0bacd4fd90926919c  small-highmem-16GB  true    bosh-aws-xen-hvm-ubuntu-bionic-go_agent/1.91
+h_master/f09393ed-b6a3-4cdf-ae37-97cca3be8cef       running        z1  10.0.1.138  i-03b5334e942ef0332  small-highmem-16GB  true    bosh-aws-xen-hvm-ubuntu-bionic-go_agent/1.91
+haproxy_webui/7770fe96-5101-4e82-bff4-a997ad53bb78  running        z1  10.0.1.89   i-039067c02f838a97c  small-highmem-16GB  true    bosh-aws-xen-hvm-ubuntu-bionic-go_agent/1.91
+pinpoint_web/fc640306-fbe3-4b41-96b9-6a6373c1384b   running        z1  10.0.1.90   i-047523b703b3565fc  small-highmem-16GB  true    bosh-aws-xen-hvm-ubuntu-bionic-go_agent/1.91
+
+4 vms 
 ```
-$ bosh –e {director_name} vms
-
-
-$ bosh -e micro-bosh -d paasta-pinpoint-monitoring vms
-Deployment 'paasta-pinpoint-monitoring'
-
-Instance                                            Process State  AZ  IPs           VM CID               VM Type             Active  
-collector/a7932462-5a55-4ad6-9a50-6d9775d8391a      running        z3  10.0.81.122   i-0104012f0c4cf1051  caas_small_highmem  true  
-h_master/7024f1d8-7911-4cc6-ac5c-8d9295221efa       running        z3  10.0.81.121   i-02b1cd70c35117d8d  caas_small_highmem  true  
-haproxy_webui/b30b856c-ad74-4ff5-a9ee-32e2ef641ffa  running        z7  10.0.0.122    i-046052aa5360f6b6f  caas_small_highmem  true  
-								       15.165.3.150                                             
-pinpoint_web/c23b79cf-ef55-42f5-9c2a-b8102b6e5ca8   running        z3  10.0.81.123   i-02a82ab6f02784317  caas_small_highmem  true 
-```
-
 
 ### [Index](https://github.com/PaaS-TA/Guide) > [Monitoring Install](PAAS-TA_MONITORING_INSTALL_GUIDE.md) > Pinpoint Monitoring

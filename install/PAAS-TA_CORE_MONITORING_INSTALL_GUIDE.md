@@ -94,7 +94,7 @@ $ vi ~/workspace/paasta-deployment/bosh/upload-stemcell.sh
 
 ```shell
 #!/bin/bash
-STEMCELL_VERSION=1.90
+STEMCELL_VERSION=1.91
 CURRENT_IAAS="${CURRENT_IAAS}"				# IaaS Information (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 aws/azure/gcp/openstack/vsphere/bosh-lite 입력)
 BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"			# bosh director alias name (PaaS-TA에서 제공되는 create-bosh-login.sh 미 사용시 bosh envs에서 이름을 확인하여 입력)
 if [[ ${CURRENT_IAAS} = "aws" ]]; then
@@ -328,58 +328,61 @@ $ vi ~/workspace/common/common_vars.yml
 
 ```yaml
 # BOSH INFO
-bosh_ip: "10.5.0.6"                              # BOSH IP
-bosh_url: "https://10.5.0.6"                     # BOSH URL (e.g. "https://00.000.0.0")
-bosh_client_admin_id: "admin"                    # BOSH Client Admin ID
-bosh_client_admin_secret: "mf4nxvkzytihm61fo0sl" # BOSH Client Admin Secret ('echo $(bosh int ~/workspace/paasta-5.0/deployment/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
-bosh_director_port: 25555                        # BOSH director port
-bosh_oauth_port: 8443                            # BOSH oauth port
-bosh_version: 271.2                              # BOSH version ('bosh env' 명령어를 통해 확인 가능, on-demand service용, e.g. "271.2")
+bosh_ip: "10.0.1.6"				# BOSH IP
+bosh_url: "https://10.0.1.6"				# BOSH URL (e.g. "https://00.000.0.0")
+bosh_client_admin_id: "admin"			# BOSH Client Admin ID
+bosh_client_admin_secret: "ert7na4jpewscztsxz48"	# BOSH Client Admin Secret('echo $(bosh int ~/workspace/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
+bosh_director_port: 25555			# BOSH director port
+bosh_oauth_port: 8443				# BOSH oauth port
+bosh_version: 271.2				# BOSH version('bosh env' 명령어를 통해 확인 가능, on-demand service용, e.g. "271.2")
 
 # PAAS-TA INFO
-system_domain: "10.5.0.240.nip.io"               # Domain (nip.io를 사용하는 경우 HAProxy Public IP와 동일)
-paasta_admin_username: "admin"                   # PaaS-TA Admin Username
-paasta_admin_password: "admin"                   # PaaS-TA Admin Password
-paasta_nats_ip: "10.5.0.121"
+system_domain: "61.252.53.246.nip.io"		# Domain (nip.io를 사용하는 경우 HAProxy Public IP와 동일)
+paasta_admin_username: "admin"			# PaaS-TA Admin Username
+paasta_admin_password: "admin"			# PaaS-TA Admin Password
+paasta_nats_ip: "10.0.1.121"
 paasta_nats_port: 4222
 paasta_nats_user: "nats"
-paasta_nats_password: "VB29evJTNK63PM0lLR91UBhqyiKtcR" # PaaS-TA Nats Password (CredHub 로그인후 'credhub get -n /micro-bosh/paasta/nats_password' 명령어를 통해 확인 가능)
-paasta_nats_private_networks_name: "default"     # PaaS-TA Nats 의 Network 이름
-paasta_database_ips: "10.5.0.123"                # PaaS-TA Database IP (e.g. "10.0.1.123")
-paasta_database_port: 5524                       # PaaS-TA Database Port (e.g. 5524(postgresql)/13307(mysql)) -- Do Not Use "3306"&"13306" in mysql
-paasta_database_type: "postgresql"               # PaaS-TA Database Type (e.g. "postgresql" or "mysql")
-paasta_database_driver_class: "org.postgresql.Driver" # PaaS-TA Database driver-class (e.g. "org.postgresql.Driver" or "com.mysql.jdbc.Driver")
-paasta_cc_db_id: "cloud_controller"              # CCDB ID (e.g. "cloud_controller")
-paasta_cc_db_password: "cc_admin"                # CCDB Password (e.g. "c418e687c4Kx!" 영어/숫자/특수문자 혼용 8자리 이상)
-paasta_uaa_db_id: "uaa"                          # UAADB ID (e.g. "uaa")
-paasta_uaa_db_password: "uaa_admin"              # UAADB Password (e.g. "ifb2497iEA5!" 영어/숫자/특수문자 혼용 8자리 이상)
+paasta_nats_password: "7EZB5ZkMLMqT73h2JtxPv1fvh3UsqO"	# PaaS-TA Nats Password (CredHub 로그인후 'credhub get -n /micro-bosh/paasta/nats_password' 명령어를 통해 확인 가능)
+paasta_nats_private_networks_name: "default"	# PaaS-TA Nats 의 Network 이름
+paasta_database_ips: "10.0.1.123"		# PaaS-TA Database IP (e.g. "10.0.1.123")
+paasta_database_port: 5524			# PaaS-TA Database Port (e.g. 5524(postgresql)/13307(mysql)) -- Do Not Use "3306"&"13306" in mysql
+paasta_database_type: "postgresql"                      # PaaS-TA Database Type (e.g. "postgresql" or "mysql")
+paasta_database_driver_class: "org.postgresql.Driver"   # PaaS-TA Database driver-class (e.g. "org.postgresql.Driver" or "com.mysql.jdbc.Driver")
+paasta_cc_db_id: "cloud_controller"		# CCDB ID (e.g. "cloud_controller")
+paasta_cc_db_password: "cc_admin"		# CCDB Password (e.g. "c418e687c4Kx!" 영어/숫자/특수문자 혼용 8자리 이상)
+paasta_uaa_db_id: "uaa"				# UAADB ID (e.g. "uaa")
+paasta_uaa_db_password: "uaa_admin"		# UAADB Password (e.g. "ifb2497iEA5!" 영어/숫자/특수문자 혼용 8자리 이상)
 paasta_api_version: "v3"
 
 # UAAC INFO
-uaa_client_admin_id: "admin"                     # UAAC Admin Client Admin ID
-uaa_client_admin_secret: "admin-secret"          # UAAC Admin Client에 접근하기 위한 Secret 변수
-uaa_client_portal_secret: "clientsecret"         # UAAC Portal Client에 접근하기 위한 Secret 변수
+uaa_client_admin_id: "admin"			# UAAC Admin Client Admin ID
+uaa_client_admin_secret: "admin-secret"		# UAAC Admin Client에 접근하기 위한 Secret 변수
+uaa_client_portal_secret: "clientsecret"	# UAAC Portal Client에 접근하기 위한 Secret 변수
 
-# Monitoring INFO
-metric_url: "10.0.161.101"                       # Monitoring InfluxDB IP
-syslog_address: "10.0.121.100"                   # td-agent IP
-syslog_port: "2514"                              # td-agent Port
-syslog_transport: "udp"                          # td-agent Logging Protocol
-saas_monitoring_url: "61.252.53.248"             # Pinpoint HAProxy WEBUI의 Public IP
-monitoring_api_url: "61.252.53.241"              # Monitoring-WEB의 Public IP
+# paasta-monitoring & pinpoint-monitoring deployment configuration
+metric_url: "10.0.1.101"                  # influxdb IP
+syslog_address: "10.0.1.100"              # td-agent IP
+syslog_port: "2514"                       # td-agent Port
+syslog_transport: "udp"                   # td-agent Logging Protocol
+monitoring_api_url: "10.0.1.88"           # monitoring-web IP
+saas_monitoring_url: "10.0.1.89"          # haproxy_webui IP
+pinpoint_was_ip: "10.0.1.90"              # pinpoint_web IP
 
-### Zabbix Agent for monitoring ###
-server_ip: "xxx.xxx.xxx.xxx"                     # Zabbix server (or Proxy) IP address
-listen_port: "10050"                             # Zabbix server (or Proxy) Port number
-server_active: "xxx.xxx.xxx.xxx:10051"           # Zabbix server (or Proxy) IP:Port string
-host_metadata: "paasta"                          # Metadata for Zabbix Agent autoregistration
+# zabbix-agent configuration (Essential setting when using IaaS monitoring option)
+server_ip: "xxx.xxx.xxx.xxx"              # Zabbix server (or Proxy) IP address
+listen_port: "10050"                      # Zabbix server (or Proxy) Port number
+server_active: "xxx.xxx.xxx.xxx:10051"    # Zabbix server (or Proxy) IP:Port string
+host_metadata: "paasta"                   # Metadata for Zabbix Agent autoregistration
 
 ### Portal INFO
 portal_web_user_ip: "52.78.88.252"
-portal_web_user_url: "http://portal-web-user.52.78.88.252.nip.io"
+portal_web_user_url: "http://portal-web-user.52.78.88.252.nip.io" 
+portal_web_user_language: ["ko", "en"]             # portal webuser language list (e.g. ["ko", "en"])
+portal_web_admin_language: ["ko", "en"]             # portal webadmin language list (e.g. ["ko", "en"])
 
 ### ETC INFO
-abacus_url: "http://abacus.61.252.53.248.nip.io" # abacus url (e.g. "http://abacus.xxx.xxx.xxx.xxx.nip.io")
+abacus_url: "http://abacus.61.252.53.248.nip.io"	# abacus url (e.g. "http://abacus.xxx.xxx.xxx.xxx.nip.io")
 ```
 
 Zabbix Agent를 위한 Zabbix Proxy의 주소는 아직 Proxy 인스턴스를 생성하지 않았다면 인스턴스를 생성한 후 값을 참조할 수 있도록 한다.
@@ -415,7 +418,7 @@ syslog_fallback_servers: []             # [MONITORING] PaaS-TA Syslog Fallback S
 
 # STEMCELL
 stemcell_os: "ubuntu-bionic"		# Stemcell OS
-stemcell_version: "1.90"		# Stemcell Version
+stemcell_version: "1.91"		# Stemcell Version
 
 # SMOKE-TEST
 smoke_tests_azs: ["z1"]			# Smoke-Test 가용 존
