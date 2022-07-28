@@ -15,7 +15,7 @@ PaaS-TA Monitoring Dashboard는 관리자 화면으로 알람이 발생된 이�
 
 ### │ CaaS Collecting Metric Data Architecture
 CaaS는 내부적으로 메트릭스 정보를 수집 하는 Prometheus Metric Agent(Node Exporter, cAdvisor) 제공한다.  
-Prometheus 기본 제공되는 로컬 디지스 Time-Series Database 정보를 저장한다. 해당 정보를 조회하기 위해서는 Prometheus 제공하는 API를 통하여 조회할 수 있다.
+Prometheus 기본 제공되는 로컬 디지스 Time-Series Database 정보를 저장한다. 해당 정보는 Prometheus에서  제공하는 API를 통하여 조회할 수 있다.
 
 ![Caas_Monit_collect_architecure_Image]
 
