@@ -502,7 +502,8 @@ bosh/0:~$
 ### <div id='4.1'/>4.1. BOSH 로그인 생성 스크립트
 
 PaaS-TA 5.5부터 BOSH 로그인을 하는 스크립트의 생성을 지원한다.
-해당 스크립트의 BOSH_DEPLOYMENT_PATH, CURRENT_IAAS, BOSH_IP, BOSH_CLIENT_ADMIN_ID, BOSH_ENVIRONMENT, BOSH_LOGIN_FILE_PATH, BOSH_LOGIN_FILE_NAME를 BOSH 환경과 스크립트를 저장하고 싶은 위치로 변경 후 실행한다.
+BOSH 환경과 스크립트의 위치를 저장하고 싶은 위치로 변경 후 해당 스크립트의 BOSH_DEPLOYMENT_PATH, CURRENT_IAAS, BOSH_IP, 
+BOSH_CLIENT_ADMIN_ID, BOSH_ENVIRONMENT, BOSH_LOGIN_FILE_PATH, BOSH_LOGIN_FILE_NAME을 실행한다.
 
 - BOSH Login 생성 Script의 설정 수정
 
