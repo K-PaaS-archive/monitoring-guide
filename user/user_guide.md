@@ -48,7 +48,7 @@
   </tr>
   <tr>
     <td><b>monitoring-api</b></td>
-    <td>PaaS-TA 모니터링 플랫폼에서 지원하는 모니터링 관련 기능을 통합 제공하는 API 모듈 및 Swagger 기반으로 작성된 <a>API 가이드</a> 제공</td>
+    <td>PaaS-TA 모니터링 플랫폼에서 지원하는 모니터링 관련 기능을 통합 제공하는 API 모듈 및 Swagger 기반으로 작성된 <a href="temp_links">API 가이드</a> 제공</td>
   </tr>
   <tr>
     <td><b>td-agent</b></td>
@@ -57,4 +57,4 @@
 </table>
 
 
-### [Index](https://github.com/PaaS-TA/Guide) > Monitoring Architecture
+### [Index](https://github.com/PaaS-TA/Guide) > User Guide
