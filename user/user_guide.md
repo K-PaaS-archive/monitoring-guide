@@ -1,7 +1,7 @@
 ### [Index](https://github.com/PaaS-TA/Guide) > User Guide
 
 
-# PaaS-TA Monitoring Monitoring User Guide
+# PaaS-TA Monitoring User Guide
 
 
 ### │ Purpose
