@@ -4,7 +4,7 @@
 ### │ Shortcuts Doc
 1. [Architecture Guide](architecture/PAAS-TA_MONITORING_ARCHITECTURE.md)
 2. [Install Guide](install/PAAS-TA_MONITORING_INSTALL_GUIDE.md)
-3. [User Guide (Working)](user/user_guide.md)
+3. [User Guide](user/user_guide.md)
 
 
 ### │ Deployment Version Info
