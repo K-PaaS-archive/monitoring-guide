@@ -58,7 +58,7 @@
 
 
 ### │ User Guide Shortcut
-ㆍ [Monitoring API User Guide](monitoring-api_guide.md)
+📘 [Monitoring API User Guide](monitoring-api_guide.md)
 
 
 ### [Index](https://github.com/PaaS-TA/Guide) > User Guide
