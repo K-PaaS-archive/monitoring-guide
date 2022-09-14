@@ -163,7 +163,7 @@ kubernetes_ip: "52.78.16.121"         # Kubernates의 서비스 API IP
 pinpoint_was_ip: "10.0.1.152"         # Pinpoint HAProxy WEBUI Private IP
 cassbroker_ip: "3.36.38.199"          # CaaS 서비스 로그인 인증 처리를 위한 API IP (Kubernetes Master IP/service-common-api-deployment)
 kubernetes_token: "eyJhbGciOiJSUzI1NiIsImtpZCI6IlMtbHpvLUYybGpiejl4c1ZqelRGRnFlX3pxaVFkS2NQOWhpWEJLS1JXckUifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJrOHNhZG1pbi10b2tlbi12cWhudiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJrOHNhZG1pbiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImExMGVkODgyLTU1ZGEtNGNmYS04Y2ZmLThiOTdiZTQzODE4MSIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlLXN5c3RlbTprOHNhZG1pbiJ9.QZ3mTvdyaPwzDt7mtDoDYlaCxEqN7QIpWTIpUUCJm6qurOonhJd_kdmvhQsylkft6z-Pp4odMr6eQcTD3WwUQ95UMqvQirLZOjLF7MU07CBIxWvhIDK5qx3xrYEa5KswuhfTNre4py9I-tPV9_vHxRNcwZUjnBGo_BimuwJgqG_1LsZjXvdIeJfMQlEY2LokUDt07bMoUtH9sWLKHv8-rZfiMU1fGfifz9NwQ54Uh-CVspbg-YaJbVC6tnbyriuTNciViOth6Onwx_xuzBfFGRlh6ck0HlYKYz5-JxEpZy3zJwoNfukVmjl-4gNXb67Esm7rQyjHFMF2Z2c2EgDQEw"
-enable_private_network: "yes"
+enable_private_network: "yes"         # Monitoring 웹을 private IP로 배포하려면 yes로 설정
   
 # Zabbix API INFO
 zabbix_host: "http://10.200.1.200/zabbix/api_jsonrpc.php"
@@ -259,22 +259,40 @@ td-agent_network: "default"                # Monitoring-WEB 네트워크
 ```shell script
 #!/bin/bash
 
-# paasta-monitoring-vars.yml 파일에서 IaaS 모니터링 옵션이 사용되는지 확인하고 조건에 따라 iaas-monitoring-batch VM 배포 여부를 분기한다.
+# paasta-monitoring-vars.yml 파일에서 IaaS 모니터링 옵션이 사용되는지 확인하고 조건에 따라 iaas-monitoring-batch VM 배포 및 zabbix-agent Addon 여부를 분기한다.
 ScanIaaSOption=`grep IaaS paasta-monitoring-vars.yml`
+enablePrivateNetworkOpt=`grep 'enable_private_network' paasta-monitoring-vars.yml`
 
 if [ -n "$ScanIaaSOption" ]; then
-    bosh -e micro-bosh -n -d paasta-monitoring deploy paasta-monitoring.yml \
-        -o use-public-network-aws.yml \
-        -o addons/enable-zabbix-agent.yml \
-        -l paasta-monitoring-vars.yml \
-        -l ../../common/common_vars.yml
+    if [[ "$enablePrivateNetworkOpt" =~ yes ]]; then
+	bosh -e micro-bosh -n -d paasta-monitoring deploy paasta-monitoring.yml \
+          -o use-public-network-aws.yml \
+	  -o use-private-monitoring-web.yml \
+          -o addons/enable-zabbix-agent.yml \
+          -l paasta-monitoring-vars.yml \
+          -l ../../common/common_vars.yml
+    else
+        bosh -e micro-bosh -n -d paasta-monitoring deploy paasta-monitoring.yml \
+          -o use-public-network-aws.yml \
+          -o addons/enable-zabbix-agent.yml \
+          -l paasta-monitoring-vars.yml \
+          -l ../../common/common_vars.yml
+    fi
 else
-    bosh -e micro-bosh -n -d paasta-monitoring deploy paasta-monitoring.yml \
-        -o use-public-network-aws.yml \
-        -o addons/enable-zabbix-agent.yml \
-        -o addons/disable-iaas-monitoring-batch.yml \
-        -l paasta-monitoring-vars.yml \
-        -l ../../common/common_vars.yml
+    if [[ "$enablePrivateNetworkOpt" =~ yes ]]; then
+	bosh -e micro-bosh -n -d paasta-monitoring deploy paasta-monitoring.yml \
+          -o use-public-network-aws.yml \
+	  -o use-private-monitoring-web.yml \
+          -o addons/disable-iaas-monitoring-batch.yml \
+          -l paasta-monitoring-vars.yml \
+          -l ../../common/common_vars.yml
+    else
+	bosh -e micro-bosh -n -d paasta-monitoring deploy paasta-monitoring.yml \
+          -o use-public-network-aws.yml \
+          -o addons/disable-iaas-monitoring-batch.yml \
+          -l paasta-monitoring-vars.yml \
+          -l ../../common/common_vars.yml
+    fi
 fi
 ```
 
