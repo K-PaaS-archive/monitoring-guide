@@ -163,7 +163,7 @@ abacus_url: "http://abacus.61.252.53.248.nip.io"	# abacus url (e.g. "http://abac
 
 ### <div id='232'>● pinpoint-monitoring-vars.yml
 	
-모니터링 하려는 VM에 접근을 하기 위해 PemSSH의 값을 true로 한다면 BOSH를 설치할때 IaaS의 VM을 만들 수 있는 권한을 주었던 Key를 같은 폴더에 있는 pem.yml에 같은 형식으로 복사하여야 한다.
+모니터링 하려는 VM에 접근을 하기 위해 PemSSH의 값을 true로 한다면 BOSH를 설치할때 IaaS의 VM을 만들 수 있는 권한을 주었던 Key를 같은 폴더에 있는 pem.yml에 같은 형식으로 복사하여야 한다. HAProxy를 Private IP로 배포하려면 enable_private_network를 yes로 설정해야 한다.
 
 ```yaml
 ### Main Stemcells Setting ###

@@ -129,7 +129,7 @@ abacus_url: "http://abacus.61.252.53.248.nip.io"	# abacus url (e.g. "http://abac
 
 **│ paasta-monitoring-vars.yml**  
 
-`monitoring-deployment/paasta-monitoring/paasta-monitoring-vars.yml` 파일은 PaaS-TA Monitoring Dashboard 설치시 필요한 각종 변수 설정을 담고 있다. 내용 중 `mariadb` 및 `influxdb` 계정 등은 보안 설정 및 모듈 간 계정 정보가 연결된 부분이 있어 이를 변경하여 배포할 경우 관련 모듈이 정상적으로 동작하지 않을 수 있다. 따라서 이를 수정하여 사용하기 위해서는 [monitoring-dashboard-release](https://github.com/PaaS-TA/monitoring-dashboard-release) 또는 [monitoring-influxdb-release](https://github.com/PaaS-TA/monitoring-influxdb-release) 저장소에서 `job` 디렉토리 내의 관련 파일의 수정이 필요하다. 다음 파일 예제를 실제 환경 구성시에 참고하여 작성할 수 있다.
+`monitoring-deployment/paasta-monitoring/paasta-monitoring-vars.yml` 파일은 PaaS-TA Monitoring Dashboard 설치시 필요한 각종 변수 설정을 담고 있다. 내용 중 `mariadb` 및 `influxdb` 계정 등은 보안 설정 및 모듈 간 계정 정보가 연결된 부분이 있어 이를 변경하여 배포할 경우 관련 모듈이 정상적으로 동작하지 않을 수 있다. 따라서 이를 수정하여 사용하기 위해서는 [monitoring-dashboard-release](https://github.com/PaaS-TA/monitoring-dashboard-release) 또는 [monitoring-influxdb-release](https://github.com/PaaS-TA/monitoring-influxdb-release) 저장소에서 `job` 디렉토리 내의 관련 파일의 수정이 필요하다. 다음 파일 예제를 실제 환경 구성시에 참고하여 작성할 수 있다. monitoring web을 Private IP로 배포하려면 enable_private_network를 yes로 설정해야 한다.
 
 ```yaml
 # SERVICE VARIABLE
