@@ -58,7 +58,10 @@
 
 
 ### │ User Guide Shortcut
-📘 [Monitoring API User Guide](monitoring-api_guide.md)
+- 📘 [Monitoring MariaDB User Guide (제작중)]()
+- 📘 [Monitoring InfluxDB User Guide (제작중)]()
+- 📘 [Monitoring Monitoring Web User Guide (제작중)]()
+- 📘 [Monitoring API User Guide](monitoring-api_guide.md)
 
 
 ### [Index](https://github.com/PaaS-TA/Guide) > User Guide
