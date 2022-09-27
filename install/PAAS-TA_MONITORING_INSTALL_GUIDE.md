@@ -20,11 +20,11 @@
   + [Zabbix Proxy 설치](PAAS-TA_MONITORING_ZABBIX-PROXY_INSTALL.md)
   + [Zabbix Agent 설치](PAAS-TA_MONITORING_ZABBIX-AGENT_INSTALL.md)
 
-+ [**[SaaS] Application Monitoring** - Pinpoint Monitoring 설치](PAAS-TA_MONITORING_PINPOINT_MONITORING_INSTALL.md)
+- [**[SaaS] Application Monitoring** - Pinpoint Monitoring 설치](PAAS-TA_MONITORING_PINPOINT_MONITORING_INSTALL.md)
   + [Pinpoint Java Buildpack 생성과 등록](PAAS-TA_MONITORING_PINPOINT_JAVA_BUILDPACK_CREATING_AND_UPLOADING.md)
   + [Application & Pinpoint Service 푸싱과 바인딩](PAAS-TA_MONITORING_PINPOINT_APPLICATION_PUSHING_AND_BINDING.md)
 
-- [**[CaaS] Container Monitoring** - Prometheus 설치](PAAS-TA_MONITORING_CONTAINER_SERVICE_INSTALL.md)
++ [**[CaaS] Container Monitoring** - Prometheus 설치](PAAS-TA_MONITORING_CONTAINER_SERVICE_INSTALL.md)
 
 
 ### [Index](https://github.com/PaaS-TA/Guide) > Monitoring Install
