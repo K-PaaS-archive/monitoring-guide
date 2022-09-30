@@ -58,9 +58,9 @@
 
 
 ### │ User Guide Shortcut
-- 📘 [Monitoring MariaDB User Guide (제작중)]()
-- 📘 [Monitoring InfluxDB User Guide (제작중)]()
-- 📘 [Monitoring Monitoring Web User Guide (제작중)]()
+- 📘 [Monitoring MariaDB User Guide (제작중)](mariadb_guide.md)
+- 📘 [Monitoring InfluxDB User Guide (제작중)](influxdb_guide.md)
+- 📘 [Monitoring Monitoring Web User Guide (제작중)](monitoring-web_guide.md)
 - 📘 [Monitoring API User Guide](monitoring-api_guide.md)
 
 
