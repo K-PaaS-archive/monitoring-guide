@@ -11,7 +11,7 @@
 
 
 ## <div id="2">2. Monitoring MariaDB 테이블/컬럼 명세
-### ![](images/mariadb_db.png) PaastaMonitoring
+### 2.1. PaastaMonitoring
 **![](images/table.png) alarm_actions**  
 : 발생한 알람에 대한 관리자의 조치 이력을 관리한다.
 
