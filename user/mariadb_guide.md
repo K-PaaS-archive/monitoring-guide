@@ -1,13 +1,13 @@
 ### [Index](https://github.com/PaaS-TA/Guide) > [User Guide](user_guide.md) > Monitoring MariaDB
 
 
-# Monitoring MariaDB User Guide (작성중)
+# Monitoring MariaDB User Guide
 1. [개요](#1)
 2. [Monitoring MariaDB 테이블/컬럼 명세](#2)
 
 
 ## <div id="1">1. 개요
-이 문서는 PaaS-TA Monitoring Dashboard 배포시 생성되는 mariadb VM 내 설치된 MariaDB의 데이터베이스와 테이블/컬럼 구조 명세 가이드를 제공하기 위해 작성되었다.
+이 문서는 PaaS-TA Monitoring Dashboard 배포시 생성되는 mariadb VM 내 설치된 MariaDB의 데이터베이스와 테이블/컬럼 구조에 대한 명세와 가이드를 제공하기 위해 작성되었다.
 
 
 ## <div id="2">2. Monitoring MariaDB 테이블/컬럼 명세
