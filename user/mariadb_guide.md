@@ -15,7 +15,7 @@
 **![](images/table.png) alarm_actions**  
 : 발생한 알람에 대한 관리자의 조치 이력을 관리한다.
 
-| Column                                   | Description                    |
+| Column                                   | Properties                     |
 |------------------------------------------|--------------------------------|
 | ![](images/primary-column.png) id        | int unsigned (auto increment)  |
 | ![](images/column.png) alarm_id          | int                            |
@@ -28,7 +28,7 @@
 **![](images/table.png) alarm_policies**  
 : 알람 임계치 정책(기준)을 관리한다.
 
-| Column                                    | Description                    |
+| Column                                    | Properties                     |
 |-------------------------------------------|--------------------------------|
 | ![](images/primary-column.png) id         | int unsigned (auto increment)  |
 | ![](images/column.png) origin_type        | varchar(3)                     |
@@ -46,7 +46,7 @@
 **![](images/table.png) alarm_sns**  
 : 알람 발생시 알림 받을 SNS 채널(Telegram)을 관리한다.
 
-| Column                                    | Description                    |
+| Column                                    | Properties                     |
 |-------------------------------------------|--------------------------------|
 | ![](images/primary-column.png) channel_id | int unsigned (auto increment)  |
 | ![](images/column.png) origin_type        | varchar(3) = 'all'             |
@@ -63,7 +63,7 @@
 **![](images/table.png) alarm_sns_targets**  
 : 알람 발생시 알림 받을 SNS 채널(Telegram)의 사용자 번호를 관리한다.
 
-| Column                            | Description                    |
+| Column                            | Properties                     |
 |-----------------------------------|--------------------------------|
 | ![](images/column.png) channel_id | int unsigned                   |
 | ![](images/column.png) target_id  | bigint unsigned                |
@@ -75,7 +75,7 @@
 **![](images/table.png) alarm_targets**  
 : 알람 발생시 알림 받을 이메일을 관리한다.
 
-| Column                              | Description                    |
+| Column                              | Properties                     |
 |-------------------------------------|--------------------------------|
 | ![](images/primary-column.png) id   | int unsigned (auto increment)  |
 | ![](images/column.png) origin_type  | varchar(3)                     |
@@ -89,7 +89,7 @@
 **![](images/table.png) alarms**  
 : 발생된 알람 이력을 관리한다.
 
-| Column                                 | Description                    |
+| Column                                 | Properties                     |
 |----------------------------------------|--------------------------------|
 | ![](images/primary-column.png) id      | int unsigned (auto increment)  |
 | ![](images/column.png) origin_type     | varchar(3)                     |
@@ -116,7 +116,7 @@
 **![](images/table.png) app_alarm_histories**  
 : 애플리케이션에서 발생한 알람 이력을 관리한다.
 
-| Column                                     | Description                    |
+| Column                                     | Properties                     |
 |--------------------------------------------|--------------------------------|
 | ![](images/primary-column.png) alarm_id    | int unsigned                   |
 | ![](images/column.png) app_guid            | varchar(50)                    |
@@ -139,7 +139,7 @@
 **![](images/table.png) app_alarm_policies**  
 : 애플리케이션의 알람 임계치 정책(기준)을 관리한다.
 
-| Column                                           | Description                    |
+| Column                                           | Properties                     |
 |--------------------------------------------------|--------------------------------|
 | ![](images/primary-column.png) app_guid          | varchar(50)                    |
 | ![](images/column.png) cpu_warning_threshold     | int unsigned                   |
@@ -158,7 +158,7 @@
 **![](images/table.png) app_auto_scaling_policies**  
 : 애플리케이션의 오토스케일 정책(기준)을 관리한다.
 
-| Column                                        | Description                    |
+| Column                                        | Properties                     |
 |-----------------------------------------------|--------------------------------|
 | ![](images/primary-column.png) app_guid       | varchar(50)                    |
 | ![](images/column.png) instance_min_cnt       | int unsigned                   |
@@ -181,7 +181,7 @@
 **![](images/table.png) batch_alarm_executions_resolves**  
 : (확인중)
 
-| Column                                    | Description                       |
+| Column                                    | Properties                        |
 |-------------------------------------------|-----------------------------------|
 | ![](images/primary-column.png) resolve_id | bigint unsignded (auto increment) |
 | ![](images/column.png) excution_id        | bigint                            |
@@ -191,25 +191,25 @@
 **![](images/table.png) batch_alarm_executions**  
 : (확인중)
 
-| Column                                     | Description                       |
-|--------------------------------------------|-----------------------------------|
-| ![](images/primary-column.png) excution_id | bigint unsigned (auto increment)  |
-| ![](images/column.png) alarm_id            | int                               |
-| ![](images/column.png) service_type        | varchar(10)                       |
-| ![](images/column.png) critical_status     | varchar(50)                       |
-| ![](images/column.png) measure_value       | float                             |
-| ![](images/column.png) measure_name1       | varchar(200)                      |
-| ![](images/column.png) measure_name2       | varchar(200)                      |
-| ![](images/column.png) measure_name3       | varchar(200)                      |
-| ![](images/column.png) execution_time      | timestamp = current_timestamp()   |
-| ![](images/column.png) execution_result    | varchar(1000)                     |
-| ![](images/column.png) resolve_status      | varchar(1)                        |
-| ![](images/column.png) complete_date       | datetime                          |
+| Column                                     | Properties                       |
+|--------------------------------------------|----------------------------------|
+| ![](images/primary-column.png) excution_id | bigint unsigned (auto increment) |
+| ![](images/column.png) alarm_id            | int                              |
+| ![](images/column.png) service_type        | varchar(10)                      |
+| ![](images/column.png) critical_status     | varchar(50)                      |
+| ![](images/column.png) measure_value       | float                            |
+| ![](images/column.png) measure_name1       | varchar(200)                     |
+| ![](images/column.png) measure_name2       | varchar(200)                     |
+| ![](images/column.png) measure_name3       | varchar(200)                     |
+| ![](images/column.png) execution_time      | timestamp = current_timestamp()  |
+| ![](images/column.png) execution_result    | varchar(1000)                    |
+| ![](images/column.png) resolve_status      | varchar(1)                       |
+| ![](images/column.png) complete_date       | datetime                         |
 
 **![](images/table.png) batch_alarm_infos**  
 : (확인중)
 
-| Column                                  | Description                      |
+| Column                                  | Properties                       |
 |-----------------------------------------|----------------------------------|
 | ![](images/primary-column.png) alarm_id | bigint unsigned (auto increment) |
 | ![](images/column.png) service_type     | varchar(10)                      |
@@ -226,7 +226,7 @@
 **![](images/table.png) batch_alarm_receivers**  
 : (확인중)
 
-| Column                                     | Description                    |
+| Column                                     | Properties                     |
 |--------------------------------------------|--------------------------------|
 | ![](images/primary-column.png) receiver_id | int unsigned (auto increment)  |
 | ![](images/column.png) service_type        | varchar(10)                    |
@@ -241,7 +241,7 @@
 **![](images/table.png) batch_alarm_sns**  
 : (확인중)
 
-| Column                                    | Description                      |
+| Column                                    | Properties                       |
 |-------------------------------------------|----------------------------------|
 | ![](images/primary-column.png) channel_id | bigint unsigned (auto increment) |
 | ![](images/column.png) origin_type        | varchar(10)                      |
@@ -257,7 +257,7 @@
 **![](images/table.png) member_infos**  
 : Monitoring Dashboard 유저 정보를 관리한다.
 
-| Column                                  | Description                    |
+| Column                                  | Properties                     |
 |-----------------------------------------|--------------------------------|
 | ![](images/primary-column.png) user_id  | varchar(50)                    |
 | ![](images/column.png) user_pw          | varchar(500)                   |
@@ -278,7 +278,7 @@
 **![](images/table.png) vms**  
 : PaaS-TA(AP) VM 정보를 관리한다.
 
-| Column                                 | Description                    |
+| Column                                 | Properties                     |
 |----------------------------------------|--------------------------------|
 | ![](images/primary-column.png) id      | int unsigned (auto increment)  |
 | ![](images/primary-column.png) zone_id | int                            |
@@ -293,7 +293,7 @@
 **![](images/table.png) zones**  
 : PaaS-TA(AP) Zone 정보를 관리한다.
 
-| Column                                 | Description                    |
+| Column                                 | Properties                     |
 |----------------------------------------|--------------------------------|
 | ![](images/primary-column.png) id      | int unsigned (auto increment)  |
 | ![](images/column.png) name            | varchar(200)                   |

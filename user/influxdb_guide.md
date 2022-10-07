@@ -100,13 +100,13 @@
 | Column                           | Description        |
 |----------------------------------|--------------------|
 | ![](images/column.png) time      | Time               |
-| ![](images/column.png) _seq      | -                  |
+| ![](images/column.png) _seq      | Log Order          |
 | ![](images/column.png) extradata | Extra Data         |
 | ![](images/column.png) host      | Instance Host Info |
 | ![](images/column.png) ident     | Log Identity       |
 | ![](images/column.png) message   | Log Message        |
-| ![](images/column.png) msgid     | -                  |
-| ![](images/column.png) pid       | -                  |
+| ![](images/column.png) msgid     | Message ID         |
+| ![](images/column.png) pid       | Process ID         |
 
 
 ### [Index](https://github.com/PaaS-TA/Guide) > [User Guide](user_guide.md) > Monitoring InfluxDB
