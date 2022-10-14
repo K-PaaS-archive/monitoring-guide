@@ -60,7 +60,7 @@
 ### │ User Guide Shortcut
 - 📘 [Monitoring MariaDB User Guide](mariadb_guide.md)
 - 📘 [Monitoring InfluxDB User Guide](influxdb_guide.md)
-- 📘 [Monitoring Monitoring Web User Guide (제작중)](monitoring-web_guide.md)
+- 📘 [Monitoring Monitoring Web User Guide](monitoring-web_guide.md)
 - 📘 [Monitoring API User Guide](monitoring-api_guide.md)
 
 
