@@ -41,8 +41,8 @@ $ source ~/.bashrc
 **Ruby**를 설치한다.
 
 ```
-$ rbenv install 2.7.3
-$ rbenv global 2.7.3
+$ rbenv install 2.5.9
+$ rbenv global 2.5.9
 $ rbenv rehash
 $ ruby -v
 ```
